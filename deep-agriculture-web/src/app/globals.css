@@ -1,0 +1,107 @@
+/* src/app/globals.css */
+@import "tailwindcss"; /* 确保 Tailwind 被正确导入 */
+
+/* --- 基础变量定义 (全局 - 仅亮色模式) --- */
+:root {
+  /* 主色调 */
+  --primary-blue: #10b981;
+  --primary-green: #50e3c2;
+  --primary-purple: #a569bd;
+  --primary-cyan: #36d1dc;
+  --primary-orange: #f5a623;
+  --primary-red: #e74c3c;
+
+  /* 文本与背景 (亮色模式) */
+  --text-color: #2c3e50;
+  --text-secondary: #7f8c9a;
+  --background-color: #f8faff;
+  --card-background: #ffffff;
+  --border-color-light: #e6f0fa;
+
+  /* 设计元素 */
+  --border-radius: 12px;
+  --border-radius-sm: 8px;
+  --shadow-soft: 0 6px 15px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.08);
+  --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* 渐变色 */
+  --gradient-accent: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-cyan) 100%);
+  --gradient-accent-hover: linear-gradient(135deg, #7bc8eb 0%, #6fe7f5 100%);
+  --gradient-sidebar-bg: linear-gradient(to bottom, #ffffff 0%, #f8faff 100%);
+  --gradient-text-color: linear-gradient(90deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+  --gradient-header: linear-gradient(to right, #2b5876, #4e4376); /* 保留之前的渐变色 */
+
+  /* 基础布局尺寸 */
+  /* --header-height: 60px; */ /* 旧的 Header 高度，可以注释掉或移除 */
+  --left-sidebar-width: 330px;
+  --right-sidebar-width: 360px;
+  --top-analysis-height: 260px;
+  --mini-chart-height: 160px;
+  --mini-chart-min-height: 140px;
+
+  /*
+   * =========================================
+   * Header 组件相关的全局 CSS 变量
+   * 问题：在 Header.module.css 中直接使用 :root 定义变量会报错。
+   * 解决方案：将这些全局变量移到全局 globals.css 文件中。
+   * =========================================
+   */
+  --header-height: 64px;                 /* 定义新 Header 高度 */
+  --header-padding-horizontal: 24px;     /* Header 左右内边距 */
+  --header-background: #ffffff;          /* Header 背景色 (微软风格常用白色) */
+  --header-border-color: #e5e7eb;        /* Header 底部边框颜色 (浅灰) */
+  --nav-text-color: #374151;             /* 导航文字颜色 (深灰) */
+  --nav-text-hover-color: var(--primary-blue, #4a90e2); /* 导航悬停/选中颜色 */
+  --nav-item-spacing: 8px;               /* 导航项左右内边距 */
+  --button-primary-bg: var(--primary-blue, #4a90e2); /* 主按钮背景色 */
+  --button-primary-hover-bg: #357ac8;     /* 主按钮悬停背景色 */
+  --icon-color: #6b7280;                 /* 图标颜色 (中灰) */
+  --icon-hover-color: #374151;           /* 图标悬停颜色 (深灰) */
+}
+
+/* --- 响应式 CSS 变量重新定义 (全局) --- */
+@media (max-width: 1450px) { /* 中等偏大屏幕 */
+  :root {
+    --right-sidebar-width: 330px;
+  }
+}
+
+@media (max-width: 768px) { /* 小型屏幕 */
+  :root {
+    --left-sidebar-width: 100%;
+    --right-sidebar-width: 100%;
+    --top-analysis-height: auto;
+    --mini-chart-height: 180px; /* 稍高一点 */
+    /* --header-height: 55px; */ /* 旧的 Header 高度 */
+    --header-height: 60px; /* 也可以在小屏幕调整 Header 高度 */
+    --header-padding-horizontal: 16px; /* 减小 Header 左右内边距 */
+  }
+}
+
+@media (max-width: 576px) { /* 超小屏幕 */
+  :root {
+    /* --header-height: 50px; */ /* 旧的 Header 高度 */
+    --header-height: 56px; /* 也可以在超小屏幕调整 Header 高度 */
+    --mini-chart-height: 160px;
+    --mini-chart-min-height: 140px;
+  }
+}
+
+
+/* Tailwind @theme (如果你的项目使用了这个指令) */
+/* @theme { ... } */
+
+/* 全局 body 样式 */
+body {
+  /* 直接使用亮色模式的 CSS 变量 */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family); /* 应用全局字体 */
+  margin: 0; /* 重置默认 margin */
+  padding: 0; /* 重置默认 padding */
+  line-height: 1.6;
+}
+
+/* Tailwind @layer (如果需要) */
+/* @layer utilities { ... } */

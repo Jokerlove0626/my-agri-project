@@ -1,0 +1,443 @@
+/* src/entry/styles/EntryForm.module.css */
+/* --- 基于 entry_form_style.css 转换和优化 --- */
+
+/* --- Page Container & Title --- */
+.entryPage {
+    padding: 1.5rem 2rem;
+    max-width: 1200px;
+    margin: 1.5rem auto; /* Added top margin */
+  }
+  
+  .pageTitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.8rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  .pageTitle i,
+  .pageTitle svg { /* Support FontAwesome components */
+    margin-right: 0.8rem;
+    color: var(--primary-blue);
+    font-size: 1.2em;
+    width: 1.2em; /* Ensure consistent width */
+    height: 1.2em;
+  }
+  
+  /* --- Entry Form Container --- */
+  .entryFormContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem; /* Space between cards */
+  }
+  
+  /* --- Entry Card Styling --- */
+  .entryCard {
+    background-color: var(--card-background, #ffffff);
+    border-radius: var(--border-radius, 12px);
+    box-shadow: var(--shadow-soft, 0 6px 15px rgba(0, 0, 0, 0.05));
+    border: 1px solid var(--border-color-light, #e6f0fa);
+    padding: 1.5rem 2rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .entryCard:hover {
+    box-shadow: var(--shadow-hover, 0 10px 20px rgba(0, 0, 0, 0.08));
+  }
+  
+  .cardTitle {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: -1.5rem -2rem 1.5rem -2rem; /* Extend header */
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color-light, #e6f0fa);
+    display: flex;
+    align-items: center;
+    background-color: #f8faff; /* Light background for header */
+  }
+  .cardTitle.gradientText {
+    background: var(--gradient-accent, linear-gradient(135deg, #4a90e2 0%, #36d1dc 100%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border-bottom: none;
+    background-color: transparent;
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .cardTitle.gradientText::after {
+    content: '';
+    position: absolute;
+    left: 2rem;
+    bottom: 0;
+    width: calc(100% - 4rem);
+    height: 1px;
+    background: linear-gradient(to right, rgba(74, 144, 226, 0.1), rgba(54, 209, 220, 0.1), rgba(74, 144, 226, 0.1));
+  }
+  
+  .cardTitle i,
+  .cardTitle svg {
+    margin-right: 0.8rem;
+    font-size: 1.1em;
+    width: 1.1em;
+    height: 1.1em;
+    color: var(--primary-blue); /* Default icon color */
+  }
+  .cardTitle.gradientText i,
+  .cardTitle.gradientText svg {
+     /* Keep icon colored even if text is gradient - Use the gradient itself! */
+     background: var(--gradient-accent);
+     -webkit-background-clip: text;
+     background-clip: text;
+     color: transparent;
+     /* Fallback if needed, but gradient should work */
+     /* color: var(--primary-blue); */
+  }
+  
+  
+  /* --- Form Grid Layout --- */
+  .formGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem 1.2rem;
+  }
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .formGroup.fullWidth {
+    grid-column: 1 / -1;
+  }
+  
+  /* Form Elements */
+  .formGroup label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary, #7f8c9a);
+  }
+  .formGroup label i,
+  .formGroup label svg {
+    margin-right: 0.5rem;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    color: var(--primary-blue); /* Icon color */
+    font-size: 0.95em;
+  }
+  
+  .formGroup input[type="text"],
+  .formGroup input[type="number"],
+  .formGroup input[type="url"],
+  .formGroup input[type="datetime-local"],
+  .formGroup select,
+  .formGroup textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border-color-light, #e6f0fa);
+    border-radius: var(--border-radius-sm, 8px);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.03);
+    color: var(--text-color); /* Ensure text is readable */
+  }
+  .formGroup input:focus,
+  .formGroup select:focus,
+  .formGroup textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue, #4a90e2);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15), inset 0 1px 2px rgba(0,0,0,0.03);
+    background-color: #fff;
+  }
+  .formGroup select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23888'%3E%3Cpath d='M8 11.414l-4.707-4.707a1 1 0 0 1 1.414-1.414L8 8.586l3.293-3.293a1 1 0 1 1 1.414 1.414L8 11.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+  }
+  .formGroup textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+  
+  .formHint {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed #eee;
+  }
+  
+  /* --- Accordion Styling --- */
+  .accordionContainer {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .accordionItem {
+    border: 1px solid var(--border-color-light, #e6f0fa);
+    border-radius: var(--border-radius-sm, 8px);
+    overflow: hidden;
+    background-color: #fdfdff;
+  }
+  .accordionTitle {
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1.2rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: #f8faff;
+    transition: background-color 0.3s ease;
+    list-style: none; /* Remove default marker */
+    position: relative;
+    width: 100%; /* Ensure summary takes full width */
+  }
+  .accordionTitle.gradientBgLight {
+    background: linear-gradient(135deg, #f5faff 0%, #eef7ff 100%);
+    color: #4a6a8a;
+  }
+  .accordionTitle:hover {
+    background-color: #f0f6ff;
+  }
+  .accordionTitle i,
+  .accordionTitle svg {
+    margin-right: 0.7rem;
+    color: var(--primary-blue);
+    font-size: 1em;
+    width: 1em;
+    height: 1em;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Custom Arrow for Details/Summary */
+  .accordionTitle::after {
+    content: '\f078'; /* FontAwesome down arrow */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+  }
+  /* Style for when the details element is open */
+  .accordionItem[open] > .accordionTitle::after {
+    transform: translateY(-50%) rotate(-180deg);
+  }
+  /* Hide default marker */
+  .accordionTitle::-webkit-details-marker {
+    display: none;
+  }
+  
+  .accordionContent {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color-light, #e6f0fa);
+  }
+  
+  /* --- Dynamic Entry Section Styling --- */
+  .dynamicEntrySection {
+    /* Container for dynamic items */
+  }
+  .entryItem {
+    border: 1px dashed #dbe8f8;
+    border-radius: var(--border-radius-sm, 8px);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    background-color: rgba(248, 250, 255, 0.5);
+  }
+  .entryItem:last-child {
+    margin-bottom: 0;
+  }
+  .entryItem .formGroup label {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .addButton {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background: var(--gradient-green, linear-gradient(135deg, #79f1a4 0%, #50e3c2 100%));
+    color: white;
+    border-radius: var(--border-radius-sm, 8px);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 3px 6px rgba(80, 227, 194, 0.2);
+  }
+  .addButton:hover {
+    opacity: 0.9;
+    box-shadow: 0 5px 10px rgba(80, 227, 194, 0.3);
+    transform: translateY(-2px);
+  }
+  .addButton i,
+  .addButton svg {
+     width: 1em;
+     height: 1em;
+  }
+  
+  .removeButton {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    background: #ffeff2; /* Light red */
+    color: var(--primary-red, #e74c3c); /* Red icon */
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .removeButton:hover {
+    background: #f8d7da;
+    color: #721c24;
+    transform: scale(1.1);
+  }
+  .removeButton i,
+  .removeButton svg {
+     width: 0.9em;
+     height: 0.9em;
+  }
+  
+  
+  /* --- Form Actions (Submit/Reset Buttons) --- */
+  .formActions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color-light, #e6f0fa);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+  .submitButton, .resetButton {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius-sm, 8px);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  .submitButton {
+    color: white;
+  }
+  .submitButton.gradientAccent {
+    background: var(--gradient-accent, linear-gradient(135deg, #4a90e2 0%, #36d1dc 100%));
+  }
+  .submitButton.gradientBlueLight {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    color: #335; /* Darker text for light bg */
+    box-shadow: 0 4px 8px rgba(161, 196, 253, 0.3);
+  }
+  
+  .submitButton:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  .resetButton {
+    background-color: #f1f3f5;
+    color: var(--text-secondary, #7f8c9a);
+    border: 1px solid #e9ecef;
+  }
+  .resetButton:hover {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+  }
+  .submitButton i, .submitButton svg,
+  .resetButton i, .resetButton svg {
+      width: 1em;
+      height: 1em;
+  }
+  
+  /* --- Specific Card Styles --- */
+  .referenceEntryCard, .neo4jHintCard {
+    background-color: #fdfdff;
+  }
+  .neo4jHintCard ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  .neo4jHintCard li {
+    margin-bottom: 0.4rem;
+  }
+  
+  
+  /* --- Responsive Adjustments --- */
+  @media (max-width: 768px) {
+    .entryPage {
+      padding: 1rem;
+       margin-top: 1rem;
+    }
+    .formGrid {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+    .entryCard {
+      padding: 1rem 1.2rem;
+    }
+    .cardTitle {
+      margin: -1rem -1.2rem 1.2rem -1.2rem;
+      padding: 0.8rem 1.2rem;
+      font-size: 1.2rem;
+    }
+    .cardTitle.gradientText::after {
+       left: 1.2rem;
+       width: calc(100% - 2.4rem);
+    }
+    .accordionTitle {
+      padding: 0.8rem 1rem;
+      font-size: 0.95rem;
+    }
+    .accordionTitle::after {
+      right: 1rem;
+    }
+    .accordionContent {
+      padding: 1rem;
+    }
+    .entryItem {
+      padding: 1rem;
+    }
+    .formActions {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .submitButton, .resetButton {
+      width: 100%;
+      justify-content: center;
+      padding: 0.7rem;
+    }
+  }

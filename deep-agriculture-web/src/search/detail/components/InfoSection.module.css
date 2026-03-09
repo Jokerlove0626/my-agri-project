@@ -1,0 +1,231 @@
+/* src/search/detail/components/InfoSection.module.css */
+
+/* 基础卡片样式 (保持不变) */
+.infoSection {
+    margin-bottom: 1.8rem;
+    background-color: var(--card-background, #ffffff);
+    padding: 1.5rem 1.8rem;
+    border-radius: var(--border-radius, 12px);
+    box-shadow: var(--shadow-soft, 0 3px 8px rgba(0, 0, 0, 0.06));
+    border: 1px solid var(--border-color-light, #f0f0f0);
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .infoSection:hover {
+    box-shadow: var(--shadow-hover, 0 6px 15px rgba(0, 0, 0, 0.08));
+  }
+  
+  /* Section 标题样式 */
+  .sectionTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1.3rem;
+    color: var(--primary-blue, #4a90e2); /* 标题颜色，图标会继承这个颜色 */
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color-light, #f0f2f5);
+    padding-bottom: 0.8rem;
+  }
+  
+  /* 标题图标样式 */
+  .sectionTitle svg { /* Target FontAwesomeIcon rendered SVG */
+    margin-right: 0.8rem;
+    font-size: 1.1em;
+    line-height: 1;
+    vertical-align: middle;
+    /* color: var(--primary-blue); /* 可以明确设置颜色，但通常继承 h2 的颜色即可 */
+    /* 移除渐变相关样式 */
+  }
+  
+  /*
+   * 移除 .iconGradient 类，因为它不适用于 SVG 图标。
+   * 如果你仍想在其他地方使用文本渐变，可以保留这个类，
+   * 但不要将其应用于 FontAwesomeIcon 组件。
+  */
+  /*
+  .iconGradient {
+    background: linear-gradient(135deg, var(--primary-blue, #4a90e2) 30%, var(--primary-green, #50e3c2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  */
+  
+  
+  /* Section 内容区域默认样式 (保持不变) */
+  .sectionContent {
+    /* ... */
+  }
+  .sectionContent p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    color: var(--text-secondary, #495057);
+    font-size: 0.95rem;
+  }
+  /* ... (InfoSection.module.css 中其他的样式保持不变) ... */
+  
+  .infoListInline {
+    margin: 0.8rem 0 1rem 0;
+    padding: 0;
+    font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 2rem;
+    color: var(--text-secondary, #6c757d);
+  }
+  .infoListInline > div {
+    display: flex;
+    align-items: baseline;
+  }
+  .infoListInline dt {
+    font-weight: 500;
+    color: var(--text-color);
+    margin-right: 0.6rem;
+    flex-shrink: 0;
+  }
+  .infoListInline dd {
+    margin-left: 0;
+    word-break: break-word; /* 防止长单词溢出 */
+  }
+  .smallDl { /* .small-dl */
+    font-size: 0.85rem;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  /* 来源信息 */
+  .sourceInfo {
+    margin-top: 1.2rem; /* 调整间距 */
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--border-color-light, #eee);
+    font-size: 0.85rem;
+    color: var(--text-secondary, #7f8c9a);
+  }
+  .sourceInfo strong {
+    color: var(--text-color);
+    font-weight: 500;
+  }
+  
+  /* 备注信息 */
+  .remarkInfo {
+    margin-top: 1rem;
+    padding: 0.8rem 1.2rem; /* 调整内边距 */
+    background-color: #f8faff; /* 调整背景色 */
+    border-left: 4px solid var(--primary-green, #50e3c2); /* 使用全局变量 */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-radius: 0 var(--border-radius-sm, 8px) var(--border-radius-sm, 8px) 0; /* 使用全局变量 */
+  }
+  .remarkInfo svg { /* Target FontAwesomeIcon */
+    margin-right: 0.6rem;
+    color: var(--primary-green, #50e3c2);
+    vertical-align: middle; /* 确保对齐 */
+  }
+  
+  /* 查看全部链接 */
+  .viewAllLink {
+    display: inline-block;
+    margin-top: 1rem; /* 调整间距 */
+    color: var(--primary-blue, #4a90e2);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+  .viewAllLink svg { /* Target FontAwesomeIcon */
+    margin-left: 0.4rem;
+    transition: transform 0.2s ease-out;
+    font-size: 0.9em; /* 调整箭头大小 */
+    vertical-align: middle;
+  }
+  .viewAllLink:hover {
+    color: #3a7ac2; /* 悬停颜色加深 */
+    text-decoration: underline;
+  }
+  .viewAllLink:hover svg {
+    transform: translateX(4px);
+  }
+  
+  /* 分布地图占位符 */
+  .mapPlaceholderSmall {
+      height: 150px;
+      background-color: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #adb5bd;
+      border-radius: var(--border-radius-sm);
+      margin-top: 1rem;
+      border: 1px dashed #cce4ff;
+  }
+  .mapPlaceholderSmall p svg { margin-right: 0.5rem; }
+  
+  /* 元数据列表 */
+  .metadataList {
+      margin: 0;
+      padding: 0;
+      font-size: 0.85rem;
+      color: var(--text-secondary, #7f8c9a);
+  }
+  .metadataList > div {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0; /* 调整内边距 */
+      border-bottom: 1px solid var(--border-color-light, #f8f9fa);
+  }
+  .metadataList > div:last-child { border-bottom: none; }
+  .metadataList dt { font-weight: 500; color: var(--text-color); flex-shrink: 0; margin-right: 1rem; }
+  .metadataList dd { margin-left: 1rem; text-align: right; }
+  
+  /* 紧凑列表 (如分类地位, 其他名称的基础) */
+  .compactList {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0; /* 移除默认底部边距 */
+  }
+  .compactList li {
+      margin-bottom: 0.5rem; /* 调整间距 */
+      padding-left: 1.6em;
+      position: relative;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+  }
+  .compactList li:last-child { margin-bottom: 0; }
+  .compactList li::before {
+      content: "\f105"; /* FontAwesome right chevron */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: var(--primary-green, #50e3c2); /* 使用全局变量 */
+      position: absolute;
+      left: 0;
+      top: 5px; /* 微调位置 */
+      font-size: 0.9em;
+  }
+  
+  /* 其他名称列表特有样式 */
+  .otherNamesList li {
+      padding-bottom: 0.8rem;
+      border-bottom: 1px dashed var(--border-color-light, #eee);
+      padding-left: 0; /* 覆盖 compactList 的 padding */
+  }
+  .otherNamesList li::before { content: none; } /* 覆盖 compactList 的伪元素 */
+  .otherNamesList li:last-child { border-bottom: none; padding-bottom: 0; }
+  .otherNamesList .nameType {
+      display: inline-block;
+      font-weight: 500;
+      color: var(--text-color);
+      min-width: 80px;
+      margin-right: 0.5rem;
+  }
+  .otherNamesList .otherName {
+      color: var(--text-color); /* 调整颜色 */
+  }
+  .otherNamesList .namedYear {
+      color: var(--text-secondary);
+      margin-left: 0.5rem;
+      font-size: 0.9em;
+  }

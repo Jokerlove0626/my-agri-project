@@ -1,0 +1,421 @@
+/* src/graph/KnowledgeGraph.module.css */
+/* 导入全局样式或基础样式 (如果需要) */
+/* @import '../app/globals.css'; */
+
+/* 
+  报错问题：在 CSS Modules 文件中，即使在 @media 查询内部，也不能直接使用 :root 选择器来定义或修改全局 CSS 变量。
+  解决方案：将 @media 查询中针对 :root 的变量重新定义移至全局样式文件 src/app/globals.css 中。
+  以下代码已移除 @media 查询中的 :root { ... } 部分。
+*/
+
+
+/* --- 基础与容器 --- */
+.kgContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* 占满视窗高度 */
+    overflow: hidden; /* 防止容器本身滚动 */
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+}
+
+/* --- 头部 --- */
+.kgHeader {
+    background: var(--gradient-header);
+    color: #fff;
+    padding: 0 25px;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.logoContainer { display: flex; align-items: center; gap: 15px; }
+.logoIcon { font-size: 1.8em; color: var(--primary-green); }
+.headerTitle { font-size: 1.4em; font-weight: 600; white-space: nowrap; }
+.timeDisplay { font-size: 1.1em; font-weight: 500; color: #e0e0e0; margin: 0 15px; }
+.userProfile { display: flex; align-items: center; margin-left: auto; gap: 8px; }
+.userIcon { font-size: 1.5em; cursor: pointer; }
+.userName { font-size: 0.95em; white-space: nowrap; }
+.notificationIcon { font-size: 1.3em; margin-left: 12px; cursor: pointer; transition: color 0.3s ease; }
+.notificationIcon:hover { color: var(--primary-green); }
+
+
+/* --- 主要内容网格布局 --- */
+.kgMainContentGrid {
+    display: grid;
+    grid-template-columns: var(--left-sidebar-width) 1fr var(--right-sidebar-width);
+    grid-template-rows: var(--top-analysis-height) 1fr;
+    grid-template-areas:
+        "query   analysis analysis"
+        "query   graph    info";
+    gap: 15px;
+    padding: 15px;
+    background-color: var(--background-color);
+    flex-grow: 1;
+    overflow: hidden; /* 关键：防止主内容区滚动，让子区域滚动 */
+}
+
+/* 分配网格区域 */
+.querySidebar { grid-area: query; }
+.analysisArea { grid-area: analysis; }
+.visualizationArea { grid-area: graph; }
+.infoAreaContainer { grid-area: info; } /* 修改类名以匹配组件 */
+
+/* 网格区域通用样式 */
+.querySidebar, .analysisArea, .visualizationArea, .infoAreaContainer {
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color-light);
+    background-color: var(--card-background);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 默认隐藏溢出 */
+}
+
+/* 特定区域样式 */
+.querySidebar {
+    padding: 0; /* 内边距由内部卡片提供 */
+    background: none; /* 背景透明 */
+    border: none;
+    box-shadow: none;
+    overflow-y: auto; /* 内容超出时允许垂直滚动 */
+    gap: 15px; /* 卡片间距 */
+    scrollbar-width: thin;
+    scrollbar-color: #dce6f0 #f8fcff;
+}
+.querySidebar::-webkit-scrollbar { width: 6px; }
+.querySidebar::-webkit-scrollbar-track { background: #f8fcff; border-radius: 3px; }
+.querySidebar::-webkit-scrollbar-thumb { background: #dce6f0; border-radius: 3px; }
+.querySidebar::-webkit-scrollbar-thumb:hover { background: #c0d3e8; }
+
+
+.analysisArea {
+    padding: 15px 20px;
+    overflow: hidden; /* 隐藏垂直滚动，允许内部水平滚动 */
+}
+
+.visualizationArea {
+    padding: 0; /* 移除内边距，让图谱占满 */
+    background-color: #fff; /* 确保白色背景 */
+    position: relative; /* 用于放置加载提示 */
+}
+.graphContainer { width: 100%; height: 100%; } /* 图谱容器 */
+.loadingPlaceholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.1em;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+}
+
+.infoAreaContainer { /* 信息区 */
+     padding: 15px 20px;
+     overflow-y: auto; /* 允许内容垂直滚动 */
+     scrollbar-width: thin;
+     scrollbar-color: #dce6f0 #f8fcff;
+}
+.infoAreaContainer::-webkit-scrollbar { width: 6px; }
+.infoAreaContainer::-webkit-scrollbar-track { background: #f8fcff; border-radius: 3px; }
+.infoAreaContainer::-webkit-scrollbar-thumb { background: #dce6f0; border-radius: 3px; }
+.infoAreaContainer::-webkit-scrollbar-thumb:hover { background: #c0d3e8; }
+
+/* --- 左侧边栏内部卡片 --- */
+.kgCard {
+    background: var(--gradient-sidebar-bg);
+    border-radius: var(--border-radius);
+    padding: 18px 20px;
+    border: 1px solid var(--border-color-light);
+    box-shadow: var(--shadow-soft);
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For pseudo-elements if needed */
+}
+.kgCard:not(:last-child) {
+    margin-bottom: 15px; /* Add margin between cards */
+}
+.kgCard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* --- 通用标题 --- */
+.sidebarTitle {
+    font-size: 1.0em; font-weight: 600; color: var(--text-color); margin-bottom: 15px;
+    display: flex; align-items: center; gap: 8px; position: relative; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color-light); /* Add a subtle border */
+}
+.sidebarTitle svg { color: var(--primary-blue); font-size: 1.1em; } /* Style FontAwesomeIcon */
+.sidebarTitle::after { /* 标题下划线 */
+    content: ''; position: absolute; left: 0; bottom: -1px; /* Position on top of border */
+    width: 45px; height: 3px; background: var(--gradient-accent); border-radius: 1.5px;
+    transition: width 0.3s ease;
+}
+.sidebarTitle:hover::after {
+    width: 70px;
+}
+
+/* --- 查询卡片元素 --- */
+.queryArea, .filterArea, .advancedQuery { margin-bottom: 15px; }
+.queryArea { display: flex; gap: 8px; align-items: center; }
+.searchInput, .filterSelect, .cypherTextarea {
+    padding: 9px 12px; /* Slightly smaller padding */
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    /* 添加颜色以确保在深色模式下可读性 */
+    color: var(--text-color);
+}
+.searchInput::placeholder, .cypherTextarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+.searchInput:focus, .filterSelect:focus, .cypherTextarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15), inset 0 1px 2px rgba(0,0,0,0.05);
+    background-color: #fff;
+}
+.searchInput { flex-grow: 1; }
+.searchButton {
+    padding: 9px 15px;
+    border: none;
+    color: white;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 0.95em;
+    background: var(--gradient-accent);
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+.searchButton:hover {
+    background: var(--gradient-accent-hover);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+.searchButton:active { transform: translateY(0); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.filterArea label { display: block; margin-bottom: 6px; font-size: 0.9em; color: var(--text-secondary); font-weight: 500; }
+.filterSelect {
+    /* 添加背景和颜色以适应不同模式 */
+    background-color: #fff;
+    color: var(--text-color);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+.advancedQuery summary { cursor: pointer; font-weight: 500; color: var(--primary-blue); margin-bottom: 8px; list-style: none; display: inline-flex; align-items: center; transition: color 0.3s ease; padding: 3px 0; }
+.advancedQuery summary:hover { color: var(--primary-purple); }
+.advancedQuery summary::before { content: '▶'; margin-right: 6px; transition: transform 0.3s ease; font-size: 0.8em; display: inline-block; }
+.advancedQuery[open] summary::before { transform: rotate(90deg); }
+.cypherTextarea { margin-top: 8px; margin-bottom: 8px; min-height: 70px; resize: vertical; }
+.cypherButton { float: right; background: var(--gradient-accent); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.9em; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); cursor: pointer; }
+.cypherButton:hover { background: var(--gradient-accent-hover); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); transform: translateY(-1px); }
+.cypherButton:active { transform: translateY(0); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+
+/* --- 显示选项卡片元素 --- */
+.displayOptions { display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: space-between; }
+.layoutButtons { display: flex; gap: 10px; }
+.smallButton {
+    padding: 7px 12px; font-size: 0.9em; border: 1px solid var(--border-color-light); background-color: #fff;
+    border-radius: var(--border-radius-sm); cursor: pointer; transition: all 0.3s ease; color: var(--text-secondary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03); display: inline-flex; align-items: center; gap: 6px;
+}
+.smallButton svg { font-size: 0.95em; } /* Style FontAwesomeIcon */
+.smallButton:hover { background-color: #f8fcff; border-color: #d0e0f0; color: var(--primary-blue); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); transform: translateY(-2px); }
+.smallButton.active { background: var(--gradient-accent); color: white; border-color: transparent; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); }
+.smallButton.active:hover { transform: translateY(-2px); } /* Keep hover effect on active */
+.smallButton.active svg { color: white; }
+
+/* Toggle Switch */
+.toggleSwitch { position: relative; display: inline-flex; align-items: center; height: 24px; font-size: 0.9em; color: var(--text-secondary); cursor: pointer; white-space: nowrap; font-weight: 500; user-select: none; }
+.toggleSwitch input { opacity: 0; width: 0; height: 0; }
+.slider { display: inline-block; width: 40px; height: 20px; background-color: #ccc; border-radius: 20px; transition: .4s; cursor: pointer; margin-right: 8px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); position: relative; }
+.slider::before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; border-radius: 50%; transition: .4s; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); }
+.toggleSwitch input:checked + .slider { background-color: var(--primary-green); }
+.toggleSwitch input:focus + .slider { box-shadow: 0 0 1px var(--primary-green); }
+.toggleSwitch input:checked + .slider:before { transform: translateX(20px); }
+
+/* --- 统计卡片元素 --- */
+.miniStats { display: flex; justify-content: space-around; text-align: center; padding: 10px 0; }
+.statItem { padding: 10px 15px; border-radius: 10px; transition: all 0.3s ease; background: rgba(248, 250, 255, 0.5); }
+.statItem:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.9); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); }
+.statValue { /* 统计数值渐变色 */
+    font-size: 1.8em; font-weight: 700;
+    background: var(--gradient-text-color);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; text-fill-color: transparent;
+    display: block; /* Changed to block for better centering */
+    margin-bottom: 3px;
+}
+.statLabel { font-size: 0.85em; color: var(--text-secondary); margin-top: 2px; display: block; font-weight: 500; }
+
+/* --- 分析区域 (顶部) --- */
+.analysisChartsHorizontal { /* 横向排列图表容器 */
+    display: flex; gap: 18px; width: 100%;
+    height: calc(100% - 50px); /* 减去标题高度和一些间距 */
+    align-items: stretch; overflow-x: auto; padding-bottom: 10px; /* 留出滚动条空间 */
+    scrollbar-width: thin; scrollbar-color: #dce6f0 #f8fcff;
+}
+.analysisChartsHorizontal::-webkit-scrollbar { height: 6px; }
+.analysisChartsHorizontal::-webkit-scrollbar-track { background: #f8fcff; border-radius: 3px; }
+.analysisChartsHorizontal::-webkit-scrollbar-thumb { background: #dce6f0; border-radius: 3px; }
+.analysisChartsHorizontal::-webkit-scrollbar-thumb:hover { background: #c0d3e8; }
+
+.miniChartCard { /* 分析区内的小图表卡片 */
+    flex: 0 0 240px; /* 固定基础宽度 */
+    min-width: 220px; /* 最小宽度 */
+    display: flex; flex-direction: column; padding: 15px;
+    background: linear-gradient(145deg, #ffffff, #f8faff);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius); box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+.miniChartCard:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.miniChartCardHeader { /* 图表卡片头部 */
+    font-size: 0.9em; margin-bottom: 10px; padding-bottom: 8px;
+    border-bottom: 1px solid rgba(240, 244, 248, 0.8); color: var(--text-secondary);
+    flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    font-weight: 600; display: flex; align-items: center; gap: 6px;
+}
+.miniChartCardHeader svg { color: var(--primary-purple); } /* Style FontAwesomeIcon */
+.miniChartContainer { /* 图表容器 */
+    height: var(--mini-chart-height);
+    min-height: var(--mini-chart-min-height);
+    flex-grow: 1; /* 占据剩余空间 */
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+}
+
+/* --- 信息区域 (右下) --- */
+.infoPanelContent { /* 信息面板内容区域 */
+    font-size: 0.95em; line-height: 1.7; flex-grow: 1;
+    /* overflow-y: auto;  -- 由父容器 .infoAreaContainer 控制滚动 */
+    padding-right: 5px; /* 给滚动条留点空间 */
+}
+.infoPlaceholder { color: var(--text-secondary); text-align: center; margin-top: 30px; }
+.infoTitle { /* 信息标题 */
+    font-size: 1.1em; color: var(--primary-blue); margin-bottom: 15px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border-color-light);
+    position: relative; font-weight: 600;
+}
+.infoTitle::after { /* 标题下划线 */
+    content: ''; position: absolute; left: 0; bottom: -1px;
+    width: 40px; height: 3px; background: var(--gradient-accent);
+    border-radius: 1.5px; transition: width 0.3s ease;
+}
+.infoTitle:hover::after { width: 60px; }
+
+.infoList { list-style: none; padding-left: 0; margin: 0; }
+.infoListItem { /* 列表项 */
+    margin-bottom: 10px; padding-left: 22px; position: relative;
+    transition: background-color 0.2s ease; padding: 4px 0 4px 22px;
+    border-radius: 4px;
+}
+.infoListItem:hover { background-color: rgba(240, 248, 255, 0.6); }
+.infoListItem::before { /* 列表项图标 */
+    content: '●'; /* 使用圆点 */
+    font-size: 0.6em; color: var(--primary-green);
+    position: absolute; left: 8px; top: 9px; /* 调整位置 */
+}
+.infoProperty { /* 属性标签 */
+    color: var(--text-secondary); margin-right: 8px; font-weight: 500;
+    display: inline-block; /* 确保对齐 */
+    min-width: 80px; /* 可选：设置最小宽度对齐 */
+}
+.infoValue { /* 属性值 */
+    color: var(--text-color); word-break: break-word;
+    /* background: rgba(248, 250, 255, 0.7); */ /* 移除背景，hover效果在li上 */
+    padding: 1px 3px; border-radius: 4px;
+}
+.infoValue a { /* 链接样式 */
+    color: var(--primary-blue); text-decoration: none; font-weight: 500;
+    transition: color 0.3s ease;
+    word-break: break-all; /* 长链接换行 */
+}
+.infoValue a:hover { color: var(--primary-purple); text-decoration: underline; }
+.infoValue a svg { font-size: 0.8em; margin-left: 3px; } /* 外部链接图标 */
+
+
+/* --- 响应式布局调整 --- */
+/* 移除 @media 查询中的 :root 定义 */
+@media (max-width: 1450px) { /* 中等偏大屏幕 */
+    .analysisChartsHorizontal .miniChartCard { flex-basis: 220px; min-width: 200px; }
+    /* :root 规则已移至 globals.css */
+}
+
+@media (max-width: 1200px) { /* 中等屏幕，开始堆叠 */
+    .kgMainContentGrid {
+        grid-template-columns: 1fr; /* 单列 */
+        grid-template-rows: auto auto minmax(400px, 55vh) auto; /* 查询 | 分析 | 图谱 | 信息 */
+        grid-template-areas: "query" "analysis" "graph" "info";
+        overflow-y: auto; /* 允许整个页面滚动 */
+        height: auto; /* 高度自适应 */
+        padding: 15px;
+        gap: 15px;
+    }
+    .querySidebar, .analysisArea, .visualizationArea, .infoAreaContainer {
+        height: auto; /* 重置固定高度 */
+        max-height: none; /* 取消最大高度限制 */
+        overflow-y: visible; /* 默认不滚动，让页面滚动 */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+     .querySidebar:hover, .analysisArea:hover, .visualizationArea:hover, .infoAreaContainer:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-hover);
+    }
+    .querySidebar { order: 1; overflow-y: visible; } /* 查询区不需要滚动 */
+    .analysisArea { order: 2; overflow-x: auto; } /* 分析区允许水平滚动 */
+    .analysisChartsHorizontal { flex-wrap: nowrap; padding-bottom: 15px; } /* 强制不换行 */
+    .visualizationArea { order: 3; height: 60vh; min-height: 400px; } /* 图谱区 */
+    .infoAreaContainer { order: 4; min-height: 250px; max-height: 50vh; overflow-y: auto; } /* 信息区允许滚动 */
+    .kgContainer { height: auto; min-height: 100vh; } /* 容器高度自适应 */
+}
+
+@media (max-width: 768px) { /* 小型屏幕 */
+    /* :root 规则已移至 globals.css */
+    .kgMainContentGrid { gap: 12px; padding: 12px; }
+    .querySidebar, .analysisArea, .visualizationArea, .infoAreaContainer { padding: 15px; border-radius: 10px; }
+    .analysisChartsHorizontal .miniChartCard { flex-basis: 200px; min-width: 180px; }
+    .visualizationArea { height: 55vh; min-height: 350px; }
+    .kgHeader { padding: 0 15px; }
+    .headerTitle { font-size: 1.25em; }
+    .sidebarTitle { font-size: 0.95em; }
+    .kgCard { padding: 15px; }
+    .displayOptions { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+
+@media (max-width: 576px) { /* 超小屏幕 */
+    /* :root 规则已移至 globals.css */
+    .headerTitle { display: none; } /* 隐藏标题文字 */
+    .userName { display: none; } /* 隐藏用户名 */
+    .kgMainContentGrid { padding: 10px; gap: 10px; }
+    .querySidebar, .analysisArea, .visualizationArea, .infoAreaContainer { padding: 12px; }
+    .analysisChartsHorizontal .miniChartCard { flex-basis: 180px; min-width: 170px; padding: 12px;}
+    .miniChartCardHeader { font-size: 0.85em; }
+    /* :root 规则已移至 globals.css */
+    .visualizationArea { height: 50vh; min-height: 300px; }
+    .smallButton { padding: 6px 10px; font-size: 0.85em; }
+    .toggleSwitch { font-size: 0.85em; }
+    .statValue { font-size: 1.6em; }
+    .searchButton { padding: 8px 12px; font-size: 0.9em; }
+    .searchInput, .filterSelect, .cypherTextarea { padding: 8px 10px; font-size: 0.9em;}
+}

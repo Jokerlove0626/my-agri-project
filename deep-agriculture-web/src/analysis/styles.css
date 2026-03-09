@@ -1,0 +1,239 @@
+/* src/analysis/styles.css */
+
+/* --- CSS 变量定义 (可选，如果统一管理) --- */
+:root {
+    --chart-container-min-height: 250px; /* 图表容器默认最小高度 */
+    --map-container-min-height: 400px;   /* 地图容器默认最小高度 */
+    --chart-card-min-height: 350px;      /* 图表卡片默认最小高度 */
+    --map-card-min-height: 450px;        /* 地图卡片默认最小高度 */
+    --responsive-breakpoint-lg: 1200px;
+    --responsive-breakpoint-md: 992px;
+    --responsive-breakpoint-sm: 768px;
+    --responsive-breakpoint-xs: 576px;
+}
+
+/* --- 基础卡片样式 --- */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    padding: 16px 20px; /* 内边距 */
+    /* **核心布局：使用 Flexbox 垂直排列内部元素** */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 防止内容溢出 */
+    transition: box-shadow 0.3s ease; /* 添加悬浮效果 */
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* --- 卡片头部样式 --- */
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px; /* 头部和内容的间距 */
+    padding-bottom: 12px; /* 底部内边距，用于分隔线 */
+    border-bottom: 1px solid #eee; /* 添加分隔线 */
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+    /* **阻止头部在 flex 布局中收缩** */
+    flex-shrink: 0;
+}
+
+.card-header .icon {
+    margin-right: 8px; /* 图标和文字的间距 */
+    font-size: 16px; /* 图标大小 */
+    color: #888; /* 图标颜色 */
+    width: 18px; /* 固定图标宽度 */
+    text-align: center;
+}
+
+/* --- 指标卡片样式 (Metric Card) --- */
+.metric-card {
+    color: #fff;
+    position: relative;
+    min-height: 120px; /* 指标卡片最小高度 */
+    /* 内部内容垂直分布，使用了 justify-content 需要显式设置 flex */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 让周期信息推到底部 */
+}
+/* ... (metric-card 其他样式和渐变背景类保持不变) ... */
+.metric-card .card-header { /* 指标卡片头部的特定样式 */
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+.metric-card .icon { color: rgba(255, 255, 255, 0.95); }
+.metric-value {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+    /* 让数值部分也能在 flex 中扩展 (如果需要垂直居中等) */
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.metric-sub { font-size: 14px; font-weight: normal; margin-left: 4px; }
+.metric-period { font-size: 12px; color: rgba(255, 255, 255, 0.8); /* margin-top: auto 已由 justify-content 实现 */ }
+.gradient-green { background: linear-gradient(135deg, #66bb6a, #43a047); }
+.gradient-blue { background: linear-gradient(135deg, #42a5f5, #1e88e5); }
+.gradient-purple { background: linear-gradient(135deg, #ab47bc, #8e24aa); }
+.gradient-orange { background: linear-gradient(135deg, #ffa726, #fb8c00); }
+
+
+/* --- 图表卡片 (Chart Card) --- */
+.chart-card {
+    /* 继承 .card 的 flex 布局 */
+    /* **为普通图表卡片设置最小高度** */
+    min-height: var(--chart-card-min-height, 350px);
+}
+
+/* --- 图表容器 (.chart-container) --- */
+.chart-card .chart-container {
+    width: 100%; /* 宽度占满 */
+    /* **核心：让图表容器在 flex 布局中占据剩余垂直空间** */
+    flex-grow: 1;
+    /* **设置图表容器的最小高度** */
+    min-height: var(--chart-container-min-height, 250px);
+    position: relative; /* ECharts 可能需要 */
+    overflow: hidden; /* 裁剪 ECharts 画布 */
+    border-radius: 6px; /* 轻微圆角 */
+    /* background-color: rgba(0,0,255,0.1); */ /* 调试背景色 */
+}
+
+/* --- 地图卡片特殊样式 --- */
+.chart-card.large-card {
+    /* **为地图卡片设置更大的最小高度** */
+    /* min-height: var(--map-card-min-height, 450px); */
+    min-height: 450px;
+}
+
+/* --- 地图容器特殊样式 --- */
+.chart-card.large-card .chart-container,
+.chart-container.tall-chart { /* 也支持直接给容器加类名 */
+    /* **为地图容器设置更大的最小高度** */
+    min-height: var(--map-container-min-height, 400px);
+    height: 400px;
+    /* flex-grow: 1; 已继承/设置 */
+}
+
+/* --- 布局容器与行布局 --- */
+.dashboard-container {
+    padding: 20px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+}
+
+.dashboard-content {
+    display: grid;
+    gap: 20px;
+}
+
+.metrics-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.charts-row-triple {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.charts-row-double {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 默认响应式 */
+    gap: 20px;
+    align-items: start;
+}
+
+/* 在较大屏幕上应用特定布局 */
+@media (min-width: var(--responsive-breakpoint-md, 992px)) {
+    .charts-row-double {
+        grid-template-columns: 2fr 1fr; /* 地图占 2份，宿主占 1份 */
+    }
+}
+
+/* --- 图标颜色 --- */
+/* ... (图标颜色样式保持不变) ... */
+.icon-leaf { color: #66bb6a; }
+.icon-book-open { color: #42a5f5; }
+/* ... etc ... */
+.icon-globe-asia { color: #5c6bc0; }
+
+
+/* --- 响应式调整 (示例，检查高度相关) --- */
+@media (max-width: var(--responsive-breakpoint-lg, 1200px)) {
+    :root { /* 可选：在不同断点调整变量 */
+        --chart-card-min-height: 320px;
+        --map-card-min-height: 420px;
+        --chart-container-min-height: 230px;
+        --map-container-min-height: 380px;
+    }
+     /* 或者直接覆盖 */
+     .chart-card { min-height: 320px; }
+     .chart-card.large-card { min-height: 420px; }
+     .chart-card .chart-container { min-height: 230px; }
+     .chart-card.large-card .chart-container,
+     .chart-container.tall-chart { min-height: 380px; }
+}
+
+@media (max-width: var(--responsive-breakpoint-md, 992px)) {
+     :root {
+        --chart-card-min-height: 300px;
+        --map-card-min-height: 400px; /* 地图卡片在堆叠时也需要足够高度 */
+        --chart-container-min-height: 220px;
+        --map-container-min-height: 350px;
+    }
+    .chart-card { min-height: 300px; }
+    .chart-card.large-card { min-height: 400px; }
+    .chart-card .chart-container { min-height: 220px; }
+     .chart-card.large-card .chart-container,
+    .chart-container.tall-chart { min-height: 350px; }
+    /* .charts-row-double 已在上面设置为堆叠 */
+}
+
+@media (max-width: var(--responsive-breakpoint-sm, 768px)) {
+    :root {
+        --chart-card-min-height: 280px;
+        --map-card-min-height: 350px;
+        --chart-container-min-height: 200px;
+        --map-container-min-height: 300px;
+    }
+     .chart-card { min-height: 280px; }
+     .chart-card.large-card { min-height: 350px; }
+     .chart-card .chart-container { min-height: 200px; }
+     .chart-card.large-card .chart-container,
+     .chart-container.tall-chart { min-height: 300px; }
+
+    .dashboard-content { padding: 15px; gap: 15px; }
+    /* 所有行堆叠 */
+    .metrics-row, .charts-row-triple, .charts-row-double {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    /* ... (其他小屏幕调整) ... */
+}
+
+@media (max-width: var(--responsive-breakpoint-xs, 576px)) {
+    :root {
+        --chart-card-min-height: 260px;
+        --map-card-min-height: 300px;
+        --chart-container-min-height: 180px;
+        --map-container-min-height: 250px;
+    }
+     .chart-card { min-height: 260px; }
+     .chart-card.large-card { min-height: 300px; }
+     .chart-card .chart-container { min-height: 180px; }
+     .chart-card.large-card .chart-container,
+     .chart-container.tall-chart { min-height: 250px; }
+    /* ... (其他超小屏幕调整) ... */
+}

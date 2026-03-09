@@ -1,0 +1,447 @@
+/* 基本样式与重置 */
+:root {
+    /* 主色调 - 更加鲜明的色彩 */
+    --primary-blue: #4a90e2;
+    --primary-green: #50e3c2;
+    --primary-purple: #bd10e0;
+    --primary-orange: #f5a623;
+    --primary-teal: #20c997;
+    --primary-pink: #e83e8c;
+    
+    /* 渐变色 - 更加丰富的渐变效果 */
+    --gradient-blue: linear-gradient(135deg, #6ac8ff 0%, #4a90e2 100%);
+    --gradient-green: linear-gradient(135deg, #79f1a4 0%, #50e3c2 100%);
+    --gradient-purple: linear-gradient(135deg, #d989ef 0%, #bd10e0 100%);
+    --gradient-orange: linear-gradient(135deg, #ffcc33 0%, #f5a623 100%);
+    --gradient-teal: linear-gradient(135deg, #8eedc7 0%, #20c997 100%);
+    --gradient-pink: linear-gradient(135deg, #ff9a9e 0%, #e83e8c 100%);
+    --gradient-header: linear-gradient(to right, #2b5876, #4e4376);
+    
+    /* 背景与卡片 */
+    --background-color: #f8faff;
+    --card-background: #ffffff;
+    --text-color: #333;
+    --text-secondary: #777;
+    
+    /* 设计元素 */
+    --border-radius: 16px;
+    --border-radius-sm: 8px;
+    --shadow: 0 10px 20px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.03);
+    --shadow-hover: 0 14px 28px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.06);
+    --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --chart-container-height: 280px; /* Default height for chart containers */
+    
+    /* 动画时间 */
+    --transition-speed: 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(74, 144, 226, 0.03) 0%, transparent 700px),
+        radial-gradient(circle at 90% 80%, rgba(80, 227, 194, 0.03) 0%, transparent 700px);
+    background-attachment: fixed;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 头部 */
+.dashboard-header {
+    background: var(--gradient-header);
+    color: #fff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-header .logo {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Spacing */
+}
+
+.dashboard-header .logo i {
+    font-size: 1.8em;
+    margin-right: 15px;
+    color: var(--primary-green);
+}
+
+.dashboard-header h1 {
+    font-size: 1.4em;
+    font-weight: 600;
+    white-space: nowrap; /* Prevent title wrapping */
+}
+
+.time-display {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #e0e0e0;
+    margin: 0 15px; /* Spacing */
+}
+
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Push user profile to the right */
+}
+
+.user-profile i {
+    font-size: 1.5em;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.user-profile span {
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+
+/* 主要内容区域 */
+.dashboard-content {
+    flex-grow: 1;
+    padding: 30px;
+    display: grid; /* Changed from flex to grid for easier layout */
+    gap: 25px; /* 卡片间距 */
+    /* Define grid columns for overall layout if needed, or rely on section layouts */
+}
+
+
+/* 卡片基础样式 */
+.card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: all var(--transition-speed) ease;
+    overflow: hidden; /* 保证渐变背景不溢出 */
+    display: flex; /* Use flexbox for card content */
+    flex-direction: column; /* Stack header and content vertically */
+    border: 1px solid rgba(230, 230, 250, 0.5);
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.0em; /* Adjusted size */
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(230, 230, 250, 0.5);
+    padding-bottom: 10px;
+    flex-shrink: 0; /* Prevent header from shrinking */
+    position: relative;
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-blue), var(--primary-green));
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.card:hover .card-header::after {
+    width: 80px;
+}
+
+.card-header i {
+    margin-right: 10px;
+    font-size: 1.1em; /* Adjusted size */
+    width: 20px; /* 图标对齐 */
+    text-align: center;
+    color: var(--primary-blue); /* Default icon color */
+}
+/* Specific icon colors */
+.card-header i.fa-leaf { color: var(--primary-green); }
+.card-header i.fa-book-open { color: var(--primary-blue); }
+.card-header i.fa-comments { color: var(--primary-purple); }
+.card-header i.fa-database { color: var(--primary-orange); }
+.card-header i.fa-sitemap,
+.card-header i.fa-check-circle,
+.card-header i.fa-chart-line,
+.card-header i.fa-globe-asia,
+.card-header i.fa-bug,
+.card-header i.fa-chart-area,
+.card-header i.fa-tags,
+.card-header i.fa-file-alt {
+    /* Use default blue or assign specific colors */
+     color: #555; /* Darker grey for content icons */
+}
+
+
+/* 指标卡片 */
+.metrics-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.metric-card {
+    color: #fff; /* 渐变背景上的文字用白色 */
+    position: relative;
+    z-index: 1;
+    min-height: 180px;
+    justify-content: space-between;
+}
+
+.metric-card .card-header {
+    color: rgba(255, 255, 255, 0.9); /* 调整头部文字透明度 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.metric-card .card-header i { /* 指标卡片图标颜色 */
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-size: 1.2em;
+}
+
+.metric-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 15px 0 10px;
+    line-height: 1.2;
+    flex-grow: 1; /* Allow value to take space if needed */
+    display: flex;
+    align-items: center; /* Center vertically if single line */
+    justify-content: center; /* Center horizontally */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 2;
+    letter-spacing: 1px;
+}
+
+.metric-period {
+    font-size: 0.9em;
+    opacity: 0.95;
+    text-align: center; /* Center align period text */
+    margin-top: auto; /* Push to bottom */
+    padding: 8px 0 0;
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.metric-sub {
+    font-size: 0.4em;
+    font-weight: normal;
+    opacity: 0.9;
+    margin-left: 5px;
+}
+
+/* 渐变背景 - 增强版 */
+.gradient-blue { 
+    background-image: var(--gradient-blue); 
+    position: relative;
+    overflow: hidden;
+}
+.gradient-blue::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent 70%);
+    z-index: 0;
+}
+
+.gradient-green { 
+    background-image: var(--gradient-green); 
+    position: relative;
+    overflow: hidden;
+}
+.gradient-green::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent 70%);
+    z-index: 0;
+}
+
+.gradient-purple { 
+    background-image: var(--gradient-purple); 
+    position: relative;
+    overflow: hidden;
+}
+.gradient-purple::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent 70%);
+    z-index: 0;
+}
+
+.gradient-orange { 
+    background-image: var(--gradient-orange); 
+    position: relative;
+    overflow: hidden;
+}
+.gradient-orange::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent 70%);
+    z-index: 0;
+}
+
+/* Layout Grids for Chart Rows */
+.charts-row-triple {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.charts-row-double {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr; /* Map wider */
+    gap: 25px;
+}
+
+
+/* Chart container styling */
+.chart-container {
+    width: 100%;
+    height: var(--chart-container-height); /* Use CSS variable */
+    min-height: 200px; /* Ensure minimum height */
+    flex-grow: 1; /* Allow chart container to fill card space */
+    position: relative;
+    z-index: 1;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    transition: all var(--transition-speed) ease;
+}
+
+.tall-chart {
+    height: calc(var(--chart-container-height) * 1.5); /* Taller chart for map */
+    min-height: 350px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Specific card adjustments */
+.large-card {
+     /* grid-column: span 2; */ /* Let the grid handle spanning */
+}
+
+.list-card .card-header { /* Applied to Top 5 Hosts card */
+   /* No special style needed unless overriding */
+}
+/* Remove default list styling if a chart is inside list-card */
+.list-card .chart-container {
+    /* Styles specific to chart within a list-card if needed */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .charts-row-double {
+        grid-template-columns: 1.8fr 1fr; /* Adjust ratio */
+    }
+}
+
+@media (max-width: 992px) {
+     .charts-row-double, .charts-row-triple {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* More flexible stacking */
+    }
+     .tall-chart {
+         height: calc(var(--chart-container-height) * 1.2); /* Slightly reduce map height */
+         min-height: 300px;
+     }
+      .dashboard-header {
+         justify-content: space-between; /* Ensure items spread out */
+     }
+     .time-display {
+         order: 1; /* Move time below logo on wrap */
+         width: 100%;
+         text-align: center;
+         margin: 5px 0;
+     }
+     .user-profile {
+         order: 2; /* User profile last on wrap */
+         margin-left: 0;
+     }
+}
+
+
+@media (max-width: 768px) {
+    :root {
+        --chart-container-height: 250px; /* Reduce chart height */
+    }
+    .dashboard-content {
+        padding: 20px;
+        gap: 20px;
+    }
+    .metrics-row, .charts-row-double, .charts-row-triple {
+        grid-template-columns: 1fr; /* Stack all cards */
+        gap: 20px;
+    }
+     .tall-chart {
+         height: var(--chart-container-height); /* Reset map height */
+         min-height: 250px;
+     }
+     .dashboard-header {
+        padding: 10px 15px;
+    }
+    .dashboard-header h1 {
+        font-size: 1.2em;
+    }
+     .metric-value {
+        font-size: 2em;
+    }
+
+}
+
+@media (max-width: 576px) {
+    .dashboard-header h1 { display: none; } /* Hide text title, keep icon */
+    .user-profile span { display: none; } /* Hide user name, keep icon */
+     :root {
+        --chart-container-height: 220px; /* Further reduce chart height */
+    }
+     .tall-chart {
+         min-height: 220px;
+     }
+}

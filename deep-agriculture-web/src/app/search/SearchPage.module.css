@@ -1,0 +1,28 @@
+/* src/app/search/SearchPage.module.css */
+.pageContainer {
+    /* 如果 Header 不在全局 layout 中，可能需要为 Header 留出空间 */
+    /* padding-top: var(--header-height, 60px); */
+    min-height: calc(100vh - var(--header-height, 60px)); /* 确保内容至少占满视口剩余高度 */
+    background-color: var(--background-color); /* 页面背景色 */
+ }
+ 
+ .mainContainer {
+   display: flex;
+   padding: 1.5rem 2rem; /* 页面主内容区域的内边距 */
+   gap: 1.5rem; /* 侧边栏和结果区之间的间距 */
+ }
+ 
+ /* 响应式调整 */
+ @media (max-width: 768px) {
+   .mainContainer {
+     flex-direction: column; /* 在小屏幕上垂直排列 */
+     padding: 1rem; /* 调整内边距 */
+     gap: 1.5rem; /* 保持间距 */
+   }
+ }
+ 
+ @media (max-width: 576px) {
+      .mainContainer {
+          padding: 0.8rem;
+      }
+ }

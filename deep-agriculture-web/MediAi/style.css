@@ -1,0 +1,776 @@
+/* ==========================================================================
+   基础样式与变量定义 (MediAI 定制主题)
+   ========================================================================== */
+
+:root {
+    /* --- MediAI 浅色模式配色 --- */
+    /* 主色调 (蓝色系) */
+    --primary-color: #3B82F6;       /* blue-500 */
+    --primary-color-light: #60A5FA; /* blue-400 (用于深色模式下的主色或浅色模式点缀) */
+    /* 辅助色 (青色系) */
+    --secondary-color: #14B8A6;     /* teal-500 */
+    --secondary-color-light: #2DD4BF;/* teal-400 */
+    /* 强调色 (琥珀黄/金色系) */
+    --accent-color: #0b3af5;        /* amber-500 */
+    --accent-color-light: #416aef;  /* amber-300 */
+
+    /* 背景色 */
+    --bg-light: #F9FAFB;           /* gray-50 (非常浅的灰色) */
+    --bg-subtle-light: #F3F4F6;     /* gray-100 */
+    --bg-card-light: rgba(255, 255, 255, 0.75); /* 白色半透明 - 玻璃拟态 */
+    --bg-hover-light: rgba(59, 130, 246, 0.08); /* 主色调的浅悬停背景 */
+
+    /* 文本颜色 */
+    --text-base-light: #374151;     /* gray-700 (正文) */
+    --text-heading-light: #111827;   /* gray-900 (标题) */
+    --text-muted-light: #6B7280;     /* gray-500 (辅助文本) */
+    --text-link-light: var(--primary-color); /* 链接使用主色 */
+    --text-on-primary: #FFFFFF;        /* 主按钮文字 (白色) */
+
+    /* 边框颜色 */
+    --border-light: rgba(59, 130, 246, 0.2);  /* 主色调的浅边框 */
+    --border-card-light: rgba(0, 0, 0, 0.05);    /* 卡片浅边框 */
+    --border-input-light: #D1D5DB; /* gray-300 */
+    --border-hover-light: rgba(59, 130, 246, 0.4); /* 主色调的悬停边框 */
+
+    /* 渐变色 */
+    --bg-gradient-start-light: rgba(59, 130, 246, 0.08); /* 主色 */
+    --bg-gradient-end-light: rgba(20, 184, 166, 0.03); /* 辅色 */
+
+    /* --- MediAI 深色模式配色 --- */
+    /* 主色调 (使用浅蓝色) */
+    --primary-color-dark: var(--primary-color-light); /* blue-400 */
+    --primary-color-dark-deep: var(--primary-color);  /* blue-500 (备用) */
+    /* 辅助色 (使用浅青色) */
+    --secondary-color-dark: var(--secondary-color-light); /* teal-400 */
+    --secondary-color-dark-deep: var(--secondary-color); /* teal-500 (备用) */
+    /* 强调色 (使用浅金色) */
+    --accent-color-dark: var(--accent-color-light);   /* amber-300 */
+
+    /* 背景色 */
+    --bg-dark: #111827;             /* gray-900 (深灰蓝) */
+    --bg-subtle-dark: #1F2937;       /* gray-800 */
+    --bg-card-dark: rgba(31, 41, 55, 0.65); /* 深灰色半透明 - 玻璃拟态 */
+    --bg-hover-dark: rgba(96, 165, 250, 0.12); /* 亮蓝色的浅悬停背景 */
+
+    /* 文本颜色 */
+    --text-base-dark: #D1D5DB;       /* gray-300 (正文) */
+    --text-heading-dark: #F9FAFB;     /* gray-50 (标题) */
+    --text-muted-dark: #9CA3AF;       /* gray-400 (辅助文本) */
+    --text-link-dark: var(--primary-color-dark); /* 链接使用浅蓝色 */
+    /* --text-on-primary: #FFFFFF; (保持不变) */
+
+    /* 边框颜色 */
+    --border-dark: rgba(96, 165, 250, 0.25); /* 亮蓝色的浅边框 */
+    --border-card-dark: rgba(255, 255, 255, 0.08);/* 卡片亮边框 */
+    --border-input-dark: #4B5563; /* gray-600 */
+    --border-hover-dark: rgba(96, 165, 250, 0.5); /* 亮蓝色的悬停边框 */
+
+    /* 渐变色 */
+    --bg-gradient-start-dark: rgba(96, 165, 250, 0.1); /* 亮蓝色 */
+    --bg-gradient-end-dark: rgba(45, 212, 191, 0.1); /* 亮青色 */
+
+    /* --- 通用样式变量 (保持 DeepForest 结构) --- */
+    /* 圆角 */
+    --rounded-btn: 9999px;
+    --rounded-card: 1rem; /* 旧卡片圆角，兼容 */
+    --rounded-input: 0.5rem;
+    --rounded-img: 1rem;
+    --rounded-icon-bg: 0.75rem; /* 12px */
+    --rounded-lg: 0.75rem; /* 常用小圆角 */
+    --rounded-xl: 1.25rem; /* 主要卡片圆角 */
+    --rounded-2xl: 1.5rem; /* 图片等大圆角 */
+
+    /* 阴影 (保持结构，颜色可微调) */
+    --shadow-sm: 0 2px 5px rgba(17, 24, 39, 0.06); /* 接近 gray-900 */
+    --shadow-md: 0 4px 10px rgba(17, 24, 39, 0.08);
+    --shadow-lg: 0 12px 25px rgba(17, 24, 39, 0.1);
+    --shadow-xl: 0 25px 50px rgba(17, 24, 39, 0.12);
+    --shadow-dark-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
+    --shadow-dark-md: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --shadow-dark-lg: 0 15px 35px rgba(0, 0, 0, 0.35);
+    --shadow-dark-xl: 0 30px 60px rgba(0, 0, 0, 0.4);
+
+    /* 过渡 */
+    --transition-fast: all 0.2s ease-in-out;
+    --transition-base: all 0.3s ease-in-out;
+    --transition-slow: all 0.5s ease-in-out;
+
+    /* 辉光效果 (颜色基于新主色调调整) */
+    --glow-primary-light: 0 0 15px rgba(59, 130, 246, 0.3);
+    --glow-primary-dark: 0 0 20px rgba(96, 165, 250, 0.4);
+
+    /* --- MediAI 特定组件颜色变量 --- */
+    /* 特性图标背景 (示例) */
+    --icon-bg-feature-1-light: #297ef1; --icon-color-feature-1-light: #1D4ED8; /* blue */
+    --icon-bg-feature-1-dark: #1E3A8A;  --icon-color-feature-1-dark: #93C5FD;
+    --icon-bg-feature-2-light: #1bd9e7; --icon-color-feature-2-light: #0E7490; /* cyan */
+    --icon-bg-feature-2-dark: #164E63;  --icon-color-feature-2-dark: #67E8F9;
+    --icon-bg-feature-3-light: #efcb3d; --icon-color-feature-3-light: #92400E; /* amber */
+    --icon-bg-feature-3-dark: #78350F;  --icon-color-feature-3-dark: #FCD34D;
+    --icon-bg-feature-4-light: #315bed; --icon-color-feature-4-light: #3730A3; /* indigo */
+    --icon-bg-feature-4-dark: #312E81;  --icon-color-feature-4-dark: #A5B4FC;
+    --icon-bg-feature-5-light: #3fec93; --icon-color-feature-5-light: #047857; /* emerald */
+    --icon-bg-feature-5-dark: #064E3B;  --icon-color-feature-5-dark: #A7F3D0;
+    --icon-bg-feature-6-light: #ea5858; --icon-color-feature-6-light: #991B1B; /* red */
+    --icon-bg-feature-6-dark: #7F1D1D;  --icon-color-feature-6-dark: #FCA5A5;
+
+    /* 流程图节点颜色 (示例) */
+    --node-color-io: var(--primary-color); --node-color-io-light: var(--primary-color-dark);         /* IO 节点用主色蓝 */
+    --node-color-llm: #A855F7;             --node-color-llm-light: #C084FC;                           /* LLM 节点用紫色 */
+    --node-color-kg: var(--secondary-color);--node-color-kg-light: var(--secondary-color-dark);       /* KG 节点用辅色青 */
+    --node-color-process: var(--accent-color); --node-color-process-light: var(--accent-color-dark); /* 处理节点用强调色黄 */
+    --node-color-output: #EC4899;          --node-color-output-light: #F472B6;                         /* 输出节点用粉色 */
+    /* ... 可根据需要添加更多节点类型颜色 */
+
+    /* 优势图标背景渐变 (示例) */
+    --icon-bg-benefit-1: linear-gradient(to right, var(--primary-color), var(--primary-color-light)); /* blue */
+    --icon-bg-benefit-2: linear-gradient(to right, #22D3EE, #67E8F9); /* cyan */
+    --icon-bg-benefit-3: linear-gradient(to right, var(--secondary-color), var(--secondary-color-light)); /* teal */
+    --icon-bg-benefit-4: linear-gradient(to right, var(--accent-color), var(--accent-color-light)); /* amber */
+}
+
+/* ==========================================================================
+   基础样式和字体设置 (保持 DeepForest 结构)
+   ========================================================================== */
+/* 基本样式 */
+body {
+    /* 字体族: 优先使用无衬线 */
+    font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+    /* 背景色通过 .global-gradient-bg 应用 */
+    color: var(--text-base-light); /* 默认浅色文本 */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative; /* 用于背景 SVG 定位 */
+    z-index: 0;
+}
+
+/* 标题使用衬线字体 */
+h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Noto Serif SC', serif;
+    color: var(--text-heading-light); /* 默认浅色标题 */
+}
+
+/* 暗色模式基础样式 */
+html.dark body {
+    color: var(--text-base-dark); /* 暗色文本 */
+}
+html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6, html.dark .font-serif {
+    color: var(--text-heading-dark); /* 暗色标题 */
+}
+
+/* 全局链接样式 */
+.link {
+    color: var(--text-link-light); /* 浅色模式链接颜色 */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+}
+.link:hover { text-decoration: underline; }
+html.dark .link { color: var(--text-link-dark); } /* 暗色模式链接颜色 */
+
+/* 全局背景 (确保 body 有 class="global-gradient-bg") */
+.global-gradient-bg { background-color: var(--bg-light); } /* 默认浅色背景 */
+html.dark .global-gradient-bg { background-color: var(--bg-dark); } /* 暗色背景 */
+/* Fixed background SVGs are placed in HTML, using CSS variables for color stops */
+
+/* ==========================================================================
+   通用组件样式 (保持 DeepForest 结构和类名)
+   ========================================================================== */
+
+/* 容器 */
+.container {
+    width: 100%; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;
+}
+@media (min-width: 640px) { .container { max-width: 640px; padding-left: 1.5rem; padding-right: 1.5rem; } }
+@media (min-width: 768px) { .container { max-width: 768px; } }
+@media (min-width: 1024px) { .container { max-width: 1024px; padding-left: 2rem; padding-right: 2rem; } }
+@media (min-width: 1280px) { .container { max-width: 1280px; } }
+@media (min-width: 1536px) { .container { max-width: 1536px; } }
+
+/* 区域内边距 */
+.section-padding {
+    padding-top: 4rem; padding-bottom: 4rem; /* 调整了间距 */
+}
+@media (min-width: 768px) { .section-padding { padding-top: 6rem; padding-bottom: 6rem; } }
+
+/* 标题样式 */
+.heading {
+    margin-top: 0.5rem; font-size: 1.875rem; line-height: 1.25; font-weight: 700;
+    letter-spacing: -0.025em; font-family: 'Noto Serif SC', serif; color: var(--text-heading-light);
+}
+html.dark .heading { color: var(--text-heading-dark); }
+@media (min-width: 640px) { .heading { font-size: 2.25rem; line-height: 2.5rem; } }
+@media (min-width: 1024px) { .heading { font-size: 2.5rem; line-height: 1.2; } } /* 调整大屏幕字号 */
+
+/* 副标题/小标题样式 */
+.subheading {
+    font-size: 1rem; line-height: 1.75rem; font-weight: 600; letter-spacing: 0.05em;
+    color: var(--primary-color); /* 使用主色调 */
+    text-transform: uppercase; /* 可选：大写 */
+}
+html.dark .subheading { color: var(--primary-color-dark); }
+/* 允许使用辅助色 */
+.subheading.text-secondary { color: var(--secondary-color); }
+html.dark .subheading.text-secondary { color: var(--secondary-color-dark); }
+
+/* 区域标题底部外边距 */
+.section-title-mb {
+    margin-bottom: 3rem;
+}
+@media (min-width: 768px) { .section-title-mb { margin-bottom: 4rem; } }
+
+/* 按钮样式 */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem 1.75rem; /* 调整了 Padding */
+    border-radius: var(--rounded-btn); /* 药丸形状 */
+    font-weight: 600; /* 半粗体 */
+    transition: var(--transition-base); /* 使用基础过渡 */
+    box-shadow: var(--shadow-lg); /* 默认阴影 */
+    white-space: nowrap; letter-spacing: 0.5px; cursor: pointer; outline: none;
+    border: 1px solid transparent; /* 默认无边框 */
+    font-size: 0.95rem; /* 调整字号 */
+}
+html.dark .btn { box-shadow: var(--shadow-dark-lg); } /* 暗色模式阴影 */
+/* 悬停效果: 轻微上移 */
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl); /* 悬停时阴影更大 */
+}
+html.dark .btn:hover { box-shadow: var(--shadow-dark-xl); }
+/* 焦点状态: 显示轮廓 */
+.btn:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px var(--border-hover-light); /* 使用悬停边框色作为轮廓 */
+}
+html.dark .btn:focus-visible { box-shadow: 0 0 0 3px var(--border-hover-dark); }
+/* 按钮内图标过渡 */
+.btn i { transition: transform 0.3s ease-in-out; display: inline-block; }
+
+/* 主按钮 (渐变背景) */
+.btn-gradient-primary {
+    /* 使用新的主色渐变 */
+    background-image: linear-gradient(to right, var(--primary-color) 0%, var(--primary-color-light) 50%, var(--primary-color) 100%);
+    background-size: 200% auto; border: none; color: var(--text-on-primary); /* 文字白色 */
+}
+html.dark .btn-gradient-primary {
+    /* 暗色模式下的主色渐变 */
+    background-image: linear-gradient(to right, var(--primary-color-dark) 0%, #93C5FD 50%, var(--primary-color-dark) 100%); /* blue-300 中间色 */
+}
+.btn-gradient-primary:hover { background-position: right center; /* 渐变动画 */ }
+
+/* 次按钮 (玻璃拟态/描边) */
+.btn-gradient-secondary {
+    /* 浅色模式: 半透明白背景 + 主色边框 */
+    background-color: rgba(255, 255, 255, 0.6); /* 轻微透明 */
+    border: 1px solid var(--border-light);
+    color: var(--text-link-light); /* 使用链接颜色 */
+    backdrop-filter: blur(4px);
+    box-shadow: var(--shadow-md);
+}
+html.dark .btn-gradient-secondary {
+    /* 暗色模式: 半透明深背景 + 亮主色边框 */
+    background-color: rgba(31, 41, 55, 0.5); /* gray-800 半透明 */
+    border-color: var(--border-dark);
+    color: var(--text-link-dark);
+    backdrop-filter: blur(4px);
+    box-shadow: var(--shadow-dark-md);
+}
+.btn-gradient-secondary:hover {
+    border-color: var(--border-hover-light);
+    background-color: rgba(255, 255, 255, 0.8); /* 悬停时更不透明 */
+}
+html.dark .btn-gradient-secondary:hover {
+    border-color: var(--border-hover-dark);
+    background-color: rgba(55, 65, 81, 0.7); /* gray-700 悬停 */
+}
+
+/* 导航链接样式 */
+.nav-link {
+    color: var(--text-muted-light); /* 默认辅助文本色 */
+    font-weight: 500;
+    border-radius: var(--rounded-lg); /* 圆角 */
+    padding: 0.5rem 0.75rem;
+    transition: var(--transition-fast); /* 快速过渡 */
+    position: relative; text-decoration: none; background-color: transparent;
+}
+/* 悬停效果 */
+.nav-link:hover {
+    color: var(--text-link-light); /* 悬停时变主链接色 */
+    background-color: var(--bg-hover-light); /* 悬停背景 */
+}
+html.dark .nav-link { color: var(--text-muted-dark); }
+html.dark .nav-link:hover {
+    color: var(--text-link-dark);
+    background-color: var(--bg-hover-dark);
+}
+/* 悬停下划线动画 */
+.nav-link::after {
+    content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%;
+    background-color: var(--primary-color); /* 主色下划线 */
+    transition: all 0.3s ease-in-out; transform: translateX(-50%);
+}
+html.dark .nav-link::after { background-color: var(--primary-color-dark); }
+.nav-link:hover::after { width: 50%; /* 悬停时下划线展开 */ }
+
+/* 页脚图标链接 */
+.footer-icon-link {
+    color: var(--text-muted-light);
+    font-size: 1.25rem;
+    transition: var(--transition-base);
+}
+html.dark .footer-icon-link { color: var(--text-muted-dark); }
+.footer-icon-link:hover {
+    color: var(--text-link-light); /* 悬停变链接色 */
+    transform: scale(1.1); /* 轻微放大 */
+}
+html.dark .footer-icon-link:hover { color: var(--text-link-dark); }
+
+/* ==========================================================================
+   特定区域样式 (MediAI 风格)
+   ========================================================================== */
+
+/* 页眉 (Header) */
+.theme-toggle-button, .github-link { /* 主题切换和 GitHub 按钮 */
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--text-muted-light); padding: 0.5rem; border-radius: var(--rounded-lg);
+    transition: var(--transition-fast); background-color: transparent; border: none; cursor: pointer;
+}
+.theme-toggle-button:hover, .github-link:hover { color: var(--text-link-light); background-color: var(--bg-hover-light); }
+html.dark .theme-toggle-button, html.dark .github-link { color: var(--text-muted-dark); }
+html.dark .theme-toggle-button:hover, html.dark .github-link:hover { color: var(--text-link-dark); background-color: var(--bg-hover-dark); }
+.theme-toggle-button svg { width: 1.25rem; height: 1.25rem; fill: currentColor; }
+.github-link i { font-size: 1.25rem; }
+
+/* 英雄区域 (Hero Section) */
+/* 副标题渐变样式 (使用新配色) */
+.hero-subtitle-gradient {
+    background-image: linear-gradient(95deg, var(--primary-color) 0%, var(--secondary-color-light) 50%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    padding: 0.1em 0;
+}
+html.dark .hero-subtitle-gradient {
+    background-image: linear-gradient(95deg, var(--primary-color-dark) 0%, var(--secondary-color-dark) 50%, var(--accent-color-dark) 100%);
+}
+
+/* 项目概述区域 (About Section) */
+/* 文本面板样式 (玻璃拟态) */
+.about-text-panel {
+    background-color: var(--bg-card-light); /* 使用卡片背景色 */
+    backdrop-filter: blur(12px);
+    border-radius: var(--rounded-xl); /* 使用 xl 圆角 */
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-card-light); /* 使用卡片边框 */
+}
+html.dark .about-text-panel {
+    background-color: var(--bg-card-dark);
+    border-color: var(--border-card-dark);
+    box-shadow: var(--shadow-dark-lg);
+}
+/* 首字下沉样式 (保持 DeepForest 结构) */
+#about .first-letter-drop {
+    margin-top: 1.5rem; font-size: 1.125rem; line-height: 1.75;
+    color: var(--text-muted-light);
+    /* padding-left: calc(4.5em * 0.15 + 0.05em); */ /* 调整或移除内边距 */
+}
+html.dark #about .first-letter-drop { color: var(--text-base-dark); }
+#about .first-letter-drop::first-letter {
+    font-family: 'Noto Serif SC', serif; /* 衬线字体 */
+    font-size: 4em; /* 调整大小 */
+    font-weight: 600;
+    float: left;
+    line-height: 0.8; /* 微调垂直对齐 */
+    margin-right: 0.1em; /* 右侧间距 */
+    margin-top: 0.15em;   /* 微调顶部位置 */
+    margin-bottom: -0.1em; /* 避免底部额外空间 */
+    color: var(--primary-color); /* 主色 */
+    transition: color 0.3s ease;
+    position: relative;
+}
+html.dark #about .first-letter-drop::first-letter { color: var(--primary-color-dark); }
+#about .first-letter-drop::after { content: ""; display: table; clear: both; } /* 清除浮动 */
+/* 图片样式 */
+#about img {
+    border-radius: var(--rounded-2xl); /* 使用 2xl 圆角 */
+    box-shadow: var(--shadow-xl);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+}
+#about img:hover { transform: scale(1.05); } /* 悬停放大 */
+/* 辅助文本 */
+#about .text-xs { font-size: 0.75rem; line-height: 1rem; }
+#about .text-gray-600 { color: var(--text-muted-light); } /* 适配变量 */
+html.dark #about .text-gray-400 { color: var(--text-muted-dark); }
+#about .text-right { text-align: right; }
+#about .mt-3 { margin-top: 0.75rem; }
+
+/* 核心功能区域 (Features Section) */
+/* 特性卡片样式 (玻璃拟态 + 复杂悬停) */
+.feature-card {
+    padding: 1.5rem;
+    background-color: var(--bg-card-light);
+    border-radius: var(--rounded-xl);
+    border: 1px solid var(--border-card-light);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(16px) saturate(180%);
+    transition: var(--transition-base);
+    position: relative; overflow: hidden;
+    transform-style: preserve-3d; perspective: 1000px;
+}
+html.dark .feature-card {
+    background-color: var(--bg-card-dark);
+    border-color: var(--border-card-dark);
+    box-shadow: var(--shadow-dark-md);
+}
+/* 悬停效果: 3D 倾斜 + 阴影 + 边框 */
+.feature-card:hover {
+    transform: translateY(-8px) rotateX(3deg) rotateY(-2deg) scale(1.03);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-hover-light);
+}
+html.dark .feature-card:hover {
+    box-shadow: var(--shadow-dark-lg);
+    border-color: var(--border-hover-dark);
+}
+/* 悬停辉光效果 */
+.feature-card::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    /* 辉光颜色使用主色调 */
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%); /* 对应 --primary-color-dark */
+    opacity: 0; transform: scale(0.8); border-radius: inherit; z-index: -1;
+    transition: opacity var(--transition-slow) ease, transform var(--transition-slow) ease;
+    pointer-events: none;
+}
+html.dark .feature-card::before {
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.15) 0%, transparent 70%);
+}
+.feature-card:hover::before { opacity: 1; transform: scale(1); }
+
+/* 特性图标包裹元素 */
+.feature-card .icon-wrapper {
+    height: 3rem; width: 3rem; border-radius: var(--rounded-lg);
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition-base); box-shadow: var(--shadow-sm);
+    color: #fff; /* 默认图标颜色，具体颜色在下方定义 */
+}
+html.dark .feature-card .icon-wrapper { box-shadow: var(--shadow-dark-sm); }
+/* 图标悬停动画 */
+.feature-card:hover .icon-wrapper {
+    transform: scale(1.15) rotate(-8deg);
+    box-shadow: var(--shadow-md);
+}
+html.dark .feature-card:hover .icon-wrapper { box-shadow: var(--shadow-dark-md); }
+
+/* 定义特性图标背景色和颜色 (使用新变量) */
+.feature-icon-bg-1 { background-color: var(--icon-bg-feature-1-light); color: var(--icon-color-feature-1-light); }
+html.dark .feature-icon-bg-1 { background-color: var(--icon-bg-feature-1-dark); color: var(--icon-color-feature-1-dark); }
+.feature-icon-bg-2 { background-color: var(--icon-bg-feature-2-light); color: var(--icon-color-feature-2-light); }
+html.dark .feature-icon-bg-2 { background-color: var(--icon-bg-feature-2-dark); color: var(--icon-color-feature-2-dark); }
+.feature-icon-bg-3 { background-color: var(--icon-bg-feature-3-light); color: var(--icon-color-feature-3-light); }
+html.dark .feature-icon-bg-3 { background-color: var(--icon-bg-feature-3-dark); color: var(--icon-color-feature-3-dark); }
+.feature-icon-bg-4 { background-color: var(--icon-bg-feature-4-light); color: var(--icon-color-feature-4-light); }
+html.dark .feature-icon-bg-4 { background-color: var(--icon-bg-feature-4-dark); color: var(--icon-color-feature-4-dark); }
+.feature-icon-bg-5 { background-color: var(--icon-bg-feature-5-light); color: var(--icon-color-feature-5-light); }
+html.dark .feature-icon-bg-5 { background-color: var(--icon-bg-feature-5-dark); color: var(--icon-color-feature-5-dark); }
+.feature-icon-bg-6 { background-color: var(--icon-bg-feature-6-light); color: var(--icon-color-feature-6-light); }
+html.dark .feature-icon-bg-6 { background-color: var(--icon-bg-feature-6-dark); color: var(--icon-color-feature-6-dark); }
+
+/* 特性标题和描述 */
+.feature-title { font-size: 1.125rem; font-weight: 600; color: var(--text-heading-light); }
+html.dark .feature-title { color: var(--text-heading-dark); }
+.feature-description { font-size: 0.9rem; color: var(--text-muted-light); line-height: 1.7; margin-top: 0.5rem; }
+html.dark .feature-description { color: var(--text-muted-dark); }
+
+/* 运作流程区域 (Visualization Section) */
+/* 保持 DeepForest 的 Flexbox 流程图布局和节点样式 */
+/* 确保 .flowchart-flex-container, .flowchart-flex-stage, .flowchart-flex-connector 样式存在 */
+/* 确保 .flowchart-node 样式 (圆形, 玻璃拟态, 复杂悬停) 存在 */
+/* 确保节点颜色变量 (--node-color-*) 已在新配色方案中定义 */
+.flowchart-flex-container {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 1rem 0;
+}
+.flowchart-flex-stage {
+    display: flex; flex-direction: column; align-items: center; gap: 1.5rem; width: 100%; padding: 1rem 0;
+}
+.flowchart-flex-connector {
+    width: 2px; height: 3rem; position: relative; display: flex; justify-content: center; align-items: flex-end; margin: 0.5rem 0;
+}
+.flowchart-flex-connector .connector-line {
+    width: 100%; height: 100%;
+    background: linear-gradient( to bottom, transparent 0%, var(--border-dark) 30%, var(--border-dark) 70%, transparent 100% );
+    opacity: 0.6; background-size: 100% 200%; animation: flow-gradient 2s linear infinite;
+}
+html.dark .flowchart-flex-connector .connector-line {
+    background: linear-gradient( to bottom, transparent 0%, var(--border-light) 30%, var(--border-light) 70%, transparent 100% );
+    background-size: 100% 200%; animation: flow-gradient 2s linear infinite;
+}
+.flowchart-flex-connector .connector-arrow {
+    position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%); width: 0; height: 0;
+    border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid var(--border-dark);
+}
+html.dark .flowchart-flex-connector .connector-arrow { border-top-color: var(--border-light); }
+
+@media (min-width: 1024px) {
+    .flowchart-flex-container { flex-direction: row; align-items: stretch; justify-content: center; gap: 0; padding: 2rem 0; }
+    .flowchart-flex-stage { flex-direction: column; justify-content: center; align-items: center; gap: 2rem; width: auto; min-width: 11rem; padding: 0 1rem; }
+    .flowchart-flex-connector { width: 5rem; height: auto; align-self: center; flex-direction: row; align-items: center; margin: 0 1rem; }
+    .flowchart-flex-connector .connector-line {
+        width: 100%; height: 2px;
+        background: linear-gradient( to right, transparent 0%, var(--border-dark) 30%, var(--border-dark) 70%, transparent 100% );
+        background-size: 200% 100%; animation: flow-gradient-horizontal 2s linear infinite;
+    }
+    html.dark .flowchart-flex-connector .connector-line {
+        background: linear-gradient( to right, transparent 0%, var(--border-light) 30%, var(--border-light) 70%, transparent 100% );
+        background-size: 200% 100%; animation: flow-gradient-horizontal 2s linear infinite;
+    }
+    .flowchart-flex-connector .connector-arrow {
+        position: absolute; right: -1px; top: 50%; transform: translateY(-50%); left: auto; bottom: auto;
+        border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 9px solid var(--border-dark); border-right: 0;
+    }
+    html.dark .flowchart-flex-connector .connector-arrow { border-left-color: var(--border-light); }
+}
+
+/* 流程图节点样式 (圆形, 玻璃拟态, 复杂悬停) */
+.flowchart-node {
+    width: 9rem; height: 9rem; padding: 1rem; /* 尺寸微调 */
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    border-radius: 50%; border: 2px solid transparent;
+    background: radial-gradient(circle at center, var(--bg-card-light) 0%, transparent 100%);
+    box-shadow: var(--shadow-sm), inset 0 0 10px rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px) saturate(150%);
+    position: relative; overflow: visible;
+    transform-style: preserve-3d; perspective: 1000px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+html.dark .flowchart-node {
+    background: radial-gradient(circle at center, var(--bg-card-dark) 0%, transparent 100%);
+    box-shadow: var(--shadow-dark-sm), inset 0 0 15px rgba(0,0,0,0.4);
+}
+/* 应用节点颜色 */
+.flowchart-node.node-io { --node-color: var(--node-color-io); --node-color-light: var(--node-color-io-light); }
+.flowchart-node.node-llm { --node-color: var(--node-color-llm); --node-color-light: var(--node-color-llm-light); }
+.flowchart-node.node-kg { --node-color: var(--node-color-kg); --node-color-light: var(--node-color-kg-light); }
+.flowchart-node.node-process { --node-color: var(--node-color-process); --node-color-light: var(--node-color-process-light); }
+.flowchart-node.node-output { --node-color: var(--node-color-output); --node-color-light: var(--node-color-output-light); }
+
+/* 节点悬停前辉光 */
+.flowchart-node::before {
+    content: ''; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px;
+    border-radius: 50%; border: 2px solid var(--node-color, transparent);
+    opacity: 0; animation: pulse-glow 2.5s infinite ease-out; z-index: -1;
+    transition: opacity 0.4s ease; pointer-events: none;
+}
+html.dark .flowchart-node::before { border-color: var(--node-color-light, transparent); }
+
+/* 节点悬停效果 */
+.flowchart-node:hover {
+    transform: translateY(-10px) scale(1.08) rotateZ(5deg);
+    border-color: var(--node-color);
+    /* 悬停阴影使用节点颜色 */
+    box-shadow: var(--shadow-lg), 0 0 25px var(--node-color);
+}
+html.dark .flowchart-node:hover {
+    border-color: var(--node-color-light);
+    box-shadow: var(--shadow-dark-lg), 0 0 30px var(--node-color-light);
+}
+.flowchart-node:hover::before { opacity: 0.8; animation-play-state: paused; }
+
+/* 节点内图标样式 */
+.flowchart-node i {
+    font-size: 2rem; margin-bottom: 0.75rem;
+    color: var(--node-color); /* 图标颜色使用节点颜色 */
+    transition: transform 0.5s ease, filter 0.3s ease;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+    transform: translateZ(20px); /* 3D 效果 */
+}
+html.dark .flowchart-node i {
+    color: var(--node-color-light);
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.4));
+}
+/* 图标悬停动画 */
+.flowchart-node:hover i {
+    transform: translateZ(40px) scale(1.2) rotateY(360deg);
+    filter: drop-shadow(0 5px 8px rgba(0,0,0,0.3));
+}
+html.dark .flowchart-node:hover i { filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));}
+
+/* 节点内文字 */
+.flowchart-node span { font-size: 0.8rem; font-weight: 500; color: var(--text-heading-light); }
+html.dark .flowchart-node span { color: var(--text-heading-dark); }
+.flowchart-node .node-subtitle { font-size: 0.65rem; color: var(--text-muted-light); margin-top: 0.1rem; }
+html.dark .flowchart-node .node-subtitle { color: var(--text-muted-dark); }
+
+/* 技术方案区域 (Tech Stack Section) */
+/* 技术项卡片样式 (玻璃拟态) */
+.tech-item {
+    padding: 1.5rem 1rem; text-align: center;
+    background-color: var(--bg-card-light);
+    border-radius: var(--rounded-xl);
+    border: 1px solid var(--border-card-light);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
+    transition: var(--transition-base);
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 10rem; /* 保证一定高度 */
+}
+html.dark .tech-item {
+    background-color: var(--bg-card-dark);
+    border-color: var(--border-card-dark);
+    box-shadow: var(--shadow-dark-md);
+}
+/* 悬停效果 */
+.tech-item:hover {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-hover-light);
+}
+html.dark .tech-item:hover {
+    box-shadow: var(--shadow-dark-lg);
+    border-color: var(--border-hover-dark);
+}
+/* 技术图标 */
+.tech-item .tech-icon {
+    font-size: 2.25rem; margin-bottom: 1rem;
+    transition: var(--transition-base);
+    /* 图标颜色在 HTML 中通过 Tailwind 类或 style 定义，或在此处根据 tech-item 的属性设置 */
+}
+/* 图标悬停动画 */
+.tech-item:hover .tech-icon { transform: scale(1.2) rotate(10deg) translateY(-5px); }
+/* 技术名称和描述 */
+.tech-name { font-weight: 600; font-size: 0.9rem; color: var(--text-heading-light); margin-top: auto; /* 使描述置底 */ }
+html.dark .tech-name { color: var(--text-heading-dark); }
+.tech-desc { font-size: 0.75rem; color: var(--text-muted-light); margin-top: 0.25rem; }
+html.dark .tech-desc { color: var(--text-muted-dark); }
+
+/* 项目价值区域 (Benefits Section) */
+/* 优势卡片样式 */
+.benefit-item {
+    background-color: var(--bg-card-light);
+    border-radius: var(--rounded-xl);
+    border: 1px solid var(--border-card-light);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(12px);
+    transition: var(--transition-base);
+    position: relative;
+    padding: 1.5rem; display: flex; align-items: flex-start; gap: 1rem;
+}
+html.dark .benefit-item {
+    background-color: var(--bg-card-dark);
+    border-color: var(--border-card-dark);
+    box-shadow: var(--shadow-dark-md);
+}
+/* 悬停效果 */
+.benefit-item:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-hover-light);
+}
+html.dark .benefit-item:hover {
+    box-shadow: var(--shadow-dark-lg);
+    border-color: var(--border-hover-dark);
+}
+/* 优势图标包裹元素 */
+.benefit-icon-wrapper {
+    flex-shrink: 0; height: 3rem; width: 3rem; border-radius: var(--rounded-lg);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-md); transition: var(--transition-base);
+    color: #fff; /* 图标颜色白色 */
+}
+/* 图标悬停动画 */
+.benefit-item:hover .benefit-icon-wrapper { transform: scale(1.15) rotate(-5deg); box-shadow: var(--shadow-lg); }
+/* 定义优势图标背景渐变 (使用新变量) */
+.benefit-icon-bg-1 { background-image: var(--icon-bg-benefit-1); }
+.benefit-icon-bg-2 { background-image: var(--icon-bg-benefit-2); }
+.benefit-icon-bg-3 { background-image: var(--icon-bg-benefit-3); }
+.benefit-icon-bg-4 { background-image: var(--icon-bg-benefit-4); }
+/* 优势内容 */
+.benefit-content { flex-grow: 1; }
+.benefit-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-heading-light); }
+html.dark .benefit-title { color: var(--text-heading-dark); }
+.benefit-description { font-size: 0.95rem; color: var(--text-muted-light); line-height: 1.7; }
+html.dark .benefit-description { color: var(--text-muted-dark); }
+
+/* 相关资源区域 (Further Reading Section) */
+/* 资源卡片样式 */
+.reading-card {
+    background-color: var(--bg-card-light);
+    padding: 1.25rem; border-radius: var(--rounded-xl);
+    box-shadow: var(--shadow-md); transition: var(--transition-base);
+    position: relative; overflow: hidden;
+    border: 1px solid var(--border-card-light); backdrop-filter: blur(10px);
+    display: flex; align-items: flex-start; gap: 1rem;
+}
+html.dark .reading-card {
+    background-color: var(--bg-card-dark);
+    border-color: var(--border-card-dark); box-shadow: var(--shadow-dark-md);
+}
+/* 悬停效果 */
+.reading-card:hover {
+    box-shadow: var(--shadow-lg); border-color: var(--border-hover-light);
+    transform: translateY(-5px) scale(1.02);
+}
+html.dark .reading-card:hover { box-shadow: var(--shadow-dark-lg); border-color: var(--border-hover-dark); }
+/* 资源图标 */
+.reading-icon-wrapper {
+    flex-shrink: 0; width: 2.5rem; height: 2.5rem; border-radius: var(--rounded-lg);
+    /* 背景色使用主色调的浅色 */
+    background-color: rgba(59, 130, 246, 0.1);
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition-base);
+}
+html.dark .reading-icon-wrapper { background-color: rgba(96, 165, 250, 0.15); }
+.reading-card:hover .reading-icon-wrapper {
+    background-color: rgba(59, 130, 246, 0.2); transform: scale(1.1);
+}
+html.dark .reading-card:hover .reading-icon-wrapper { background-color: rgba(96, 165, 250, 0.25); }
+.reading-icon-wrapper i {
+    font-size: 1.25rem; color: var(--primary-color); /* 图标颜色为主色 */
+}
+html.dark .reading-icon-wrapper i { color: var(--primary-color-dark); }
+/* 资源内容 */
+.reading-content { flex-grow: 1; }
+.reading-title { font-weight: 600; font-size: 1.05rem; margin-bottom: 0.25rem; color: var(--text-heading-light); }
+html.dark .reading-title { color: var(--text-heading-dark); }
+.reading-description { font-size: 0.85rem; color: var(--text-muted-light); line-height: 1.6; }
+html.dark .reading-description { color: var(--text-muted-dark); }
+
+/* ==========================================================================
+   自定义动画 (保持 DeepForest 结构)
+   ========================================================================== */
+/* Logo 跳动 */
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .6; transform: scale(1.05); }
+}
+/* 邮件图标跳动 */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-6px);}
+    60% {transform: translateY(-3px);}
+}
+/* 流程图节点辉光 */
+@keyframes pulse-glow {
+    0% { transform: scale(0.95); opacity: 0; }
+    50% { opacity: 0.6; }
+    100% { transform: scale(1.1); opacity: 0; }
+}
+/* 流程图连接线流动动画 (垂直) */
+@keyframes flow-gradient {
+    0% { background-position: 0% 100%; }
+    100% { background-position: 0% -100%; }
+}
+/* 流程图连接线流动动画 (水平) */
+@keyframes flow-gradient-horizontal {
+    0% { background-position: 100% 0%; }
+    100% { background-position: -100% 0%; }
+}

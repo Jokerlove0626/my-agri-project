@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepForest - 知识图谱探索 (独立文件版)</title>
+    <!-- 引入页面专属 CSS -->
+    <link rel="stylesheet" href="kg_style.css">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 引入 ECharts 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container kg-container">
+        <!-- 头部 -->
+        <header class="dashboard-header kg-header-enhanced">
+            <div class="logo">
+                <i class="fas fa-project-diagram"></i>
+                <h1>DeepForest 知识图谱</h1>
+            </div>
+            <div class="time-display" id="currentTime">--:--:--</div>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+                <span>管理员</span>
+                <i class="fas fa-bell"></i>
+            </div>
+        </header>
+
+        <!-- 主要内容区域 (使用CSS Grid布局) -->
+        <main class="kg-main-content-grid">
+
+            <!-- 区域 1: 左侧查询侧边栏 -->
+            <aside class="kg-grid-area kg-query-area sidebar-enhanced">
+                <!-- 查询卡片 -->
+                <div class="kg-card query-card">
+                    <h3 class="sidebar-title gradient-underline"><i class="fas fa-search"></i> 图谱查询</h3>
+                    <div class="query-area">
+                        <input type="text" id="searchInput" placeholder="搜索物种名、文献标题等...">
+                        <button id="searchButton" class="gradient-button search-button-enhanced"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="filter-area">
+                        <label for="nodeTypeFilter">节点类型:</label>
+                        <select id="nodeTypeFilter">
+                            <option value="all">所有类型</option>
+                            <option value="Species">物种 (Species)</option>
+                            <option value="Reference">文献 (Reference)</option>
+                            <option value="Location">地理位置 (Location)</option>
+                            <option value="Taxonomy">分类单元 (Taxonomy)</option>
+                            <option value="Host">寄主 (Host)</option>
+                            <option value="File">文件 (File)</option>
+                            <option value="Image">图片 (Image)</option>
+                        </select>
+                    </div>
+                    <details class="advanced-query">
+                        <summary>高级查询 (Cypher)</summary>
+                        <textarea id="cypherQueryInput" rows="3" placeholder="输入 Cypher 查询语句..."></textarea>
+                        <button id="runCypherButton" class="small-button">执行</button>
+                    </details>
+                </div>
+
+                <!-- 显示选项卡片 -->
+                <div class="kg-card display-card">
+                    <h3 class="sidebar-title gradient-underline"><i class="fas fa-cogs"></i> 显示选项</h3>
+                    <div class="display-options display-options-row">
+                        <div class="layout-buttons">
+                            <button id="layoutForce" class="small-button active"><i class="fas fa-project-diagram"></i> 力导引</button>
+                            <button id="layoutCircular" class="small-button"><i class="fas fa-circle-notch"></i> 环形</button>
+                        </div>
+                         <label class="toggle-switch">
+                            <input type="checkbox" id="showLabelsToggle" checked>
+                            <span class="slider round"></span> 显示标签
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 统计概览卡片 -->
+                <div class="kg-card stats-card">
+                     <h3 class="sidebar-title gradient-underline"><i class="fas fa-chart-pie"></i> 图谱概览</h3>
+                     <div class="mini-stats">
+                         <div class="stat-item">
+                             <span class="stat-value gradient-text" id="totalNodesStat">---</span>
+                             <span class="stat-label">总节点</span>
+                         </div>
+                         <div class="stat-item">
+                            <span class="stat-value gradient-text" id="totalEdgesStat">---</span>
+                            <span class="stat-label">总关系</span>
+                         </div>
+                     </div>
+                </div>
+            </aside>
+
+            <!-- 区域 2: 中上/右上 - 分析图表区 -->
+            <section class="kg-grid-area kg-analysis-area sidebar-enhanced kg-card">
+                 <h3 class="sidebar-title gradient-underline"><i class="fas fa-chart-bar"></i> 图谱分析</h3>
+                 <div class="analysis-charts-horizontal"> <!-- 用于横向排列图表 -->
+                     <!-- 节点类型分布图 -->
+                     <div class="card chart-card mini-chart-card">
+                          <div class="card-header"><i class="fas fa-pie-chart"></i> 节点类型分布</div>
+                         <div class="chart-container mini-chart" id="nodeTypeDistChart"></div>
+                      </div>
+                      <!-- 关系类型分布图 -->
+                       <div class="card chart-card mini-chart-card">
+                          <div class="card-header"><i class="fas fa-share-alt"></i> 关系类型分布</div>
+                         <div class="chart-container mini-chart" id="edgeTypeDistChart"></div>
+                      </div>
+                      <!-- Top 5 度中心节点图 -->
+                      <div class="card chart-card mini-chart-card">
+                          <div class="card-header"><i class="fas fa-sort-amount-up"></i> Top 5 度中心节点</div>
+                         <div class="chart-container mini-chart" id="nodeDegreeChart"></div>
+                      </div>
+                      <!-- 物种确认状态图 -->
+                      <div class="card chart-card mini-chart-card">
+                          <div class="card-header"><i class="fas fa-check-double"></i> 物种确认状态</div>
+                         <div class="chart-container mini-chart" id="speciesStatusChart"></div>
+                      </div>
+                 </div>
+            </section>
+
+            <!-- 区域 3: 中下 - 知识图谱可视化区 -->
+            <section class="kg-grid-area kg-visualization-area">
+                <div id="knowledgeGraph" class="graph-container">
+                     <p class="loading-placeholder" id="graphPlaceholder">知识图谱加载中...</p>
+                </div>
+            </section>
+
+            <!-- 区域 4: 右下 - 详细信息区 -->
+            <aside class="kg-grid-area kg-info-area sidebar-enhanced kg-card">
+                 <h3 class="sidebar-title gradient-underline"><i class="fas fa-info-circle"></i> 详细信息</h3>
+                 <div id="infoPanelContent" class="info-panel">
+                    <p>请在图谱中点击一个节点或关系以查看详细信息。</p>
+                </div>
+            </aside>
+
+        </main>
+    </div>
+
+    <!-- 引入页面专属 JavaScript -->
+    <script src="kg_script.js"></script>
+</body>
+</html>

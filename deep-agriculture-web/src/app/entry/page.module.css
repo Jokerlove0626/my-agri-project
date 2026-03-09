@@ -1,0 +1,35 @@
+/* src/app/entry/page.module.css */
+/* Styles for the overall page layout */
+
+.pageContainer {
+    padding: 1.5rem 2rem; /* Default padding */
+    max-width: 1200px; /* Limit max width */
+    margin: 0 auto; /* Center content */
+  }
+  
+  .pageTitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.8rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .pageTitle svg { /* Target FontAwesomeIcon */
+    margin-right: 0.8rem;
+    color: var(--primary-blue); /* Use primary color for icon */
+    font-size: 1.2em;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+      .pageContainer {
+          padding: 1rem;
+      }
+      .pageTitle {
+          font-size: 1.5rem;
+          margin-bottom: 1.5rem;
+      }
+  }

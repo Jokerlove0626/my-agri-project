@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepForest - 数据分析仪表盘 (填充内容版)</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <!-- 引入 ECharts 中国地图数据 -->
+    <script src="./js/china.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+             <div class="logo">
+                <i class="fas fa-tree"></i>
+                <h1>DeepForest 数据分析</h1>
+            </div>
+            <div class="time-display" id="currentTime">--:--:--</div>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+                <span>管理员</span>
+                <i class="fas fa-bell"></i>
+            </div>
+        </header>
+
+        <main class="dashboard-content">
+            <!-- Row 1: Core KPIs (已确认内容填充) -->
+            <section class="metrics-row">
+                 <div class="card metric-card gradient-green">
+                     <div class="card-header"><i class="fas fa-leaf"></i><span>物种总数</span></div>
+                    <div class="metric-value" id="totalSpeciesCount">---</div>
+                    <div class="metric-period">已收录</div>
+                </div>
+                <div class="card metric-card gradient-blue">
+                    <div class="card-header"><i class="fas fa-book-open"></i><span>参考文献总数</span></div>
+                    <div class="metric-value" id="totalReferenceCount">---</div>
+                     <div class="metric-period">本周新增: <span id="newReferencesWeekly">--</span></div>
+                </div>
+                <div class="card metric-card gradient-purple">
+                    <div class="card-header"><i class="fas fa-comments"></i><span>今日问答量</span></div>
+                    <div class="metric-value" id="todayQACount">---</div>
+                     <div class="metric-period">近7日: <span id="qaCount7Days">----</span></div>
+                </div>
+                <div class="card metric-card gradient-orange">
+                     <div class="card-header"><i class="fas fa-database"></i><span>文件总大小</span></div>
+                    <div class="metric-value" id="totalFileSize">--- GB</div>
+                    <div class="metric-period">文件数: <span id="totalFileCount">----</span></div>
+                </div>
+            </section>
+
+            <!-- Row 2: Species Analysis (已确认图表填充) -->
+            <section class="charts-row-triple">
+                <div class="card chart-card">
+                    <div class="card-header"><i class="fas fa-sitemap"></i><span>物种分类层级分布</span></div>
+                    <!-- 图表容器 -->
+                    <div class="chart-container" id="speciesTaxonomyChart"></div>
+                </div>
+                <div class="card chart-card">
+                    <div class="card-header"><i class="fas fa-check-circle"></i><span>物种确认状态</span></div>
+                     <!-- 图表容器 -->
+                    <div class="chart-container" id="speciesStatusChart"></div>
+                </div>
+                <div class="card chart-card">
+                    <div class="card-header"><i class="fas fa-chart-line"></i><span>物种收录增长趋势</span></div>
+                     <!-- 图表容器 -->
+                    <div class="chart-container" id="speciesGrowthChart"></div>
+                </div>
+            </section>
+
+            <!-- Row 3: Geographic & Host Analysis (确认填充) -->
+            <section class="charts-row-double">
+                <div class="card chart-card large-card">
+                     <div class="card-header"><i class="fas fa-globe-asia"></i><span>物种地理分布热力 (模拟中国)</span></div>
+                     <!-- 图表容器 -->
+                    <div class="chart-container tall-chart" id="geoDistributionMap"></div>
+                </div>
+                 <div class="card list-card"> <!-- 注意这里用了 list-card 类名，但实际是图表 -->
+                    <div class="card-header"><i class="fas fa-bug"></i><span>Top 5 寄主植物</span></div>
+                     <!-- 图表容器 -->
+                     <div class="chart-container" id="topHostsChart"></div>
+                 </div>
+            </section>
+
+             <!-- Row 4: Reference & Content Analysis (确认填充) -->
+             <section class="charts-row-triple">
+                 <div class="card chart-card">
+                     <div class="card-header"><i class="fas fa-chart-area"></i><span>参考文献增长趋势</span></div>
+                     <!-- 图表容器 -->
+                     <div class="chart-container" id="referenceGrowthChart"></div>
+                 </div>
+                <div class="card chart-card">
+                    <div class="card-header"><i class="fas fa-tags"></i><span>参考文献类型</span></div>
+                     <!-- 图表容器 -->
+                    <div class="chart-container" id="referenceTypeChart"></div>
+                </div>
+                 <div class="card chart-card">
+                    <div class="card-header"><i class="fas fa-file-alt"></i><span>关联文件类型</span></div>
+                     <!-- 图表容器 -->
+                    <div class="chart-container" id="fileTypeChart"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

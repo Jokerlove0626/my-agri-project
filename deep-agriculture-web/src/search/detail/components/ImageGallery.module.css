@@ -1,0 +1,50 @@
+/* src/search/detail/components/ImageGallery.module.css */
+
+.imageGallery {
+    display: grid;
+    /* 响应式网格，最小列宽 90px */
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .galleryItem {
+    text-align: center;
+    margin: 0; /* 重置 figure 的默认 margin */
+    cursor: pointer; /* 提示可点击 */
+    overflow: hidden; /* 配合图片 transform */
+    border-radius: calc(var(--border-radius-sm, 6px)); /* 添加圆角 */
+  }
+  
+  .galleryImage {
+    width: 100%;
+    height: 80px; /* 固定高度 */
+    /* object-fit: cover; (通过 style prop 设置) */
+    border-radius: var(--border-radius-sm, 6px); /* 调整圆角 */
+    border: 1px solid var(--border-color-light, #eee);
+    margin-bottom: 0.5rem;
+    background-color: #f8f9fa; /* 图片加载时的背景色 */
+    display: block; /* 确保是块级元素 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .galleryItem:hover .galleryImage {
+    transform: scale(1.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+  }
+  
+  .galleryCaption {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #6c757d);
+    margin: 0;
+    line-height: 1.3;
+    padding: 0 0.2rem; /* 防止文字贴边 */
+  }
+  
+  .noImages {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 1rem 0;
+  }

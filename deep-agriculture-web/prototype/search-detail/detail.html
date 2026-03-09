@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepForest - 物种详情 - 松材线虫</title>
+    <!-- 引入基础样式 (假设与之前的 style.css 一致) -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入详情页专属样式 (基于数据库表结构) -->
+    <link rel="stylesheet" href="detail-style-db.css">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- 标准应用头部 -->
+    <header class="app-header">
+        <div class="logo">
+            <i class="fas fa-tree"></i>
+            DeepForest 知识图谱
+        </div>
+        <div class="user-actions">
+             <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> 返回搜索</a>
+             <a href="analysis.html" class="nav-link">数据分析</a>
+             <i class="fas fa-bell notification-icon"></i>
+            <span class="username">管理员</span>
+            <i class="fas fa-user-circle user-icon"></i>
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <div class="main-container detail-page">
+        <!-- 主内容网格布局 -->
+        <div class="detail-content-grid">
+            <!-- 物种详情头部 (横向布局) -->
+            <header class="detail-header-vertical detail-header-horizontal">
+                <div class="header-icon-container">
+                    <i class="fas fa-microscope"></i> <!-- 代表性图标 -->
+                </div>
+                <div class="header-main-info">
+                    <!-- species.chinese_name -->
+                    <h1>
+                        松材线虫
+                        <!-- species.confirmation_status -->
+                        <span class="status-badge status-confirmed">
+                            <i class="fas fa-check-circle"></i> 已确认
+                        </span>
+                    </h1>
+                    <!-- species.scientific_name_with_authors / scientific_name / authorship -->
+                    <p class="scientific-name-detail" title="学名及命名人信息 (Steiner & Buhrer) Nickle, 1970">
+                        <i>Bursaphelenchus xylophilus</i> (Steiner & Buhrer) Nickle
+                    </p>
+                </div>
+                <!-- 可选操作 -->
+                <!-- <div class="header-actions"> <button class="action-button"><i class="fas fa-pencil-alt"></i> 编辑</button> </div> -->
+            </header>
+
+            <!-- 左侧主信息栏 -->
+            <div class="main-info-column">
+
+                <!-- 卡片: 基本信息与概述 -->
+                <section class="info-section card-style">
+                    <h2 class="section-title"><i class="fas fa-id-card icon-gradient"></i> 基本信息</h2>
+                    <!-- species 表字段 -->
+                    <dl class="info-list-inline">
+                        <div><dt>英文名称:</dt><dd>Pine Wood Nematode</dd></div>
+                        <div><dt>英文缩写:</dt><dd>PWN</dd></div>
+                        <div><dt>分类单元:</dt><dd>种 (Species)</dd></div>
+                         <div><dt>风险编码:</dt><dd>Risk-High-01</dd></div>
+                        <div><dt>GUID:</dt><dd>guid-sp1-pwn</dd></div>
+                        <!-- <div><dt>父级属名:</dt><dd>Bursaphelenchus</dd></div> -->
+                        <!-- <div><dt>是否物种级:</dt><dd>TRUE</dd></div> -->
+                    </dl>
+                     <p class="section-description">
+                         <!-- 结合 species_basic_info.biological_properties 开头 或 species_association.description -->
+                         一种毁灭性的植物寄生线虫，被列为国际重要的检疫性有害生物。主要侵染松属植物，引起松材线虫病（Pine Wilt Disease, PWD），导致松树快速枯萎死亡。
+                    </p>
+                     <div class="source-info">
+                        <!-- species.sources -->
+                        <strong>数据来源:</strong> EPPO Global Database, CABI Compendium, 中国林业科学研究院
+                    </div>
+                </section>
+
+                <!-- 卡片: 生物学特性 -->
+                 <section class="info-section card-style">
+                    <h2 class="section-title"><i class="fas fa-dna icon-gradient"></i> 生物学特性</h2>
+                    <!-- species_basic_info.biological_properties -->
+                    <p>典型的雌雄异体，卵生。生活史包括卵、四个幼虫期（J1-J4）和成虫期。在不利条件下，J2可发育为高抗逆性的扩散型J4（dauerlarva, J4d），该虫态是其通过媒介昆虫传播的主要形式。主要取食寄主木材薄壁细胞和侵入木材的真菌（如蓝变菌）菌丝。在适宜温度（25℃）下，完成一个世代约需4-5天，繁殖速度快。</p>
+                    <!-- species_host_part.pest_stage, visibility_type -->
+                     <dl class="info-list-inline small-dl">
+                         <div><dt>主要发育阶段:</dt><dd>卵, 幼虫(J1-J4), 成虫</dd></div>
+                         <div><dt>可见性:</dt><dd>显微镜可见</dd></div>
+                     </dl>
+                </section>
+
+                <!-- 卡片: 形态学与检测 -->
+                 <section class="info-section card-style">
+                    <h2 class="section-title"><i class="fas fa-ruler-combined icon-gradient"></i> 形态学与检测</h2>
+                     <!-- species_basic_info.morphological_characteristics -->
+                     <p><strong>形态特征:</strong> 虫体微小，长度通常在0.6-1.1毫米之间，细长呈蠕虫状。体表具细环纹。口针发达，基部具明显球结。雌虫尾端形态变异较大，可呈钝圆或尖细状，具明显的阴门瓣。雄虫尾端向腹面弯曲，具发达的交合刺和交合伞。扩散型J4形态独特，体内充满脂类物质。</p>
+                    <!-- species_basic_info.detection_method -->
+                    <p><strong>检测方法:</strong></p>
+                    <ul>
+                        <li><strong>症状诊断:</strong> 观察松树针叶萎蔫变色、树脂停止分泌等典型症状。</li>
+                        <li><strong>线虫分离:</strong> 采用贝尔曼漏斗法（Baermann funnel technique）从可疑木材样品中分离线虫。</li>
+                        <li><strong>形态学鉴定:</strong> 在显微镜下观察分离出的线虫形态特征进行鉴定。</li>
+                         <li><strong>分子检测:</strong> 利用PCR（聚合酶链式反应）等分子生物学技术进行快速、准确鉴定，特别是针对特定基因序列的检测。</li>
+                    </ul>
+                 </section>
+
+                 <!-- 卡片: 地理分布 -->
+                 <section class="info-section card-style">
+                    <h2 class="section-title"><i class="fas fa-map-marked-alt icon-gradient"></i> 地理分布</h2>
+                    <!-- species_basic_info.distribution_description -->
+                    <p>该物种被认为起源于北美洲，现已广泛传播至亚洲和欧洲部分地区。其扩散主要受媒介昆虫活动范围和人为调运带疫木材的影响。</p>
+                    <!-- species_distribution (聚合信息) -->
+                    <div class="distribution-details">
+                        <h4>主要分布区域 (示例):</h4>
+                        <ul>
+                             <li><strong>亚洲:</strong> 中国 (多省份), 日本, 韩国, 朝鲜</li>
+                             <li><strong>北美洲:</strong> 美国, 加拿大, 墨西哥</li>
+                             <li><strong>欧洲:</strong> 葡萄牙, 西班牙</li>
+                        </ul>
+                         <!-- description 字段示例 -->
+                         <p><em>状态描述: 在上述国家的主要松林区为存在(Present)状态，并被严格检疫。</em></p>
+                    </div>
+                     <div class="map-placeholder-small">
+                         <p><i class="fas fa-map"></i> 分布地图 (占位)</p>
+                     </div>
+                 </section>
+
+                 <!-- 卡片: 寄主信息 -->
+                 <section class="info-section card-style">
+                    <h2 class="section-title"><i class="fas fa-tree icon-gradient"></i> 寄主信息</h2>
+                    <!-- species_association.host_range -->
+                    <p><strong>寄主范围描述:</strong> 主要危害松属（Pinus）植物，对不同松树种类的易感性存在显著差异。部分非松属植物在实验条件下也可被侵染，但自然条件下主要在松树上完成生活史。</p>
+                    <!-- species_host (列表) -->
+                    <h4>主要寄主列表 (示例):</h4>
+                     <div class="tag-container host-tags">
+                         <!-- host_name, host_name_cn, interaction_type, host_types -->
+                         <span class="tag host-tag primary" title="主要寄主, 自然寄主">赤松 (<i>Pinus densiflora</i>)</span>
+                         <span class="tag host-tag primary" title="主要寄主, 自然寄主">黑松 (<i>Pinus thunbergii</i>)</span>
+                         <span class="tag host-tag primary" title="主要寄主, 自然寄主">油松 (<i>Pinus tabuliformis</i>)</span>
+                         <span class="tag host-tag primary" title="主要寄主, 自然寄主">马尾松 (<i>Pinus massoniana</i>)</span>
+                         <span class="tag host-tag secondary" title="次要寄主, 自然寄主">欧洲赤松 (<i>Pinus sylvestris</i>)</span>
+                         <span class="tag host-tag occasional" title="偶发寄主, 实验寄主">湿地松 (<i>Pinus elliottii</i>)</span>
+                     </div>
+                    <!-- species_host_part -->
+                    <h4>危害部位与强度:</h4>
+                     <dl class="info-list-inline small-dl">
+                         <div><dt>主要危害部位:</dt><dd>木质部 (树干、枝条)</dd></div>
+                         <div><dt>侵染强度:</dt><dd>高 (High)</dd></div>
+                     </dl>
+                 </section>
+
+                 <!-- 卡片: 传播途径与生态影响 -->
+                 <section class="info-section card-style">
+                    <h2 class="section-title"><i class="fas fa-exchange-alt icon-gradient"></i> 传播途径与生态影响</h2>
+                    <!-- species_medium -->
+                     <p><strong>主要传播媒介:</strong></p>
+                     <div class="tag-container medium-tags">
+                         <!-- medium_scientific_name, medium_type, transmission_method -->
+                         <span class="tag medium-tag" title="主要传播媒介 (Vector), 虫媒传播">松墨天牛 (<i>Monochamus alternatus</i>)</span>
+                         <span class="tag medium-tag" title="传播媒介 (Vector), 虫媒传播">花墨天牛 (<i>Monochamus saltuarius</i>)</span>
+                         <span class="tag medium-tag other-medium" title="人为传播途径">带疫松木及制品</span>
+                     </div>
+                    <!-- species_association.description / species_host_part.spreading_way -->
+                    <p><strong>传播方式描述:</strong> 携带线虫的天牛成虫在补充营养取食健康松树嫩枝时将线虫传入；天牛在衰弱木上产卵时也可引入线虫。人为远距离传播主要是通过未经检疫处理的松木包装箱、电缆盘等松木制品。</p>
+                    <!-- species_association.potential_eco_desc -->
+                    <p><strong>潜在生态影响:</strong> 导致松林大面积死亡，破坏森林生态系统结构和功能，影响生物多样性，改变林区景观，并可能引发次生病虫害。对依赖松林的野生动物造成影响。</p>
+                 </section>
+
+                 <!-- 卡片: 管理与防治 -->
+                 <section class="info-section card-style">
+                    <h2 class="section-title"><i class="fas fa-shield-alt icon-gradient"></i> 管理与防治</h2>
+                    <!-- species_association.management_info -->
+                    <p>防治策略强调“预防为主，综合治理”，关键在于控制传染源和切断传播途径。</p>
+                    <ul>
+                        <li><strong>检疫:</strong> 加强进出境及国内调运检疫，防止疫情扩散。</li>
+                        <li><strong>疫木清理:</strong> 及时发现并彻底清除（砍伐、焚烧、削片、或药剂处理）感病松树。</li>
+                        <li><strong>媒介昆虫防治:</strong> 采用诱捕器监测和诱杀天牛，在关键时期进行药剂防治（如飞机防治、地面喷雾），保护天敌。</li>
+                        <li><strong>预防性措施:</strong> 对重点保护区域或高价值松树进行树干注药（如阿维菌素）。</li>
+                        <li><strong>抗性选育:</strong> 选育和种植抗病松树品种。</li>
+                         <li><strong>监测预警:</strong> 建立监测网络，定期普查，实现早期发现、早期预警。</li>
+                    </ul>
+                     <!-- species_association.remark -->
+                     <p class="remark-info"><i class="fas fa-info-circle"></i> <strong>备注:</strong> 具体防治措施需根据当地实际情况和法规执行。可参考国家林业和草原局相关防治技术方案。</p>
+                 </section>
+
+                 <!-- 卡片: 相关文献引用 -->
+                 <section class="info-section card-style">
+                    <h2 class="section-title"><i class="fas fa-book-open icon-gradient"></i> 相关文献引用</h2>
+                    <!-- reference_relation / species_reference_info -->
+                    <ul class="reference-list compact-list">
+                         <li>
+                            <!-- title, author_display, source_title, publish_time, doi? -->
+                            <p><strong>松材线虫病研究进展</strong> - 叶建仁, 孙江华 (2010) <i>林业科学</i></p>
+                            <!-- reference_type, keywords? -->
+                            <div class="tag-container ref-tags">
+                                <span class="tag ref-tag biology">生物学</span>
+                                <span class="tag ref-tag control">防治</span>
+                                <span class="tag ref-tag">综述</span>
+                            </div>
+                             <!-- url -->
+                             <!-- <a href="#" target="_blank" class="ref-link"><i class="fas fa-link"></i> 查看链接</a> -->
+                             <!-- Link to reference_file -->
+                             <!-- <a href="path/to/file.pdf" class="ref-file-link"><i class="fas fa-file-pdf"></i> 下载PDF</a> -->
+                         </li>
+                          <li>
+                            <p><strong>Pine Wilt Disease</strong> - Zhao, B. G., et al. (Eds.) (2008) <i>Springer Japan</i></p>
+                             <div class="tag-container ref-tags">
+                                 <span class="tag ref-tag distribution">分布</span>
+                                 <span class="tag ref-tag biology">生物学</span>
+                                 <span class="tag ref-tag">专著</span>
+                             </div>
+                              <!-- doi -->
+                              <span class="doi-info">DOI: 10.1007/978-4-431-75655-2</span>
+                         </li>
+                         <!-- More references -->
+                    </ul>
+                     <a href="#" class="view-all-link">查看所有关联文献 <i class="fas fa-angle-right"></i></a>
+                 </section>
+
+            </div> <!-- End Left Main Info Column -->
+
+            <!-- Right Sidebar Column -->
+            <aside class="side-info-column">
+
+                 <!-- 卡片: 快速概览 (Sticky) -->
+                <section class="info-section card-style sticky-card">
+                    <h2 class="section-title"><i class="fas fa-bolt icon-gradient"></i> 快速概览</h2>
+                    <dl class="quick-facts-list">
+                         <!-- species.classification -->
+                        <dt><i class="fas fa-tag"></i>主要分类:</dt><dd>线虫动物门 (Nematoda)</dd>
+                         <!-- species.taxonomic_level -->
+                        <dt><i class="fas fa-layer-group"></i>分类层级:</dt><dd>种 (Species)</dd>
+                        <!-- species.confirmation_status -->
+                        <dt><i class="fas fa-check-double"></i>确认状态:</dt><dd class="status-text status-confirmed">已确认</dd>
+                         <!-- species_association.description / species_medium -->
+                        <dt><i class="fas fa-route"></i>主要传播:</dt><dd>松墨天牛, 人为调运</dd>
+                        <!-- species_host -->
+                         <dt><i class="fas fa-leaf"></i>主要寄主:</dt><dd>松属植物 (Pinus spp.)</dd>
+                         <!-- species_association.management_info -->
+                         <dt><i class="fas fa-shield-virus"></i>核心防治:</dt><dd>疫木清理, 媒介控制</dd>
+                    </dl>
+                </section>
+
+                <!-- 卡片: 分类地位 (Sticky) -->
+                <section class="info-section card-style sticky-card">
+                    <h2 class="section-title"><i class="fas fa-sitemap icon-gradient"></i> 分类地位</h2>
+                    <!-- species_taxonomy -->
+                    <ul class="taxonomy-list compact-list">
+                         <li>界: 动物界 (Animalia)</li>
+                         <li>门: 线虫动物门 (Nematoda)</li>
+                         <li>纲: 色矛纲 (Chromadorea)</li>
+                         <li>目: 滑刃目 (Rhabditida)</li>
+                          <li>亚目: 滑刃亚目 (Tylenchina)</li>
+                         <li>科: 伞滑刃科 (Aphelenchoididae)</li>
+                         <li>属: 滑刃属 (<i>Bursaphelenchus</i>)</li>
+                         <li>种: <strong>松材线虫 (<i>B. xylophilus</i>)</strong></li>
+                    </ul>
+                </section>
+
+                 <!-- 卡片: 相关图片 (Sticky) -->
+                <section class="info-section card-style sticky-card">
+                    <h2 class="section-title"><i class="fas fa-images icon-gradient"></i> 相关图片</h2>
+                    <!-- species_image -->
+                    <div class="image-gallery">
+                         <!-- image_path, title, image_type -->
+                        <figure class="gallery-item">
+                            <img src="http://www.pestchina.com/webapi/nb/SpeciesCode/image/info/8d8c3b64-b5a9-492b-9e1b-6cec36b825a5" alt="松材线虫显微照片" title="松材线虫显微照片 (来源: XXX)">
+                            <figcaption>显微图</figcaption>
+                        </figure>
+                         <figure class="gallery-item">
+                             <img src="http://www.pestchina.com/webapi/nb/SpeciesCode/image/info/0a6d6785-0866-4fc1-b6fe-888e1c72d01d" alt="松材线虫病危害状" title="感病松树萎蔫状 (来源: YYY)">
+                             <figcaption>生态图</figcaption>
+                         </figure>
+                         <figure class="gallery-item">
+                             <img src="http://www.pestchina.com/webapi/nb/SpeciesCode/image/info/28c659c5-8f18-47e4-940b-1d43e09195cc
+                             " alt="传播媒介松墨天牛" title="松墨天牛成虫 (来源: ZZZ)">
+                             <figcaption>媒介图</figcaption>
+                         </figure>
+                          <figure class="gallery-item">
+                             <img src="http://www.pestchina.com/webapi/nb/SpeciesCode/image/info/e96c4a0c-1f5a-45af-8224-002c6212629e" alt="树干注药防治" title="树干注药防治现场">
+                             <figcaption>防治图</figcaption>
+                         </figure>
+                         <!-- More images -->
+                    </div>
+                     <!-- Link to a dedicated image gallery page? -->
+                    <a href="#" class="view-all-link">查看全部图片 <i class="fas fa-angle-right"></i></a>
+                </section>
+
+                <!-- 卡片: 其他名称 -->
+                <section class="info-section card-style">
+                    <h2 class="section-title"><i class="fas fa-tags icon-gradient"></i> 其他名称</h2>
+                    <!-- species_other_names -->
+                    <ul class="other-names-list">
+                        <li>
+                            <span class="name-type">异名(Synonym):</span>
+                            <span class="other-name"><i>Aphelenchoides xylophilus</i> Steiner & Buhrer</span>
+                            <span class="named-year">(1934)</span>
+                        </li>
+                         <li>
+                             <span class="name-type">曾用名(Old Name):</span>
+                             <span class="other-name">松树萎蔫病线虫</span>
+                             <span class="named-year"></span>
+                         </li>
+                         <!-- More names -->
+                    </ul>
+                </section>
+
+                <!-- 卡片: 元数据信息 -->
+                 <section class="info-section card-style metadata-card">
+                    <h2 class="section-title"><i class="fas fa-cogs icon-gradient"></i> 元数据</h2>
+                    <!-- species table metadata fields -->
+                    <dl class="metadata-list">
+                        <div><dt>创建者:</dt><dd>系统管理员</dd></div>
+                        <div><dt>创建时间:</dt><dd>2024-01-15 10:30:00</dd></div>
+                        <div><dt>最后编辑者:</dt><dd>专家A</dd></div>
+                         <div><dt>更新时间:</dt><dd>2025-04-01 14:25:10</dd></div>
+                         <div><dt>审核人:</dt><dd>专家A</dd></div>
+                         <div><dt>审核时间:</dt><dd>2024-02-10 09:00:00</dd></div>
+                    </dl>
+                </section>
+
+            </aside> <!-- End Right Sidebar Column -->
+
+        </div> <!-- End Detail Content Grid -->
+
+    </div> <!-- End Main Container -->
+
+    <!-- JS Placeholder -->
+    <script>
+        console.log("Species detail page loaded for 松材线虫 (B. xylophilus)");
+        // Potential JS for image gallery lightbox/modal
+        // document.querySelectorAll('.gallery-item img').forEach(img => {
+        //     img.addEventListener('click', () => { /* Open modal logic here */ });
+        // });
+    </script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepForest - 数据录入</title>
+    <!-- 引入基础样式 (复用之前的) -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入录入页面专属样式 -->
+    <link rel="stylesheet" href="entry_form_style.css">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- 标准应用头部 -->
+    <header class="app-header">
+        <div class="logo">
+            <i class="fas fa-tree"></i>
+            DeepForest 数据管理
+        </div>
+        <div class="user-actions">
+             <a href="index.html" class="nav-link">数据检索</a>
+             <a href="analysis.html" class="nav-link">数据分析</a>
+             <a href="data_entry.html" class="nav-link active">数据录入</a>
+             <i class="fas fa-bell notification-icon"></i>
+            <span class="username">管理员</span>
+            <i class="fas fa-user-circle user-icon"></i>
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <div class="main-container entry-page">
+        <h1 class="page-title"><i class="fas fa-edit"></i> 数据录入与管理</h1>
+
+        <!-- 数据录入表单区域 -->
+        <form id="entryForm" class="entry-form-container">
+
+            <!-- 卡片: 物种核心信息 (species 表) -->
+            <div class="entry-card main-entry-card">
+                <h2 class="card-title gradient-text"><i class="fas fa-leaf"></i> 物种核心信息录入 (Species)</h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="chineseName"><i class="fas fa-language"></i> 中文名称:</label>
+                        <input type="text" id="chineseName" name="species_chinese_name" value="松材线虫" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scientificName"><i class="fas fa-flask"></i> 物种学名 (拉丁名):</label>
+                        <input type="text" id="scientificName" name="species_scientific_name" value="Bursaphelenchus xylophilus" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scientificNameAuthors"><i class="fas fa-user-edit"></i> 含命名人学名:</label>
+                        <input type="text" id="scientificNameAuthors" name="species_scientific_name_with_authors" value="Bursaphelenchus xylophilus (Steiner & Buhrer) Nickle">
+                    </div>
+                     <div class="form-group">
+                        <label for="authorship"><i class="fas fa-calendar-alt"></i> 命名信息 (作者+年份):</label>
+                        <input type="text" id="authorship" name="species_authorship" value="(Steiner & Buhrer) Nickle, 1970">
+                    </div>
+                    <div class="form-group">
+                        <label for="englishName"><i class="fas fa-globe-americas"></i> 英文名称:</label>
+                        <input type="text" id="englishName" name="species_english_name" value="Pine Wood Nematode">
+                    </div>
+                    <div class="form-group">
+                        <label for="abbreviation"><i class="fas fa-text-width"></i> 英文缩写:</label>
+                        <input type="text" id="abbreviation" name="species_abbreviation" value="PWN">
+                    </div>
+                    <div class="form-group">
+                        <label for="classification"><i class="fas fa-sitemap"></i> 物种分类 (纲/门级):</label>
+                        <input type="text" id="classification" name="species_classification" value="线虫动物门">
+                    </div>
+                    <div class="form-group">
+                        <label for="parentGenus"><i class="fas fa-project-diagram"></i> 父级属名:</label>
+                        <input type="text" id="parentGenus" name="species_parent_genus" value="Bursaphelenchus">
+                    </div>
+                    <div class="form-group">
+                        <label for="taxonomicLevel"><i class="fas fa-layer-group"></i> 分类层级:</label>
+                        <select id="taxonomicLevel" name="species_taxonomic_level">
+                            <option value="种" selected>种 (Species)</option>
+                            <option value="属">属 (Genus)</option>
+                            <option value="科">科 (Family)</option>
+                            <option value="目">目 (Order)</option>
+                            <option value="纲">纲 (Class)</option>
+                            <option value="门">门 (Phylum)</option>
+                            <option value="界">界 (Kingdom)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmationStatus"><i class="fas fa-check-circle"></i> 确认状态:</label>
+                        <select id="confirmationStatus" name="species_confirmation_status">
+                            <option value="已确认" selected>已确认</option>
+                            <option value="待审核">待审核</option>
+                            <option value="有疑问">有疑问</option>
+                            <!-- 可添加其他状态 -->
+                        </select>
+                    </div>
+                     <div class="form-group full-width">
+                        <label for="sources"><i class="fas fa-book-reader"></i> 数据来源 (多源用分号;分隔):</label>
+                        <textarea id="sources" name="species_sources" rows="2">EPPO Global Database; CABI Compendium; 中国林业科学研究院</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="originalRiskCode"><i class="fas fa-exclamation-triangle"></i> 原始风险等级编码:</label>
+                        <input type="text" id="originalRiskCode" name="species_original_risk_code" value="HighRisk-001">
+                    </div>
+                    <div class="form-group">
+                        <label for="isSpecies"><i class="fas fa-question-circle"></i> 是否物种级:</label>
+                         <select id="isSpecies" name="species_is_species">
+                            <option value="TRUE" selected>是 (TRUE)</option>
+                            <option value="FALSE">否 (FALSE)</option>
+                        </select>
+                    </div>
+                </div><!-- End Form Grid -->
+
+                <!-- 折叠区域: 用于关联信息的录入 -->
+                <div class="accordion-container">
+
+                    <!-- 折叠卡片: 基本信息详情 (species_basic_info 表) -->
+                    <details class="accordion-item">
+                        <summary class="accordion-title gradient-bg-light"><i class="fas fa-info-circle"></i> 基本信息详情 (可选项)</summary>
+                        <div class="accordion-content form-grid">
+                            <div class="form-group full-width">
+                                <label for="biologicalProperties"><i class="fas fa-dna"></i> 生物学特性描述:</label>
+                                <textarea id="biologicalProperties" name="basic_info_biological_properties" rows="4">典型的雌雄异体，卵生。生活史复杂，包含多个幼虫期和成虫期。存在特殊的扩散龄期（dauerlarva）适应环境并利于传播。繁殖速度受温度影响大。</textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="morphologicalChars"><i class="fas fa-ruler-combined"></i> 形态学特征描述:</label>
+                                <textarea id="morphologicalChars" name="basic_info_morphological_characteristics" rows="4">虫体微小，线形。口针发达，基部具球结。雌雄形态有差异，如尾部形状、交合刺等。</textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="detectionMethod"><i class="fas fa-search-plus"></i> 检测方法描述:</label>
+                                <textarea id="detectionMethod" name="basic_info_detection_method" rows="3">主要通过症状诊断、贝尔曼漏斗法分离、显微镜形态鉴定和PCR分子检测等方法。</textarea>
+                            </div>
+                             <div class="form-group full-width">
+                                <label for="distributionDescription"><i class="fas fa-map-signs"></i> 分布描述文本:</label>
+                                <textarea id="distributionDescription" name="basic_info_distribution_description" rows="3">起源于北美，现已传入亚洲和欧洲多国。主要分布在松树种植区域。</textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="basicInfoRemark"><i class="fas fa-comment-dots"></i> 备注信息:</label>
+                                <textarea id="basicInfoRemark" name="basic_info_remark" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- 折叠卡片: 地理分布 (species_distribution 表) - 动态添加 -->
+                    <details class="accordion-item">
+                        <summary class="accordion-title gradient-bg-light"><i class="fas fa-map-marked-alt"></i> 地理分布记录</summary>
+                        <div class="accordion-content dynamic-entry-section">
+                            <div id="distributionEntries">
+                                <!-- 示例条目 (实际应用中可能由JS生成或默认显示一条空的) -->
+                                <div class="entry-item form-grid">
+                                    <div class="form-group">
+                                        <label>大陆名称:</label>
+                                        <input type="text" name="distribution_continent_name[]" value="亚洲">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>国家名称:</label>
+                                        <input type="text" name="distribution_country_name[]" value="中国">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>省份/州名称:</label>
+                                        <input type="text" name="distribution_province_name[]" value="江苏省">
+                                    </div>
+                                     <div class="form-group full-width">
+                                        <label>分布状态描述:</label>
+                                        <input type="text" name="distribution_description[]" value="存在 (Present), 广泛分布">
+                                    </div>
+                                    <button type="button" class="remove-button" onclick="removeEntryItem(this)"><i class="fas fa-trash-alt"></i> </button>
+                                </div>
+                                 <div class="entry-item form-grid">
+                                    <div class="form-group"> <label>大陆名称:</label> <input type="text" name="distribution_continent_name[]" value="欧洲"> </div>
+                                    <div class="form-group"> <label>国家名称:</label> <input type="text" name="distribution_country_name[]" value="葡萄牙"> </div>
+                                    <div class="form-group"> <label>省份/州名称:</label> <input type="text" name="distribution_province_name[]" value=""> </div>
+                                     <div class="form-group full-width"> <label>分布状态描述:</label> <input type="text" name="distribution_description[]" value="存在 (Present)"> </div>
+                                     <button type="button" class="remove-button" onclick="removeEntryItem(this)"><i class="fas fa-trash-alt"></i> </button>
+                                 </div>
+                            </div>
+                            <button type="button" class="add-button" onclick="addDistributionEntry()"><i class="fas fa-plus-circle"></i> 添加分布记录</button>
+                        </div>
+                    </details>
+
+                    <!-- 折叠卡片: 寄主信息 (species_host & species_host_part 表) - 动态添加 -->
+                    <details class="accordion-item">
+                        <summary class="accordion-title gradient-bg-light"><i class="fas fa-tree"></i> 寄主植物信息</summary>
+                        <div class="accordion-content dynamic-entry-section">
+                             <div id="hostEntries">
+                                 <!-- 示例条目 -->
+                                <div class="entry-item form-grid">
+                                    <div class="form-group"> <label>寄主学名:</label> <input type="text" name="host_name[]" value="Pinus densiflora" required> </div>
+                                    <div class="form-group"> <label>寄主中文名:</label> <input type="text" name="host_name_cn[]" value="赤松"> </div>
+                                    <div class="form-group">
+                                        <label>寄主类型:</label>
+                                        <input type="text" name="host_types[]" placeholder="逗号分隔, 如: 自然寄主,主要寄主" value="自然寄主,主要寄主">
+                                    </div>
+                                     <div class="form-group">
+                                        <label>互作关系:</label>
+                                        <select name="interaction_type[]">
+                                            <option value="primary" selected>主要 (primary)</option>
+                                            <option value="secondary">次要 (secondary)</option>
+                                            <option value="occasional">偶发 (occasional)</option>
+                                        </select>
+                                    </div>
+                                     <div class="form-group"> <label>危害植物部位:</label> <input type="text" name="plant_parts[]" placeholder="逗号分隔, 如: 木质部,枝条" value="木质部,枝条"> </div>
+                                     <div class="form-group">
+                                         <label>侵染强度:</label>
+                                         <select name="infection_intensity[]">
+                                             <option value="">未指定</option>
+                                             <option value="low">低 (low)</option>
+                                             <option value="medium">中 (medium)</option>
+                                             <option value="high" selected>高 (high)</option>
+                                         </select>
+                                     </div>
+                                     <button type="button" class="remove-button" onclick="removeEntryItem(this)"><i class="fas fa-trash-alt"></i> </button>
+                                 </div>
+                             </div>
+                            <button type="button" class="add-button" onclick="addHostEntry()"><i class="fas fa-plus-circle"></i> 添加寄主记录</button>
+                        </div>
+                    </details>
+
+                    <!-- 折叠卡片: 其他名称 (species_other_names 表) - 动态添加 -->
+                    <details class="accordion-item">
+                        <summary class="accordion-title gradient-bg-light"><i class="fas fa-tags"></i> 其他名称/异名</summary>
+                        <div class="accordion-content dynamic-entry-section">
+                             <div id="otherNameEntries">
+                                 <!-- 示例条目 -->
+                                <div class="entry-item form-grid">
+                                    <div class="form-group">
+                                        <label>名称类型:</label>
+                                        <input type="text" name="other_name_type[]" placeholder="如: 异名, 曾用名" value="异名 (Synonym)">
+                                    </div>
+                                     <div class="form-group">
+                                        <label>其他名称:</label>
+                                        <input type="text" name="other_name[]" value="Aphelenchoides xylophilus">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>命名年份:</label>
+                                        <input type="text" name="named_year[]" value="1934">
+                                    </div>
+                                    <button type="button" class="remove-button" onclick="removeEntryItem(this)"><i class="fas fa-trash-alt"></i> </button>
+                                </div>
+                             </div>
+                             <button type="button" class="add-button" onclick="addOtherNameEntry()"><i class="fas fa-plus-circle"></i> 添加其他名称</button>
+                        </div>
+                    </details>
+
+                    <!-- 折叠卡片: 相关图片 (species_image 表) - 动态添加 -->
+                    <details class="accordion-item">
+                        <summary class="accordion-title gradient-bg-light"><i class="fas fa-images"></i> 相关图片信息</summary>
+                        <div class="accordion-content dynamic-entry-section">
+                             <div id="imageEntries">
+                                 <!-- 示例条目 -->
+                                <div class="entry-item form-grid">
+                                    <div class="form-group"> <label>图片标题:</label> <input type="text" name="image_title[]" value="松材线虫显微照片"> </div>
+                                    <div class="form-group"> <label>图片类型:</label> <input type="text" name="image_type[]" placeholder="如: 显微图, 生态图" value="显微图"> </div>
+                                    <div class="form-group"> <label>存储路径:</label> <input type="text" name="image_path[]" placeholder="相对或绝对路径" value="/images/pwn_microscope_01.jpg"> </div>
+                                     <div class="form-group full-width"> <label>内容描述:</label> <textarea name="image_content_description[]" rows="2">高倍镜下显示的松材线虫成虫形态</textarea> </div>
+                                     <div class="form-group full-width"> <label>版权信息:</label> <textarea name="image_copyright_description[]" rows="1">CC BY-SA 4.0 - Forest Pest Lab</textarea> </div>
+                                     <div class="form-group"> <label>排序权重:</label> <input type="number" name="image_order_by[]" value="1" min="0"> </div>
+                                     <div class="form-group"> <label>首页展示:</label> <select name="image_is_home_show[]"><option value="0">否</option><option value="1">是</option></select> </div>
+                                     <button type="button" class="remove-button" onclick="removeEntryItem(this)"><i class="fas fa-trash-alt"></i> </button>
+                                 </div>
+                             </div>
+                             <button type="button" class="add-button" onclick="addImageEntry()"><i class="fas fa-plus-circle"></i> 添加图片信息</button>
+                        </div>
+                    </details>
+
+                    <!-- 折叠卡片: 关联文献 (reference_relation 表) - 动态添加 -->
+                     <details class="accordion-item">
+                        <summary class="accordion-title gradient-bg-light"><i class="fas fa-book"></i> 关联文献引用</summary>
+                        <div class="accordion-content dynamic-entry-section">
+                            <p class="form-hint">录入与该物种直接相关的文献引用信息。完整的文献元数据请在“参考文献管理”模块录入。</p>
+                             <div id="referenceEntries">
+                                 <!-- 示例条目 -->
+                                <div class="entry-item form-grid">
+                                     <div class="form-group"> <label>文献标识码(icode):</label> <input type="number" name="ref_icode[]" value="1001" required> </div>
+                                     <div class="form-group"> <label>文献标题:</label> <input type="text" name="ref_title[]" value="松材线虫病研究进展"> </div>
+                                     <div class="form-group"> <label>作者显示(含年份):</label> <input type="text" name="ref_author_display[]" value="叶建仁, 孙江华 (2010)"> </div>
+                                     <div class="form-group">
+                                        <label>引用类型:</label>
+                                        <select name="ref_reference_type[]">
+                                            <option value="distribution">分布 (distribution)</option>
+                                            <option value="biology" selected>生物学 (biology)</option>
+                                            <option value="control">防治 (control)</option>
+                                        </select>
+                                    </div>
+                                     <div class="form-group full-width"> <label>文献在线链接(URL):</label> <input type="url" name="ref_url[]" placeholder="可选"> </div>
+                                     <button type="button" class="remove-button" onclick="removeEntryItem(this)"><i class="fas fa-trash-alt"></i> </button>
+                                 </div>
+                             </div>
+                            <button type="button" class="add-button" onclick="addReferenceEntry()"><i class="fas fa-plus-circle"></i> 添加关联文献</button>
+                        </div>
+                    </details>
+
+                     <!-- 折叠卡片: 生态关系与管理 (species_association 表) -->
+                     <details class="accordion-item">
+                         <summary class="accordion-title gradient-bg-light"><i class="fas fa-users-cog"></i> 生态关系与管理 (可选项)</summary>
+                         <div class="accordion-content form-grid">
+                             <div class="form-group full-width">
+                                 <label for="hostRangeDesc"><i class="fas fa-list-alt"></i> 寄主范围详细描述:</label>
+                                 <textarea id="hostRangeDesc" name="assoc_host_range" rows="3">主要寄主为松属植物，尤其是二针和五针松类。对不同松种的易感性有差异。</textarea>
+                             </div>
+                              <div class="form-group full-width">
+                                 <label for="potentialEcoDesc"><i class="fas fa-leaf"></i> 潜在生态影响分析:</label>
+                                 <textarea id="potentialEcoDesc" name="assoc_potential_eco_desc" rows="3">导致松林生态系统崩溃，生物多样性降低，影响水源涵养。</textarea>
+                             </div>
+                             <div class="form-group full-width">
+                                 <label for="associationDesc"><i class="fas fa-link"></i> 关联关系核心描述:</label>
+                                 <textarea id="associationDesc" name="assoc_description" rows="3" placeholder="传播途径、互作关系等">主要通过松墨天牛等媒介昆虫传播，也可随带疫木材远距离扩散。</textarea>
+                             </div>
+                             <div class="form-group full-width">
+                                 <label for="managementInfo"><i class="fas fa-shield-alt"></i> 防控管理措施信息:</label>
+                                 <textarea id="managementInfo" name="assoc_management_info" rows="4">综合运用检疫、疫木清理、媒介防治、树干注药、抗性品种等措施。</textarea>
+                             </div>
+                             <div class="form-group full-width">
+                                 <label for="associationRemark"><i class="fas fa-comment"></i> 补充信息 (可含URL):</label>
+                                 <textarea id="associationRemark" name="assoc_remark" rows="2"></textarea>
+                             </div>
+                         </div>
+                     </details>
+
+                </div> <!-- End Accordion Container -->
+
+                <!-- 提交按钮 -->
+                <div class="form-actions">
+                    <button type="submit" class="submit-button gradient-accent"><i class="fas fa-save"></i> 保存物种信息</button>
+                    <button type="reset" class="reset-button"><i class="fas fa-undo"></i> 重置表单</button>
+                </div>
+
+            </div> <!-- End Main Entry Card -->
+
+            <!-- 可选: 参考文献元数据录入卡片 (简化版，实际可能更复杂或在独立页面) -->
+             <div class="entry-card reference-entry-card">
+                 <h2 class="card-title gradient-text"><i class="fas fa-book"></i> 参考文献元数据录入 (Reference Info)</h2>
+                  <p class="form-hint">在此录入文献的详细信息，上方“关联文献引用”部分只需填写标识码进行关联。</p>
+                  <!-- 简化示例，实际需要更完整的表单 -->
+                  <div class="form-grid">
+                      <div class="form-group"> <label for="refInfoIcode"><i class="fas fa-hashtag"></i> 文献标识码(icode):</label> <input type="number" id="refInfoIcode" name="ref_info_icode" required placeholder="与关联引用中的icode对应"> </div>
+                      <div class="form-group"> <label for="refInfoTitle"><i class="fas fa-heading"></i> 文献标题:</label> <input type="text" id="refInfoTitle" name="ref_info_title" required> </div>
+                      <div class="form-group"> <label for="refInfoAuthors"><i class="fas fa-users"></i> 作者列表 (逗号分隔):</label> <input type="text" id="refInfoAuthors" name="ref_info_authors"> </div>
+                      <div class="form-group"> <label for="refInfoSourceTitle"><i class="fas fa-newspaper"></i> 来源期刊/出版物:</label> <input type="text" id="refInfoSourceTitle" name="ref_info_source_title"> </div>
+                      <div class="form-group"> <label for="refInfoPublishTime"><i class="fas fa-calendar-check"></i> 发表时间:</label> <input type="datetime-local" id="refInfoPublishTime" name="ref_info_publish_time"> </div>
+                       <div class="form-group full-width"> <label for="refInfoAbstract"><i class="fas fa-align-left"></i> 摘要:</label> <textarea id="refInfoAbstract" name="ref_info_abstract" rows="4"></textarea> </div>
+                      <div class="form-group"> <label for="refInfoKeywords"><i class="fas fa-key"></i> 关键词 (分号分隔):</label> <input type="text" id="refInfoKeywords" name="ref_info_keywords"> </div>
+                       <div class="form-group"> <label for="refInfoDOI"><i class="fas fa-fingerprint"></i> DOI:</label> <input type="text" id="refInfoDOI" name="ref_info_doi"> </div>
+                       <!-- 更多字段... -->
+                   </div>
+                  <div class="form-actions">
+                     <button type="button" class="submit-button gradient-blue-light"><i class="fas fa-save"></i> 保存文献信息</button>
+                 </div>
+             </div>
+
+             <!-- Neo4j 相关提示 -->
+             <div class="entry-card neo4j-hint-card">
+                  <h3 class="card-title"><i class="fas fa-project-diagram"></i> Neo4j 图构建说明</h3>
+                  <p>上述录入的结构化数据将用于构建知识图谱。例如：</p>
+                  <ul>
+                      <li>`species` 表记录将创建 `(s:Species)` 节点。</li>
+                      <li>`species_host` 记录将创建 `(s)-[:HOSTS_ON]->(h:Host)` 关系。</li>
+                       <li>`species_distribution` 记录将创建 `(s)-[:DISTRIBUTED_IN]->(l:Location)` 关系。</li>
+                       <li>`reference_relation` 记录将创建 `(s)-[:MENTIONED_IN]->(r:Reference)` 关系。</li>
+                  </ul>
+                  <p>如有必要，可在此处补充或调整图特定的属性或关系（此原型中未实现具体输入）。</p>
+             </div>
+
+        </form> <!-- End Entry Form Container -->
+
+    </div> <!-- End Main Container -->
+
+    <!-- JavaScript for dynamic entries -->
+    <script src="entry_form_script.js"></script>
+</body>
+</html>

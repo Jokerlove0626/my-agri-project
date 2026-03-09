@@ -1,0 +1,142 @@
+/* src/search/components/ResultCard.module.css */
+.resultCard {
+    background-color: var(--card-background, #ffffff); /* 使用全局变量 */
+    border-radius: var(--border-radius, 12px); /* 使用全局变量 */
+    box-shadow: var(--shadow-soft, 0 4px 8px rgba(0, 0, 0, 0.05));
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color-light, #e6f0fa); /* 添加细边框 */
+  }
+  
+  .resultCard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover, 0 8px 16px rgba(0, 0, 0, 0.08));
+  }
+  
+  .cardImagePlaceholder {
+    height: 150px;
+    /* 使用更柔和的渐变 */
+    background: linear-gradient(135deg, #e0f2ff 0%, #d1f7f5 100%); /* 调整渐变色 */
+    /* background: var(--secondary-gradient); 原来的 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .cardIcon {
+    font-size: 3.5rem; /* 增大图标 */
+    color: rgba(74, 144, 226, 0.5); /* 使用主色调的半透明色 */
+  }
+  
+  .cardContent {
+    padding: 1.2rem 1.5rem; /* 调整内边距 */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cardTitle {
+    margin-top: 0;
+    margin-bottom: 0.6rem; /* 调整间距 */
+    font-size: 1.2rem; /* 调整字体大小 */
+    font-weight: 600; /* 稍加粗 */
+    line-height: 1.4;
+    color: var(--text-color);
+  }
+  
+  .scientificName {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-secondary, #7f8c9a);
+    font-size: 0.9em;
+    margin-left: 0.3rem; /* 与中文名间距 */
+  }
+  
+  .cardInfo {
+    margin-bottom: 0.5rem; /* 调整间距 */
+    font-size: 0.9rem;
+    color: var(--text-secondary, #7f8c9a);
+  }
+  
+  .cardInfo strong {
+    font-weight: 500;
+    color: var(--text-color);
+    margin-right: 0.4rem;
+  }
+  
+  /* 状态样式 */
+  .statusConfirmed {
+    color: #28a745; /* 保持绿色 */
+    font-weight: 500;
+  }
+  .statusPending {
+    color: #ffc107; /* 保持黄色 */
+    font-weight: 500;
+  }
+  /* 可以添加 .statusDefault 等 */
+  
+  .cardDescription {
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem; /* 增大与标签间距 */
+    color: var(--text-secondary); /* 使用次要文本颜色 */
+    flex-grow: 1;
+    line-height: 1.6;
+    /* 限制行数 (保持不变) */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: calc(1.6 * 0.9rem * 3); /* 确保至少有3行的高度 */
+  }
+  
+  .cardTags {
+    margin-bottom: 1.2rem; /* 增大与按钮间距 */
+    flex-wrap: wrap; /* 允许标签换行 */
+    display: flex; /* 改为 flex 布局 */
+    gap: 0.5rem; /* 标签间距 */
+  }
+  
+  .tag {
+    display: inline-block;
+    background-color: #eef2f7; /* 调整背景色 */
+    color: var(--text-secondary);
+    padding: 0.3rem 0.8rem; /* 调整内边距 */
+    border-radius: 15px; /* 胶囊形状 */
+    font-size: 0.75rem;
+    /* margin-right: 0.4rem; (使用gap替代) */
+    /* margin-bottom: 0.4rem; (使用gap替代) */
+    border: 1px solid var(--border-color-light);
+  }
+  
+  .detailsButton {
+    background: none;
+    border: 1px solid var(--primary-blue, #4a90e2); /* 使用全局变量 */
+    color: var(--primary-blue, #4a90e2);
+    padding: 0.6rem 1.2rem; /* 调整内边距 */
+    border-radius: var(--border-radius-sm, 8px);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: auto; /* 将按钮推到底部 */
+    align-self: flex-start;
+    display: inline-flex; /* 改为inline-flex */
+    align-items: center;
+  }
+  
+  .buttonIcon {
+     margin-left: 0.5rem;
+     transition: transform 0.3s ease;
+  }
+  
+  .detailsButton:hover {
+    background-color: var(--primary-blue, #4a90e2);
+    color: white;
+  }
+  
+  .detailsButton:hover .buttonIcon {
+    transform: translateX(4px); /* 增大移动距离 */
+  }

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仿通义千问界面 - 最终版</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入 Feather Icons 图标库 -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 左侧导航栏 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">通义</div>
+                <button class="new-chat-btn">
+                    <i data-feather="plus"></i> 新建对话
+                </button>
+            </div>
+
+            <!-- 简化的历史记录预览 -->
+            <div class="history-preview">
+                <div class="history-group">
+                    <span class="history-timeframe">当天</span>
+                    <ul class="history-list">
+                        <li><a href="#">你好</a></li>
+                    </ul>
+                </div>
+                <div class="history-group">
+                    <span class="history-timeframe">最近30天</span>
+                    <ul class="history-list">
+                         <li><a href="#">【下图为scrapy爬虫的目录】</a></li>
+                         <li><a href="#">你是什么模型？</a></li>
+                    </ul>
+                </div>
+                 <div class="history-group">
+                    <span class="history-timeframe">最近半年</span>
+                    <ul class="history-list">
+                        <li><a href="#">你好</a></li>
+                        <li><a href="#">Java切割字符串</a></li>
+                    </ul>
+                </div>
+                <!-- 可以添加更多... -->
+            </div>
+
+            <ul class="nav-links">
+                <li class="active"><a href="#"><i data-feather="message-circle"></i> 对话</a></li>
+                <li><a href="#"><i data-feather="grid"></i> 发现</a></li>
+                <li><a href="#"><i data-feather="archive"></i> 我创建的</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                 <a href="#" class="manage-history"><i data-feather="settings"></i> 管理对话记录</a>
+                 <a href="#" class="user-profile" title="用户"><i data-feather="user"></i></a>
+            </div>
+        </nav>
+
+        <!-- 右侧主聊天区域 -->
+        <main class="chat-area">
+            <div class="chat-history-wrapper">
+                <div class="chat-history" id="chat-history">
+                    <!-- 欢迎界面 (功能按钮已移到下方) -->
+                    <div class="welcome-screen" id="welcome-screen">
+                        <div class="welcome-header">
+                            <svg width="50" height="50" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="welcome-logo"><linearGradient id="grad" gradientUnits="userSpaceOnUse" x1="32" y1="0" x2="32" y2="64"><stop offset="0" stop-color="#8F6DF9"/><stop offset="1" stop-color="#5326E9"/></linearGradient><rect width="64" height="64" rx="16" fill="url(#grad)"/><path d="M32 38C35.3137 38 38 35.3137 38 32C38 28.6863 35.3137 26 32 26C28.6863 26 26 28.6863 26 32C26 35.3137 28.6863 38 32 38ZM32 44C34.2091 44 36 42.2091 36 40C36 37.7909 34.2091 36 32 36C29.7909 36 28 37.7909 28 40C28 42.2091 29.7909 44 32 44ZM26 32C26 28.6863 28.6863 26 32 26C35.3137 26 38 28.6863 38 32C38 35.3137 35.3137 38 32 38C28.6863 38 26 35.3137 26 32Z" fill="white"/><path d="M32.0001 23.4287C27.8287 23.4287 24.4287 26.8287 24.4287 31.0001C24.4287 35.1715 27.8287 38.5715 32.0001 38.5715C36.1715 38.5715 39.5715 35.1715 39.5715 31.0001C39.5715 26.8287 36.1715 23.4287 32.0001 23.4287ZM32.0001 40.5715C29.9818 40.5715 28.3572 42.196 28.3572 44.2144C28.3572 46.2327 29.9818 47.8572 32.0001 47.8572C34.0184 47.8572 35.6429 46.2327 35.6429 44.2144C35.6429 42.196 34.0184 40.5715 32.0001 40.5715Z" fill="white"/></svg>
+                            <h1>我是通义，你的个人AI助手</h1>
+                            <p>我可以帮你做这些事情，<a href="#" id="change-prompt">换一换 <i data-feather="refresh-cw" style="width: 12px; height: 12px; vertical-align: middle;"></i></a></p>
+                        </div>
+                        <div class="suggestion-cards">
+                            <div class="card today-hot"><h3>今日热搜</h3><p>全网搜索你关心的问题</p><ul><li><span>1</span> 网传朝鲜将于2025年4月24日...</li><li><span>2</span> 山东威海一小区多层阳台坠落...</li><li><span>3</span> 多家央企增持股票，支持资本...</li><li><span>4</span> 铁路部门在京沪高铁试点宠物...</li><li><span>5</span> 国内学者论文涉嫌翻译抄袭，...</li><li><span>6</span> 广东大力扩建高校，吸引香港...</li></ul></div>
+                            <div class="card efficiency-tools"><h3>效率工具</h3><p>办公学习就用通义效率</p><div class="tool-item"><i data-feather="mic"></i><div>实时记录</div><span>语音转文字，AI会议纪要神器</span></div><div class="tool-item"><i data-feather="book-open"></i><div>阅读助手</div><span>AI速读论文、图书等超长文档</span></div><div class="tool-item"><i data-feather="clipboard"></i><div>PPT创作</div><span>言之有物、设计精美的智能PPT</span></div></div>
+                            <div class="card visual-showcase"><div class="showcase-image"><img src="https://img.alicdn.com/imgextra/i3/O1CN01s5ZQZ71k4lQ9eLJ8A_!!6000000004631-0-tps-534-200.jpg" alt="通义万相视频展示"></div><button class="try-visual-btn"><i data-feather="aperture"></i> 通义万相视频</button><div class="carousel-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+                            <div class="card featured-agent"><h3>精选智能体</h3><div class="agent-item"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkMiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIyNCIgeTE9IjAiIHgyPSIyNCIgeTI9IjQ4Ij4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzZEODJGRiIvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM3RDVCRjYiLz4KPC9saW5lYXJHcmFkaWVudD4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iMTIiIGZpbGw9InVybCgjZ3JhZDIpIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjQgMTJDMTguNDc3MiAxMiAxNCAxNi40NzcyIDE0IDIyQzE0IDI3LjUyMjggMTguNDc3MiAzMiAyNCAzMkMxOS4zMDQ2IDMyIDE1LjI0MjYgMjguOTEwMSAxNC4yNjY3IDI0LjUwNjdDMjAuNDQzNyAyMC4xODE0IDI3LjUyMjggMTQuMDAwMSAzMi4wMDAxIDE0LjAwMDFDMzcuNTIyOSAxNC4wMDAxIDQyLjAwMDEgMTguNDc3MiA0Mi4wMDAxIDI0QzQyLjAwMDEgMjkuNTIyOCA0MS4wMTQ1IDI5LjcxMzQgNDAuMTQ0OSAzMC4wOTRD MzQuNTI5MSAzNS4xNzk0IDI3LjQzMzggNDIgMjQgNDJDMTQuMDAwMSA0MiAxNCAzMi40NTczIDE0IDI0QzE0IDE4LjQ3NzIgMTguNDc3MiAxNCAyNCAxNFpNMjQgMzZDMjYuMjA5MSAzNiAyOCAzNC4yMDkxIDI4IDMyQzI4IDI5Ljc5MDkgMjYuMjA5MSAyOCAyNCAyOEMyMS43OTA5IDI4IDIwIDI5Ljc5MDkgMjAgMzJDMjAgMzQuMjA5MSAyMS43OTA5IDM2IDI0IDM2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==" alt="Qwen Logo" class="agent-logo"><div class="agent-info"><h4>Qwen-QwQ-32B</h4><p>欢迎体验阿里巴巴旗下深度思考...</p></div></div></div>
+                        </div>
+                        <!-- Feature buttons div is no longer here -->
+                    </div>
+
+                    <!-- 消息模板 -->
+                    <template id="ai-message-template">
+                        <div class="message ai-message">
+                            <div class="ai-icon-wrapper"><div class="ai-icon">通</div></div>
+                            <div class="message-content-wrapper">
+                                <div class="message-content">
+                                    <div class="thinking-process">
+                                         <div class="thinking-header" role="button" aria-expanded="false">
+                                             <span class="thinking-status">AI 正在思考...</span>
+                                             <button class="toggle-thinking" aria-label="展开/折叠思考过程"><i data-feather="chevron-down"></i></button>
+                                         </div>
+                                         <div class="thinking-details"></div>
+                                     </div>
+                                     <div class="ai-answer">...</div>
+                                 </div>
+                             </div>
+                        </div>
+                    </template>
+                     <template id="user-message-template">
+                         <div class="message user-message">
+                            <div class="message-content-wrapper">
+                                <div class="message-content"></div>
+                            </div>
+                        </div>
+                     </template>
+                    <!-- 聊天消息会出现在这里 -->
+                </div>
+            </div>
+
+             <!-- 页脚区域：包含功能切换和气泡输入框 -->
+            <footer class="input-area-container">
+                 <!-- 功能切换按钮 -->
+                 <div class="function-toggles" id="function-toggles">
+                     <button data-mode="deep-thought" aria-pressed="false"><i data-feather="search"></i> 深度思考</button>
+                     <button data-mode="web-search" aria-pressed="false"><i data-feather="globe"></i> 联网搜索</button>
+                     <button data-mode="code-mode" aria-pressed="false"><i data-feather="code"></i> 代码模式</button>
+                     <button data-mode="ppt-creation" aria-pressed="false"><i data-feather="file-text"></i> PPT创作</button>
+                     <button data-mode="command-center" aria-pressed="false"><i data-feather="compass"></i> 指令中心</button>
+                 </div>
+
+                 <!-- 气泡输入框 -->
+                 <div class="input-area">
+                    <div class="input-buttons">
+                        <button id="upload-image" title="上传图片"><i data-feather="image"></i></button>
+                        <button id="upload-file" title="上传附件"><i data-feather="paperclip"></i></button>
+                        <input type="file" id="image-input" accept="image/*" style="display: none;">
+                        <input type="file" id="file-input" style="display: none;">
+                    </div>
+                    <div class="input-content">
+                        <div id="preview-area" class="preview-area"></div>
+                        <textarea id="user-input" placeholder="干事 不决问通义" rows="1"></textarea>
+                    </div>
+                    <button id="send-button" title="发送"><i data-feather="send"></i></button>
+                </div>
+                <!-- 免责声明 -->
+                <div class="footer-notice">服务生成的内容均由人工智能模型生成，其生成内容的准确性和完整性无法保证，不代表我们的态度或观点</div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- 引入 JavaScript -->
+    <script src="script.js"></script>
+    <script>
+      // 初始化 Feather Icons
+      feather.replace();
+    </script>
+</body>
+</html>

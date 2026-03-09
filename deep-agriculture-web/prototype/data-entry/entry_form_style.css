@@ -1,0 +1,414 @@
+/* =============================================== */
+/* == Entry Form Page Styles (entry_form_style.css) == */
+/* =============================================== */
+
+/* --- Inherit base variables and styles from style.css --- */
+/* Ensure style.css is linked before this file */
+
+/* --- Page Container & Title --- */
+.entry-page {
+    padding: 1.5rem 2rem;
+    max-width: 1200px; /* Limit max width for better readability */
+    margin: 0 auto; /* Center the content */
+}
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.8rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.page-title i {
+    margin-right: 0.8rem;
+    color: var(--primary-blue); /* Use primary color for icon */
+    font-size: 1.2em;
+}
+
+/* --- Entry Form Container --- */
+.entry-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem; /* Space between cards */
+}
+
+/* --- Entry Card Styling --- */
+.entry-card {
+    background-color: var(--card-background, #ffffff);
+    border-radius: var(--border-radius, 12px);
+    box-shadow: var(--shadow-soft, 0 6px 15px rgba(0, 0, 0, 0.05));
+    border: 1px solid var(--border-color-light, #e6f0fa);
+    padding: 1.5rem 2rem; /* Padding inside cards */
+    overflow: hidden; /* Contain children */
+    transition: all 0.3s ease;
+}
+.entry-card:hover {
+    box-shadow: var(--shadow-hover, 0 10px 20px rgba(0, 0, 0, 0.08));
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: -1.5rem -2rem 1.5rem -2rem; /* Extend header to card edges */
+    padding: 1rem 2rem; /* Padding for header */
+    border-bottom: 1px solid var(--border-color-light, #e6f0fa);
+    display: flex;
+    align-items: center;
+    background-color: #f8faff; /* Light background for header */
+}
+.card-title.gradient-text { /* Apply gradient to text */
+    background: var(--gradient-accent, linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border-bottom: none; /* Remove border if using gradient text */
+    background-color: transparent; /* Remove background if using gradient text */
+     padding-bottom: 0.8rem; /* Add padding back */
+     margin-bottom: 1.5rem;
+     position: relative;
+}
+.card-title.gradient-text::after { /* Optional subtle underline */
+     content: '';
+     position: absolute;
+     left: 2rem;
+     bottom: 0;
+     width: calc(100% - 4rem);
+     height: 1px;
+     background: linear-gradient(to right, rgba(74, 144, 226, 0.1), rgba(80, 227, 194, 0.1), rgba(74, 144, 226, 0.1));
+}
+
+.card-title i {
+    margin-right: 0.8rem;
+    font-size: 1.1em;
+    /* Inherit color or set explicitly if needed */
+     color: var(--primary-blue); /* Default icon color */
+}
+.card-title.gradient-text i {
+    /* Keep icon colored even if text is gradient */
+    color: var(--primary-blue); /* Or choose another color */
+    background: none; /* Reset background clipping */
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: inherit; /* Fallback if needed */
+     background: var(--gradient-accent); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* --- Form Grid Layout --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 1.5rem 1.2rem; /* Row and Column gap */
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.form-group.full-width {
+    grid-column: 1 / -1; /* Span full width */
+}
+
+/* Form Elements */
+.form-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary, #7f8c9a);
+}
+.form-group label i {
+    margin-right: 0.5rem;
+    width: 1em; /* Ensure consistent icon spacing */
+    text-align: center;
+    color: var(--primary-blue); /* Icon color */
+    font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="url"],
+.form-group input[type="datetime-local"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border-color-light, #e6f0fa);
+    border-radius: var(--border-radius-sm, 8px);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.03);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue, #4a90e2);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15), inset 0 1px 2px rgba(0,0,0,0.03);
+    background-color: #fff;
+}
+.form-group select {
+    appearance: none; /* Remove default arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23888'%3E%3Cpath d='M8 11.414l-4.707-4.707a1 1 0 0 1 1.414-1.414L8 8.586l3.293-3.293a1 1 0 1 1 1.414 1.414L8 11.414z'/%3E%3C/svg%3E"); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1em;
+    padding-right: 2.5rem; /* Space for custom arrow */
+}
+.form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.form-hint {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed #eee;
+}
+
+/* --- Accordion Styling --- */
+.accordion-container {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between accordion items */
+}
+.accordion-item {
+    border: 1px solid var(--border-color-light, #e6f0fa);
+    border-radius: var(--border-radius-sm, 8px);
+    overflow: hidden; /* Contain content */
+    background-color: #fdfdff; /* Slightly different background */
+}
+.accordion-title {
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1.2rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: #f8faff;
+    transition: background-color 0.3s ease;
+    list-style: none; /* Remove default marker */
+    position: relative;
+}
+.accordion-title.gradient-bg-light { /* Light gradient for accordion headers */
+     background: linear-gradient(135deg, #f5faff 0%, #eef7ff 100%);
+     color: #4a6a8a; /* Adjust text color for light background */
+}
+.accordion-title:hover {
+    background-color: #f0f6ff;
+}
+.accordion-title i {
+    margin-right: 0.7rem;
+    color: var(--primary-blue);
+    font-size: 1em;
+    transition: transform 0.3s ease;
+}
+.accordion-item[open] > .accordion-title i:first-of-type { /* Rotate icon when open */
+    /* transform: rotate(90deg); */ /* Example rotation */
+}
+/* Custom Arrow */
+.accordion-title::after {
+    content: '\f078'; /* FontAwesome down arrow */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+}
+.accordion-item[open] > .accordion-title::after {
+    transform: translateY(-50%) rotate(-180deg);
+}
+
+.accordion-content {
+    padding: 1.5rem; /* Padding inside content area */
+    border-top: 1px solid var(--border-color-light, #e6f0fa);
+}
+
+/* --- Dynamic Entry Section Styling --- */
+.dynamic-entry-section {
+    /* Container for dynamic items */
+}
+.entry-item {
+    border: 1px dashed #dbe8f8;
+    border-radius: var(--border-radius-sm, 8px);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    position: relative; /* For remove button positioning */
+    background-color: rgba(248, 250, 255, 0.5); /* Slightly different bg */
+}
+.entry-item:last-child {
+    margin-bottom: 0;
+}
+.entry-item .form-group label { /* Slightly smaller labels in entry items */
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+}
+
+.add-button {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background: var(--gradient-green, linear-gradient(135deg, #79f1a4 0%, #50e3c2 100%));
+    color: white;
+    border-radius: var(--border-radius-sm, 8px);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 3px 6px rgba(80, 227, 194, 0.2);
+}
+.add-button:hover {
+    opacity: 0.9;
+    box-shadow: 0 5px 10px rgba(80, 227, 194, 0.3);
+    transform: translateY(-2px);
+}
+
+.remove-button {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    background: #ffeff2; /* Light red background */
+    color: #dc3545; /* Red icon */
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.remove-button:hover {
+    background: #f8d7da;
+    color: #721c24;
+    transform: scale(1.1);
+}
+
+/* --- Form Actions (Submit/Reset Buttons) --- */
+.form-actions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color-light, #e6f0fa);
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 1rem;
+}
+.submit-button, .reset-button {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius-sm, 8px);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.submit-button {
+    color: white;
+}
+.submit-button.gradient-accent {
+    background: var(--gradient-accent, linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%));
+}
+.submit-button.gradient-blue-light { /* Lighter blue for secondary submit */
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    color: #335; /* Darker text for light bg */
+     box-shadow: 0 4px 8px rgba(161, 196, 253, 0.3);
+}
+
+.submit-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.reset-button {
+    background-color: #f1f3f5;
+    color: var(--text-secondary, #7f8c9a);
+    border: 1px solid #e9ecef;
+}
+.reset-button:hover {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+/* --- Specific Card Styles --- */
+.reference-entry-card, .neo4j-hint-card {
+    background-color: #fdfdff; /* Slightly different bg */
+}
+.neo4j-hint-card ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+.neo4j-hint-card li {
+    margin-bottom: 0.4rem;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .entry-page {
+        padding: 1rem;
+    }
+    .form-grid {
+        grid-template-columns: 1fr; /* Stack grid items */
+        gap: 1.2rem;
+    }
+    .entry-card {
+        padding: 1rem 1.2rem;
+    }
+     .card-title {
+        margin: -1rem -1.2rem 1.2rem -1.2rem;
+        padding: 0.8rem 1.2rem;
+        font-size: 1.2rem;
+    }
+    .card-title.gradient-text::after {
+         left: 1.2rem;
+         width: calc(100% - 2.4rem);
+    }
+
+    .accordion-title {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+    }
+     .accordion-title::after {
+        right: 1rem;
+    }
+    .accordion-content {
+        padding: 1rem;
+    }
+    .entry-item {
+        padding: 1rem;
+    }
+     .form-actions {
+        flex-direction: column; /* Stack buttons on small screens */
+        gap: 0.8rem;
+    }
+    .submit-button, .reset-button {
+        width: 100%; /* Full width buttons */
+        justify-content: center;
+        padding: 0.7rem;
+    }
+}

@@ -1,0 +1,105 @@
+/* src/search/components/FilterGroup.module.css */
+.filterGroup {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color-light, #e6f0fa); /* 使用全局变量 */
+    border-radius: var(--border-radius-sm, 8px); /* 使用全局变量 */
+    background-color: #fff;
+    overflow: hidden; /* 防止内容溢出圆角 */
+    transition: box-shadow 0.3s ease;
+  }
+  .filterGroup[open] {
+      box-shadow: var(--shadow-soft, 0 4px 8px rgba(0, 0, 0, 0.05));
+  }
+  
+  
+  .summary {
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    list-style: none; /* 隐藏默认箭头 */
+    padding: 0.8rem 1rem; /* 调整内边距 */
+    position: relative;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid var(--border-color-light, #e6f0fa);
+    color: var(--text-color);
+  }
+  .filterGroup[open] .summary {
+      border-bottom: 1px solid var(--border-color-light, #e6f0fa);
+  }
+  .filterGroup:not([open]) .summary {
+       border-bottom: none; /* 关闭时无下边框 */
+  }
+  
+  
+  .summary:hover {
+     background-color: #f8faff; /* 悬停效果 */
+  }
+  
+  /* 自定义箭头 */
+  .summary::after {
+    content: '\f078'; /* FontAwesome 下箭头 */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+    color: var(--text-secondary);
+  }
+  
+  .filterGroup[open] > .summary::after {
+    transform: translateY(-50%) rotate(-180deg);
+  }
+  
+  /* summary::-webkit-details-marker { display: none; } 兼容其他浏览器 */
+  
+  .content {
+      padding: 1rem; /* 内容区域内边距 */
+      padding-top: 0.5rem; /* 减少与标题的间距 */
+  }
+  
+  /* filter-item, label, input, select 样式 */
+  /* 注意：这些现在是 FilterGroup 的子元素，需要从其 children 传入 */
+  /* 为了演示，假设子元素会使用类似下面的类名结构 */
+  .filterItem {
+      margin-bottom: 0.8rem;
+  }
+  
+  .filterItem label {
+      display: block;
+      margin-bottom: 0.4rem; /* 调整间距 */
+      font-size: 0.85rem;
+      color: var(--text-secondary, #7f8c9a);
+      font-weight: 500;
+  }
+  
+  .filterItem select,
+  .filterItem input[type="text"],
+  .filterItem input[type="number"] {
+      width: 100%;
+      padding: 0.6rem 0.8rem; /* 调整输入框/下拉框内边距 */
+      border: 1px solid var(--border-color-light, #dee2e6);
+      border-radius: var(--border-radius-sm, 6px); /* 稍小圆角 */
+      font-size: 0.9rem;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background-color: #fff; /* 确保背景色 */
+      color: var(--text-color);
+  }
+  
+  .filterItem select:focus,
+  .filterItem input:focus {
+      border-color: var(--primary-blue, #4a90e2);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  }
+  
+  .filterItem select {
+      appearance: none; /* 移除默认下拉箭头 */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%237f8c9a'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.7rem center;
+      background-size: 1.2em 1.2em;
+      padding-right: 2.5rem; /* 为自定义箭头留出空间 */
+  }

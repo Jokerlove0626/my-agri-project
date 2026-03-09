@@ -1,0 +1,116 @@
+/* src/search/components/Pagination.module.css */
+.pagination {
+  margin-top: 2.5rem; /* 增大顶部间距 */
+  margin-bottom: 1rem; /* 添加底部间距 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* 允许换行，特别是在小屏幕上 */
+  gap: 0.6rem; /* 调整元素间距 */
+}
+
+.pagination button, .pagination span {
+  /* margin: 0 0.3rem; (使用gap替代) */
+  padding: 0.6rem 1rem; /* 调整内边距 */
+  border: 1px solid var(--border-color-light, #dee2e6);
+  background-color: var(--card-background, #ffffff);
+  color: var(--primary-blue, #4a90e2);
+  border-radius: var(--border-radius-sm, 8px); /* 使用全局变量 */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
+  font-size: 0.9rem;
+  min-width: 40px; /* 保证按钮宽度 */
+  text-align: center;
+  line-height: 1.2; /* 确保文字垂直居中 */
+  user-select: none; /* 禁止选中文字 */
+}
+
+.pagination span.ellipsis {
+  cursor: default;
+  background-color: transparent;
+  border: none;
+  color: var(--text-secondary, #7f8c9a);
+  padding: 0.6rem 0.3rem; /* 调整省略号内边距 */
+  min-width: auto; /* 省略号不需要最小宽度 */
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #eef2f7; /* 悬停背景色 */
+  border-color: #d1d9e6;
+}
+
+/* **当前页高亮样式** */
+.pagination button.active {
+   background: var(--gradient-accent, linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%));
+   color: white;
+   border-color: transparent;
+   font-weight: 600;
+   box-shadow: var(--shadow-soft);
+   cursor: default; /* 当前页无需点击 */
+}
+ /* 移除当前页的 hover 效果 */
+ .pagination button.active:hover {
+     opacity: 1; /* 或者保持原始样式 */
+     background: var(--gradient-accent, linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%));
+ }
+
+
+.pagination button:disabled:not(.active) { /* 排除 active 状态 */
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #f8f9fa;
+  color: var(--text-secondary);
+}
+
+.arrowButton {
+   padding: 0.6rem 0.8rem; /* 箭头按钮稍小一点 */
+}
+
+/* --- 跳转功能样式 --- */
+.jumpContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem; /* 内部元素间距 */
+  margin-left: 1rem; /* 与页码按钮的间距 */
+}
+
+.jumpLabel {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.jumpInput {
+    width: 50px; /* 固定宽度 */
+    padding: 0.5rem 0.6rem; /* 内边距 */
+    border: 1px solid var(--border-color-light, #dee2e6);
+    border-radius: var(--border-radius-sm, 6px);
+    font-size: 0.9rem;
+    text-align: center;
+    /* 隐藏 number 类型输入框的上下箭头 (可选) */
+    -moz-appearance: textfield;
+}
+.jumpInput::-webkit-outer-spin-button,
+.jumpInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.jumpInput:focus {
+    border-color: var(--primary-blue, #4a90e2);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.jumpButton {
+    padding: 0.55rem 0.8rem; /* 按钮内边距 */
+    border: 1px solid var(--primary-blue, #4a90e2);
+    background-color: #fff;
+    color: var(--primary-blue, #4a90e2);
+    border-radius: var(--border-radius-sm, 6px);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1; /* 确保图标垂直居中 */
+}
+.jumpButton:hover {
+    background-color: var(--primary-blue, #4a90e2);
+    color: #fff;
+}

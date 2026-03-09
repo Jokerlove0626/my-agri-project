@@ -1,0 +1,49 @@
+/* src/search/components/SearchBox.module.css */
+.searchBox {
+    display: flex;
+    margin-bottom: 1.5rem;
+  }
+  
+  .searchInput {
+    flex-grow: 1;
+    padding: 0.7rem 1rem; /* 调整内边距 */
+    border: 1px solid var(--border-color-light, #dee2e6);
+    border-radius: var(--border-radius-sm, 8px) 0 0 var(--border-radius-sm, 8px); /* 使用全局变量 */
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff; /* 确保背景色 */
+    color: var(--text-color);
+  }
+  
+  .searchInput::placeholder {
+     color: var(--text-secondary, #aaa);
+  }
+  
+  .searchInput:focus {
+    border-color: var(--primary-blue, #007bff); /* 使用全局变量 */
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2); /* 调整阴影颜色 */
+  }
+  
+  .searchButton {
+    padding: 0.7rem 1.2rem; /* 调整内边距 */
+    background: var(--gradient-accent, linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%)); /* 使用全局变量 */
+    color: white;
+    border: none;
+    border-radius: 0 var(--border-radius-sm, 8px) var(--border-radius-sm, 8px) 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    font-weight: 500; /* 加粗一点 */
+  }
+  
+  .searchIcon {
+    margin-right: 0.5rem;
+  }
+  
+  .searchButton:hover {
+    /* background: var(--gradient-accent-hover, linear-gradient(135deg, #7bc8eb 0%, #6fe7f5 100%)); */
+     opacity: 0.9; /* 或者调整透明度 */
+  }

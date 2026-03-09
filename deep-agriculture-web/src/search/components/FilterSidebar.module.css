@@ -1,0 +1,42 @@
+/* src/search/components/FilterSidebar.module.css */
+.filterSidebar {
+    width: var(--left-sidebar-width, 330px); /* 使用全局变量 */
+    min-width: 280px; /* 保留最小宽度 */
+    background-color: var(--sidebar-bg, var(--background-color)); /* 使用全局变量，备用为背景色 */
+    padding: 1.5rem;
+    margin-right: 1.5rem;
+    border-radius: var(--border-radius, 12px); /* 使用全局变量 */
+    box-shadow: var(--shadow-soft, 0 2px 5px rgba(0, 0, 0, 0.1));
+    height: fit-content; /* 高度自适应内容 */
+    position: sticky; /* 粘性定位 */
+    top: calc(var(--header-height, 60px) + 1rem); /* 距离顶部距离 (考虑Header高度) */
+    background: var(--gradient-sidebar-bg, #ffffff); /* 应用侧边栏背景渐变 */
+  }
+  
+  .filterTitle {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.15rem; /* 稍大 */
+    font-weight: 500;
+    color: var(--primary-blue, #4a90e2); /* 使用全局变量 */
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color-light);
+  }
+  
+  .filterIcon {
+    margin-right: 0.6rem;
+    color: var(--primary-green, #50e3c2); /* 使用全局变量 */
+  }
+  
+  /* 响应式 */
+  @media (max-width: 768px) {
+    .filterSidebar {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 1.5rem;
+      position: static; /* 取消粘性定位 */
+      top: auto;
+    }
+  }

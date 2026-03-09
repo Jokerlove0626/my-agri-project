@@ -1,0 +1,43 @@
+/* src/search/components/ResultsArea.module.css */
+.resultsArea {
+    flex-grow: 1; /* 占据剩余空间 */
+  }
+  
+  .resultsTitle {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem; /* 调整标题大小 */
+    font-weight: 600; /* 稍加粗 */
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-color-light);
+  }
+  
+  .resultsIcon {
+    margin-right: 0.8rem; /* 增大图标间距 */
+    color: var(--primary-blue, #4a90e2); /* 使用全局变量 */
+    font-size: 1.4rem; /* 调整图标大小 */
+  }
+  
+  .resultsGrid {
+    display: grid;
+    /* 响应式网格布局，最小300px，最大1fr，自动填充 */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* 调整最小宽度 */
+    gap: 1.8rem; /* 增大卡片间距 */
+  }
+  
+  /* 响应式调整 */
+  @media (max-width: 1200px) {
+      .resultsGrid {
+           grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+           gap: 1.5rem;
+      }
+  }
+   @media (max-width: 768px) {
+      .resultsGrid {
+           grid-template-columns: 1fr; /* 移动端单列 */
+           gap: 1.2rem;
+      }
+  }

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class=""> <!-- 默认浅色模式，JS 会根据 localStorage 或系统设置调整 -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 标题根据 PDF 内容修改 -->
+    <title>MediAI - 医疗AI大模型智能导诊服务系统</title>
+    <!-- 描述根据 PDF 内容修改 -->
+    <meta
+            name="description"
+            content="MediAI 利用先进的医疗AI大模型和知识图谱，提供精准、高效的智能导诊、科室推荐和医疗咨询服务。"
+    />
+    <!-- 网页图标 (使用医疗相关Emoji) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩺</text></svg>">
+    <!-- 引入 Tailwind CSS (CDN) -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
+    <!-- 引入 Font Awesome (CDN) -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <!-- 引入 Google Fonts (思源宋体 & 思源黑体) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <!-- 引入 AOS 动画库 (CDN) -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased text-gray-700 dark:text-gray-300 transition-colors duration-300 overflow-x-hidden global-gradient-bg">
+
+<!-- ========================== 页眉 (Header) ========================== -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-dark-sm transition-all duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo 区域 -->
+            <div class="logo-area flex-shrink-0" data-aos="fade-right">
+                <a href="#" class="flex items-center">
+                    <!-- 图标使用医疗十字或大脑 -->
+                    <i class="fas fa-brain text-primary dark:text-primary-light text-2xl mr-2 animate-pulse"></i>
+                    <!-- 项目名称使用衬线字体 -->
+                    <span class="text-xl font-semibold font-serif text-gray-900 dark:text-white">MediAI</span>
+                </a>
+            </div>
+            <!-- 导航区域 (桌面) -->
+            <nav class="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
+                <div class="flex space-x-1">
+                    <!-- 导航链接根据 PDF 内容调整 -->
+                    <a href="#about" class="nav-link">项目概述</a>
+                    <a href="#features" class="nav-link">核心功能</a>
+                    <a href="#visualization" class="nav-link">运作流程</a>
+                    <a href="#tech" class="nav-link">技术方案</a>
+                    <a href="#benefits" class="nav-link">项目价值</a>
+                    <a href="#further-reading" class="nav-link">相关资源</a>
+                    <a href="#contact" class="nav-link">立即体验</a>
+                </div>
+            </nav>
+            <!-- 操作区域 (主题切换, GitHub 链接等) -->
+            <div class="actions-area flex-shrink-0 flex items-center space-x-3" data-aos="fade-left">
+                <!-- 主题切换按钮 -->
+                <button id="theme-toggle" type="button" class="theme-toggle-button">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 7.072l.707-.707a1 1 0 10-1.414-1.414l-.707.707a1 1 0 001.414 1.414zM3 11a1 1 0 100 2H2a1 1 0 100-2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+                <!-- GitHub 链接 (如果项目开源) -->
+                <a href="[此处替换为您的GitHub仓库链接]" target="_blank" rel="noopener noreferrer" class="github-link" title="GitHub 仓库">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- 主要内容区域 -->
+<!-- [修改] 调整了区域间垂直间距 space-y-* -->
+<main class="relative z-10 space-y-16 md:space-y-20 lg:space-y-24">
+    <!-- ========================== 英雄区域 (Hero Section) ========================== -->
+    <!-- [修改] 确保 -mt-* 负边距适应页眉高度 -->
+    <section class="hero-section relative overflow-hidden py-20 md:py-28 lg:py-32 -mt-16 md:-mt-16 lg:-mt-16 min-h-screen flex items-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- [修改] 添加了 ID 用于 GSAP 控制 -->
+            <div class="max-w-3xl mx-auto text-center">
+                <!-- 徽章 -->
+                <span id="hero-badge" class="inline-flex items-center px-4 py-1 rounded-full text-base font-medium bg-blue-100/80 dark:bg-blue-900/70 text-blue-800 dark:text-blue-200 shadow-md dark:shadow-dark-md backdrop-blur-sm opacity-0">
+                        <i class="fas fa-robot mr-1.5"></i> AI 驱动 · 智能导诊
+                    </span>
+                <!-- 主标题 - 使用项目名 -->
+                <h1 id="hero-title-main" class="mt-8 text-4xl font-bold font-serif tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl opacity-0">
+                    MediAI
+                </h1>
+                <!-- 副标题 - 使用项目全称或核心价值 -->
+                <h2 id="hero-title-sub" class="mt-4 text-3xl font-semibold font-serif tracking-tight text-gray-800 dark:text-gray-100 sm:text-4xl lg:text-5xl opacity-0">
+                    <span class="hero-subtitle-gradient">医疗AI大模型智能导诊服务系统</span>
+                </h2>
+                <!-- 描述 - 提炼 PDF 中的核心介绍 -->
+                <p id="hero-desc" class="mt-8 text-lg leading-relaxed text-gray-700 dark:text-gray-300 opacity-0">
+                    基于先进的AI大模型与医疗知识图谱，精准理解您的症状描述，快速推荐合适科室，优化就医流程，让看病“医如反掌”。
+                </p>
+                <!-- 行动号召按钮 -->
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6" data-aos="fade-up" data-aos-delay="200">
+                    <!-- 主按钮 (链接到实际体验页面/应用) -->
+                    <a href="[此处替换为体验链接或占位符#]" class="btn btn-gradient-primary group text-lg px-8 py-3"><i class="fas fa-play-circle mr-2 group-hover:scale-110 transition-transform duration-300"></i> 开始智能导诊</a>
+                    <!-- 次按钮 (联系方式) -->
+                    <a href="mailto:[替换为联系邮箱]" class="btn btn-gradient-secondary group text-lg px-8 py-3"><i class="fas fa-envelope mr-2 group-hover:animate-bounce"></i> 联系我们</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== 项目概述区域 (About Section) ========================== -->
+    <section id="about" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 区域标题 -->
+            <div class="text-center section-title-mb" data-aos="fade-up">
+                <h2 class="subheading text-secondary dark:text-secondary-light">项目背景与目标</h2>
+                <p class="heading mt-2 text-gray-900 dark:text-white">解决就医痛点，提升服务效率</p>
+            </div>
+            <!-- 主要内容 (两栏布局) -->
+            <div class="lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center">
+                <!-- 文本面板 (使用玻璃拟态) -->
+                <div data-aos="fade-right" class="about-text-panel">
+                    <h2 class="subheading text-primary dark:text-primary-light">关于 MediAI</h2>
+                    <p class="heading mt-2 text-gray-900 dark:text-white">智慧医疗的导航者</p>
+                    <!-- PDF P6: 现状分析 + 用户期望 -->
+                    <p class="mt-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300 first-letter-drop">
+                        当前普遍存在患者因缺乏医学知识挂错科室、人工导诊效率低下且重复性高、现有系统准确性不足等问题。“知症不知病，知病不知科”的困境亟待解决。
+                    </p>
+                    <!-- PDF P7: 项目意义 -->
+                    <p class="mt-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300 first-letter-drop">
+                        MediAI 旨在利用 AI 大模型和知识图谱技术，打造一个高效、精准、智能的导诊服务系统。通过分析用户症状，准确推荐就诊科室，减轻医护负担，优化医疗资源配置，加速就医服务数字化转型，提升患者满意度。
+                    </p>
+                </div>
+                <!-- 图片区域 -->
+                <div class="mt-12 lg:mt-0" data-aos="fade-left" data-aos-delay="100">
+                    <!-- 图片替换为医疗或 AI 相关的示意图 -->
+                    <img src="./medical-ai.jpg" alt="AI 辅助医疗示意图" class="rounded-2xl shadow-xl dark:shadow-dark-xl aspect-video object-cover transform hover:scale-105 transition-transform duration-500 ease-in-out">
+                    <p class="text-xs text-gray-600 dark:text-gray-400 text-right mt-3">图片示意：AI 赋能智慧医疗</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== 核心功能区域 (Features Section) ========================== -->
+    <section id="features" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 区域标题 -->
+            <div class="text-center section-title-mb" data-aos="fade-up">
+                <h2 class="subheading text-secondary dark:text-secondary-light">核心功能</h2>
+                <p class="heading mt-2 text-gray-900 dark:text-white">MediAI 的智能服务</p>
+            </div>
+            <!-- 功能卡片网格 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- 功能卡片 1: 智能问答/导诊 (核心) -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start mb-4">
+                        <!-- 图标和背景 -->
+                        <span class="icon-wrapper feature-icon-bg-1 mr-4 flex-shrink-0"><i class="fas fa-comments-medical text-xl"></i></span>
+                        <h3 class="feature-title mt-1">智能导诊问答</h3>
+                    </div>
+                    <p class="feature-description">用户输入症状描述，系统通过 AI 大模型理解意图，结合知识图谱进行分析，精准推荐可能科室及概率。</p>
+                </div>
+                <!-- 功能卡片 2: 多轮交互细化 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-start mb-4">
+                        <!-- 图标和背景 -->
+                        <span class="icon-wrapper feature-icon-bg-2 mr-4 flex-shrink-0"><i class="fas fa-tasks text-xl"></i></span>
+                        <h3 class="feature-title mt-1">多轮症状追问</h3>
+                    </div>
+                    <p class="feature-description">支持通过多轮交互选择伴随症状，进一步细化病情描述，提高诊断和科室推荐的准确性。</p>
+                </div>
+                <!-- 功能卡片 3: 知识图谱可视化 (可能) -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start mb-4">
+                        <!-- 图标和背景 -->
+                        <span class="icon-wrapper feature-icon-bg-3 mr-4 flex-shrink-0"><i class="fas fa-project-diagram text-xl"></i></span>
+                        <h3 class="feature-title mt-1">医疗知识关联</h3>
+                    </div>
+                    <p class="feature-description">（可选）可视化展示症状、疾病、科室之间的关联关系，提供更全面的医学知识背景。</p>
+                </div>
+                <!-- 功能卡片 4: 多端协同 (根据 PDF P22) -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start mb-4">
+                        <!-- 图标和背景 -->
+                        <span class="icon-wrapper feature-icon-bg-4 mr-4 flex-shrink-0"><i class="fas fa-mobile-alt text-xl"></i></span>
+                        <h3 class="feature-title mt-1">多端协同服务</h3>
+                    </div>
+                    <p class="feature-description">支持网页端和移动端访问，随时随地获取智能导诊服务，实现便捷就医。</p>
+                </div>
+                <!-- 功能卡片 5: 数据持续更新 (爬虫部分) -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-start mb-4">
+                        <!-- 图标和背景 -->
+                        <span class="icon-wrapper feature-icon-bg-5 mr-4 flex-shrink-0"><i class="fas fa-sync-alt text-xl"></i></span>
+                        <h3 class="feature-title mt-1">知识动态更新</h3>
+                    </div>
+                    <p class="feature-description">通过爬虫技术持续获取最新的医学文献和信息，保证知识库的时效性和权威性。</p>
+                </div>
+                <!-- 功能卡片 6: 潜在的集成 (预约/在线咨询) -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start mb-4">
+                        <!-- 图标和背景 -->
+                        <span class="icon-wrapper feature-icon-bg-6 mr-4 flex-shrink-0"><i class="fas fa-notes-medical text-xl"></i></span>
+                        <h3 class="feature-title mt-1">服务闭环（未来）</h3>
+                    </div>
+                    <p class="feature-description">未来计划与医院系统对接，实现从导诊到挂号、在线咨询的一站式服务。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== 运作流程区域 (Visualization Section) ========================== -->
+    <section id="visualization" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 区域标题 -->
+            <div class="text-center section-title-mb" data-aos="fade-up">
+                <h2 class="subheading text-primary dark:text-primary-light">运作流程</h2>
+                <p class="heading mt-2 text-gray-900 dark:text-white">MediAI 如何智能工作</p>
+                <p class="mt-6 max-w-2xl mx-auto text-lg leading-relaxed text-gray-700 dark:text-gray-300">从用户输入到智能推荐，MediAI 通过严谨的流程整合 AI 与医学知识，提供可靠的导诊建议。</p>
+            </div>
+
+            <!-- 流程图 (Flexbox 布局) -->
+            <div class="max-w-7xl mx-auto" data-aos="zoom-in-up">
+                <!-- Flex 容器 -->
+                <div class="flowchart-flex-container">
+
+                    <!-- 阶段 1: 用户输入 -->
+                    <div class="flowchart-flex-stage justify-center">
+                        <!-- 节点: 用户描述症状 -->
+                        <div class="flowchart-node node-io" data-aos="fade-right" data-aos-delay="100">
+                            <i class="fas fa-user-edit"></i> <!-- 用户编辑图标 -->
+                            <span>用户输入</span>
+                            <span class="node-subtitle">症状描述</span>
+                        </div>
+                    </div>
+
+                    <!-- 连接器 1 -->
+                    <div class="flowchart-flex-connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow"></div>
+                    </div>
+
+                    <!-- 阶段 2: AI 处理 -->
+                    <div class="flowchart-flex-stage justify-center">
+                        <!-- 节点: LLM 理解 & 实体提取 -->
+                        <div class="flowchart-node node-llm" data-aos="fade-up" data-aos-delay="300">
+                            <i class="fas fa-brain"></i> <!-- 大脑/AI 图标 -->
+                            <span>LLM 处理</span>
+                            <span class="node-subtitle">理解 & 实体提取</span>
+                        </div>
+                        <!-- 节点: 知识图谱查询 -->
+                        <div class="flowchart-node node-kg" data-aos="fade-down" data-aos-delay="400">
+                            <i class="fas fa-project-diagram"></i> <!-- 图谱图标 -->
+                            <span>知识图谱</span>
+                            <span class="node-subtitle">关系查询</span>
+                        </div>
+                    </div>
+
+                    <!-- 连接器 2 -->
+                    <div class="flowchart-flex-connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow"></div>
+                    </div>
+
+                    <!-- 阶段 3: 融合与分析 -->
+                    <div class="flowchart-flex-stage justify-center">
+                        <!-- 节点: RAG/融合分析 -->
+                        <div class="flowchart-node node-process" data-aos="fade-left" data-aos-delay="600">
+                            <i class="fas fa-sync-alt"></i> <!-- 融合/处理图标 -->
+                            <span>融合分析</span>
+                            <span class="node-subtitle">LLM+KG 结果</span>
+                        </div>
+                    </div>
+
+                    <!-- 连接器 3 -->
+                    <div class="flowchart-flex-connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow"></div>
+                    </div>
+
+                    <!-- 阶段 4: 结果生成 -->
+                    <div class="flowchart-flex-stage justify-center">
+                        <!-- 节点: 生成推荐 -->
+                        <div class="flowchart-node node-output" data-aos="fade-up" data-aos-delay="800">
+                            <i class="fas fa-clipboard-list"></i> <!-- 列表/推荐图标 -->
+                            <span>结果生成</span>
+                            <span class="node-subtitle">科室推荐 & 概率</span>
+                        </div>
+                    </div>
+
+                    <!-- 连接器 4 (可选，如果有多轮交互) -->
+                    <div class="flowchart-flex-connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow"></div>
+                    </div>
+
+                    <!-- 阶段 5: 用户反馈/输出 -->
+                    <div class="flowchart-flex-stage justify-center">
+                        <!-- 节点: 展示给用户 -->
+                        <div class="flowchart-node node-io" data-aos="fade-right" data-aos-delay="1000">
+                            <i class="fas fa-desktop"></i> <!-- 屏幕/界面图标 -->
+                            <span>结果展示</span>
+                            <span class="node-subtitle">可视化界面</span>
+                        </div>
+                        <!-- 节点: 多轮交互 (可选) -->
+                        <div class="flowchart-node node-io" data-aos="fade-right" data-aos-delay="1100">
+                            <i class="fas fa-exchange-alt"></i> <!-- 交互图标 -->
+                            <span>多轮交互</span>
+                            <span class="node-subtitle">细化症状</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 流程图说明 -->
+                <p class="text-center mt-12 text-sm text-gray-600 dark:text-gray-400">(MediAI 核心导诊流程)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== 技术方案区域 (Tech Stack Section) ========================== -->
+    <section id="tech" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 区域标题 -->
+            <div class="text-center section-title-mb" data-aos="fade-up">
+                <h2 class="subheading text-secondary dark:text-secondary-light">技术方案</h2>
+                <p class="heading mt-2 text-gray-900 dark:text-white">驱动 MediAI 的核心技术</p>
+            </div>
+            <!-- 技术卡片网格 -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8 text-center">
+                <!-- 技术卡片 - 根据 PDF P10, P12-16 调整 -->
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-brain tech-icon text-purple-500 dark:text-purple-400"></i><span class="tech-name">GLM-4 大模型</span><span class="tech-desc">核心 AI 引擎</span></div>
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="150"><i class="fas fa-project-diagram tech-icon text-green-500 dark:text-green-400"></i><span class="tech-name">医疗知识图谱</span><span class="tech-desc">Neo4j/Cypher</span></div>
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-spider tech-icon text-teal-500 dark:text-teal-400"></i><span class="tech-name">异步爬虫</span><span class="tech-desc">数据获取</span></div>
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="250"><i class="fab fa-vuejs tech-icon text-green-600 dark:text-green-500"></i><span class="tech-name">Vue.js</span><span class="tech-desc">前端框架</span></div>
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="300"><i class="fab fa-node-js tech-icon text-lime-600 dark:text-lime-500"></i><span class="tech-name">Node.js</span><span class="tech-desc">中间件</span></div>
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="350"><i class="fab fa-python tech-icon text-indigo-500 dark:text-indigo-400"></i><span class="tech-name">Flask</span><span class="tech-desc">后端框架</span></div>
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="400"><i class="fas fa-exchange-alt tech-icon text-blue-500 dark:text-blue-400"></i><span class="tech-name">Axios</span><span class="tech-desc">HTTP 请求</span></div>
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="450"><i class="fas fa-cubes tech-icon text-red-500 dark:text-red-400"></i><span class="tech-name">Element UI</span><span class="tech-desc">UI 组件库</span></div>
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="500"><i class="fas fa-chart-bar tech-icon text-orange-500 dark:text-orange-400"></i><span class="tech-name">ECharts</span><span class="tech-desc">数据可视化</span></div>
+                <div class="tech-item" data-aos="zoom-in" data-aos-delay="550"><i class="fas fa-font tech-icon text-yellow-600 dark:text-yellow-500"></i><span class="tech-name">ddddocr</span><span class="tech-desc">OCR 识别</span></div>
+                <!-- 可根据未来规划添加 Spring Boot, Redis Geo 等 -->
+            </div>
+            <!-- 技术栈总结 -->
+            <p class="text-center mt-12 text-gray-700 dark:text-gray-300" data-aos="fade-up">采用业界领先的 AI 模型、图数据库、前后端分离架构及多种辅助库，构建稳定、高效、可扩展的智能导诊系统。</p>
+        </div>
+    </section>
+
+    <!-- ========================== 项目价值区域 (Benefits Section) ========================== -->
+    <section id="benefits" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 区域标题 -->
+            <div class="text-center section-title-mb" data-aos="fade-up">
+                <h2 class="subheading text-primary dark:text-primary-light">项目价值</h2>
+                <p class="heading mt-2 text-gray-900 dark:text-white">MediAI 带来的核心优势</p>
+            </div>
+            <!-- 优势卡片网格 (根据 PDF P7 项目意义) -->
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- 优势 1: 提升效率，节省资源 -->
+                <div class="benefit-item" data-aos="fade-right" data-aos-delay="100">
+                    <!-- 图标和背景 -->
+                    <div class="benefit-icon-wrapper benefit-icon-bg-1"><i class="fas fa-tachometer-alt text-white text-2xl"></i></div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">精准高效导诊</h3>
+                        <p class="benefit-description">大幅提高科室推荐准确率，减少患者挂错号的情况，优化就医路径，提升整体诊疗效率。</p>
+                    </div>
+                </div>
+                <!-- 优势 2: 优化服务，提升体验 -->
+                <div class="benefit-item" data-aos="fade-left" data-aos-delay="150">
+                    <!-- 图标和背景 -->
+                    <div class="benefit-icon-wrapper benefit-icon-bg-2"><i class="fas fa-users-cog text-white text-2xl"></i></div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">优化就医体验</h3>
+                        <p class="benefit-description">提供便捷的线上导诊入口，减少排队和咨询时间，缓解患者焦虑，提升就医满意度。</p>
+                    </div>
+                </div>
+                <!-- 优势 3: 减轻负担，辅助决策 -->
+                <div class="benefit-item" data-aos="fade-right" data-aos-delay="200">
+                    <!-- 图标和背景 -->
+                    <div class="benefit-icon-wrapper benefit-icon-bg-3"><i class="fas fa-user-md text-white text-2xl"></i></div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">赋能医护人员</h3>
+                        <p class="benefit-description">分担导诊台重复性咨询工作，使医护人员能更专注于核心诊疗任务，减轻工作压力。</p>
+                    </div>
+                </div>
+                <!-- 优势 4: 技术突破，推动转型 -->
+                <div class="benefit-item" data-aos="fade-left" data-aos-delay="250">
+                    <!-- 图标和背景 -->
+                    <div class="benefit-icon-wrapper benefit-icon-bg-4"><i class="fas fa-lightbulb text-white text-2xl"></i></div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">推动智慧医疗</h3>
+                        <p class="benefit-description">探索 AI 大模型在医疗导诊领域的应用，打破技术瓶颈，助力医疗服务数字化、智能化转型。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== 相关资源区域 (Further Reading Section) ========================== -->
+    <section id="further-reading" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 区域标题 -->
+            <div class="text-center section-title-mb" data-aos="fade-up">
+                <h2 class="subheading text-secondary dark:text-secondary-light">相关资源</h2>
+                <p class="heading mt-2 text-gray-900 dark:text-white">了解更多背景知识</p>
+            </div>
+            <!-- 资源列表 -->
+            <div class="max-w-4xl mx-auto space-y-6">
+                <!-- 资源卡片 1: 相关政策 -->
+                <div class="reading-card" data-aos="fade-up" data-aos-delay="100">
+                    <!-- 图标 -->
+                    <div class="reading-icon-wrapper"><i class="fas fa-file-alt"></i></div>
+                    <div class="reading-content">
+                        <h4 class="reading-title">《关于推动公立医院高质量发展的意见》</h4>
+                        <p class="reading-description">了解国家层面推动智慧医院建设和医疗服务数字化转型的政策导向。</p>
+                    </div>
+                </div>
+                <!-- 资源卡片 2: 相关技术 (大模型) -->
+                <div class="reading-card" data-aos="fade-up" data-aos-delay="150">
+                    <!-- 图标 -->
+                    <div class="reading-icon-wrapper"><i class="fas fa-robot"></i></div>
+                    <div class="reading-content">
+                        <h4 class="reading-title">大型语言模型 (LLM) 技术</h4>
+                        <p class="reading-description">探索如 GLM、GPT 等大模型在自然语言理解和生成方面的原理与进展。</p>
+                    </div>
+                </div>
+                <!-- 资源卡片 3: 相关技术 (知识图谱) -->
+                <div class="reading-card" data-aos="fade-up" data-aos-delay="200">
+                    <!-- 图标 -->
+                    <div class="reading-icon-wrapper"><i class="fas fa-share-alt"></i></div>
+                    <div class="reading-content">
+                        <h4 class="reading-title">知识图谱 (Knowledge Graph) 技术</h4>
+                        <p class="reading-description">学习知识图谱在表示实体关系、支持推理和问答系统中的应用，如 Neo4j。</p>
+                    </div>
+                </div>
+                <!-- 资源卡片 4: 医疗信息化 -->
+                <div class="reading-card" data-aos="fade-up" data-aos-delay="250">
+                    <!-- 图标 -->
+                    <div class="reading-icon-wrapper"><i class="fas fa-hospital-user"></i></div>
+                    <div class="reading-content">
+                        <h4 class="reading-title">医疗信息化与便捷就医</h4>
+                        <p class="reading-description">关注“互联网+医疗”的发展趋势，了解数字化手段如何改善就医流程和服务体验。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== 联系/体验区域 (Contact Section) ========================== -->
+    <section id="contact" class="section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- 主要标题 -->
+            <h2 class="heading text-3xl sm:text-4xl text-gray-900 dark:text-white" data-aos="fade-up">即刻体验 MediAI 智能导诊</h2>
+            <!-- 描述文字 -->
+            <p class="mt-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">不再为挂错科室而烦恼，让 MediAI 成为您便捷就医的第一步。立即开始，体验 AI 带来的智能与高效！</p>
+            <!-- 行动号召按钮 -->
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6" data-aos="fade-up" data-aos-delay="200">
+                <!-- 主按钮 (链接到实际体验页面/应用) -->
+                <a href="[此处替换为体验链接或占位符#]" class="btn btn-gradient-primary group text-lg px-8 py-3"><i class="fas fa-play-circle mr-2 group-hover:scale-110 transition-transform duration-300"></i> 开始智能导诊</a>
+                <!-- 次按钮 (联系方式) -->
+                <a href="mailto:[替换为联系邮箱]" class="btn btn-gradient-secondary group text-lg px-8 py-3"><i class="fas fa-envelope mr-2 group-hover:animate-bounce"></i> 联系我们</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- ========================== 页脚 (Footer) ========================== -->
+<footer class="bg-white/80 dark:bg-gray-900/80 border-t border-gray-200 dark:border-gray-700 backdrop-blur-sm mt-16 md:mt-20 lg:mt-24 relative z-10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+        <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6 md:gap-8">
+            <!-- Logo 和项目名 -->
+            <div class="flex items-center justify-center md:justify-start order-1" data-aos="fade-right">
+                <i class="fas fa-brain text-primary dark:text-primary-light text-2xl mr-2"></i>
+                <span class="text-xl font-semibold font-serif text-gray-800 dark:text-gray-100">MediAI</span>
+            </div>
+            <!-- 版权和链接 -->
+            <div class="text-sm text-gray-500 dark:text-gray-400 order-3 md:order-2" data-aos="fade-up">
+                <!-- 使用项目团队成员或组织名 -->
+                <span>© 2024 [杨灵涛, 郑伊希, 汤雅婷 或 团队名称]. 保留所有权利.</span>
+                <span class="hidden sm:inline"> | </span><br class="sm:hidden">
+                <!-- 隐私政策和服务条款链接 (占位符) -->
+                <a href="#" class="link ml-2">隐私政策</a> | <a href="#" class="link ml-1">服务条款</a>
+            </div>
+            <!-- 社交媒体/联系图标 -->
+            <div class="flex justify-center space-x-6 order-2 md:order-3" data-aos="fade-left">
+                <!-- GitHub 链接 -->
+                <a href="[此处替换为您的GitHub仓库链接]" target="_blank" rel="noopener noreferrer" class="footer-icon-link" title="GitHub"><i class="fab fa-github"></i></a>
+                <!-- 邮件链接 -->
+                <a href="mailto:[替换为联系邮箱]" class="footer-icon-link" title="Email"><i class="fas fa-envelope"></i></a>
+                <!-- 其他链接 (可选) -->
+                <!-- <a href="#" class="footer-icon-link" title="Twitter (示例)"><i class="fab fa-twitter"></i></a> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ========================== 全局背景元素 ========================== -->
+<!-- (保持原样，但内部颜色可能需要微调以适应新主题) -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+    <!-- 背景渐变 SVG 1 (颜色基于新主色调调整) -->
+    <div class="absolute top-0 left-0 -translate-x-1/3 -translate-y-1/3 opacity-30 dark:opacity-20" aria-hidden="true">
+        <svg width="1000" height="1000" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- fill 指向渐变 ID -->
+            <circle cx="500" cy="500" r="500" fill="url(#global-gradient-1-medi)" />
+            <defs>
+                <!-- 渐变定义 (使用新的主色调) -->
+                <radialGradient id="global-gradient-1-medi" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(500 500) rotate(90) scale(500)">
+                    <stop stop-color="#60A5FA" stop-opacity="0.5"/> <!-- 对应 --primary-color-light -->
+                    <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/> <!-- 对应 --primary-color -->
+                </radialGradient>
+            </defs>
+        </svg>
+    </div>
+    <!-- 背景渐变 SVG 2 (颜色基于新辅助色/强调色调整) -->
+    <div class="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 opacity-20 dark:opacity-15" aria-hidden="true">
+        <svg width="900" height="900" viewBox="0 0 900 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- fill 指向渐变 ID -->
+            <circle cx="450" cy="450" r="450" fill="url(#global-gradient-2-medi)" />
+            <defs>
+                <!-- 渐变定义 (使用新的辅助色或强调色) -->
+                <radialGradient id="global-gradient-2-medi" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(450 450) rotate(90) scale(450)">
+                    <stop stop-color="#2DD4BF" stop-opacity="0.4"/> <!-- 对应 --secondary-color-light 或其他 -->
+                    <stop offset="1" stop-color="#14B8A6" stop-opacity="0"/> <!-- 对应 --secondary-color 或其他 -->
+                </radialGradient>
+            </defs>
+        </svg>
+    </div>
+</div>
+
+<!-- ========================== JavaScript 引入 ========================== -->
+<!-- AOS 动画库 -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<!-- GSAP 动画库 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<!-- 自定义脚本 -->
+<script src="script.js" defer></script>
+
+</body>
+</html>

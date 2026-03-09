@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepForest - 数据检索</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 可以引入 Ant Design 或其他图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo">
+            <i class="fas fa-tree"></i> <!-- 替换为 DeepForest Logo -->
+            DeepForest 知识图谱
+        </div>
+        <div class="user-actions">
+            <i class="fas fa-bell notification-icon"></i>
+            <span class="username">管理员</span>
+            <i class="fas fa-user-circle user-icon"></i>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="filter-sidebar">
+            <div class="search-box">
+                <input type="text" placeholder="搜索物种名、学名、寄主、文献...">
+                <button class="search-button">
+                    <i class="fas fa-search"></i> 搜索
+                </button>
+            </div>
+
+            <div class="filter-section">
+                <h3><i class="fas fa-filter"></i> 筛选条件</h3>
+
+                <details class="filter-group" open>
+                    <summary>物种信息</summary>
+                    <div class="filter-item">
+                        <label for="classification">分类:</label>
+                        <select id="classification">
+                            <option value="">所有分类</option>
+                            <option value="线虫动物门">线虫动物门</option>
+                            <option value="节肢动物门">节肢动物门</option>
+                            <!-- 其他分类 -->
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="status">确认状态:</label>
+                        <select id="status">
+                            <option value="">所有状态</option>
+                            <option value="已确认">已确认</option>
+                            <option value="待审核">待审核</option>
+                            <!-- 其他状态 -->
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="taxonomic_level">分类层级:</label>
+                        <select id="taxonomic_level">
+                            <option value="">所有层级</option>
+                            <option value="种">种</option>
+                            <option value="属">属</option>
+                            <option value="科">科</option>
+                             <!-- 其他层级 -->
+                        </select>
+                    </div>
+                </details>
+
+                <details class="filter-group">
+                    <summary>地理分布</summary>
+                     <div class="filter-item">
+                        <label for="continent">大洲:</label>
+                        <input type="text" id="continent" placeholder="如：亚洲">
+                    </div>
+                    <div class="filter-item">
+                        <label for="country">国家:</label>
+                        <input type="text" id="country" placeholder="如：中国">
+                    </div>
+                     <div class="filter-item">
+                        <label for="province">省份:</label>
+                        <input type="text" id="province" placeholder="如：北京">
+                    </div>
+                </details>
+
+                 <details class="filter-group">
+                    <summary>寄主信息</summary>
+                     <div class="filter-item">
+                        <label for="host_name">寄主名称:</label>
+                        <input type="text" id="host_name" placeholder="输入寄主学名或中文名">
+                    </div>
+                     <div class="filter-item">
+                        <label for="host_type">寄主类型:</label>
+                        <select id="host_type">
+                            <option value="">所有类型</option>
+                            <option value="primary">主要寄主</option>
+                            <option value="secondary">次要寄主</option>
+                            <option value="occasional">偶发寄主</option>
+                        </select>
+                    </div>
+                </details>
+
+                <details class="filter-group">
+                    <summary>文献信息</summary>
+                    <div class="filter-item">
+                        <label for="ref_type">文献类型:</label>
+                         <select id="ref_type">
+                            <option value="">所有类型</option>
+                            <option value="distribution">分布</option>
+                            <option value="biology">生物学</option>
+                            <option value="control">防治</option>
+                        </select>
+                    </div>
+                     <div class="filter-item">
+                        <label for="pub_year">发表年份:</label>
+                        <input type="number" id="pub_year" placeholder="如: 2023">
+                    </div>
+                </details>
+
+                <div class="filter-actions">
+                    <button class="reset-button">清空筛选</button>
+                    <button class="apply-button">应用筛选</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="results-area">
+            <h2><i class="fas fa-list-ul"></i> 搜索结果</h2>
+            <div class="results-grid">
+                <!-- 示例卡片 -->
+                <article class="result-card">
+                    <div class="card-image-placeholder">
+                        <!-- <img src="path/to/image.jpg" alt="物种图片"> -->
+                        <i class="fas fa-leaf card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">松材线虫 <span class="scientific-name">(Bursaphelenchus xylophilus)</span></h3>
+                        <p class="card-info"><strong>分类:</strong> 线虫动物门</p>
+                        <p class="card-info"><strong>状态:</strong> <span class="status-confirmed">已确认</span></p>
+                        <p class="card-description">一种毁灭性森林病害，主要危害松树，可导致松树迅速枯萎死亡...</p>
+                        <div class="card-tags">
+                            <span class="tag">寄主: 松属</span>
+                            <span class="tag">分布: 亚洲、北美、欧洲</span>
+                        </div>
+                        <a href="detail.html" class="details-button">查看详情 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                 <article class="result-card">
+                    <div class="card-image-placeholder">
+                        <i class="fas fa-bug card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">美国白蛾 <span class="scientific-name">(Hyphantria cunea)</span></h3>
+                        <p class="card-info"><strong>分类:</strong> 节肢动物门</p>
+                        <p class="card-info"><strong>状态:</strong> <span class="status-pending">待审核</span></p>
+                        <p class="card-description">一种重要的国际检疫性害虫，食性杂，繁殖量大，危害多种林木、果树和农作物...</p>
+                        <div class="card-tags">
+                            <span class="tag">寄主: 杨树, 柳树, 榆树</span>
+                             <span class="tag">分布: 北美、欧洲、亚洲</span>
+                        </div>
+                         <button class="details-button">查看详情 <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </article>
+
+                <article class="result-card">
+                     <div class="card-image-placeholder">
+                         <i class="fas fa-book-open card-icon"></i>
+                     </div>
+                     <div class="card-content">
+                         <h3 class="card-title">松材线虫病研究进展 (2023)</h3>
+                         <p class="card-info"><strong>类型:</strong> 文献</p>
+                         <p class="card-info"><strong>作者:</strong> 张三, 李四 等</p>
+                         <p class="card-description">本文综述了近年来松材线虫病的发生规律、传播途径、致病机理及综合防治技术的最新研究进展...</p>
+                         <div class="card-tags">
+                            <span class="tag">关键词: 松材线虫, 综述, 防治</span>
+                         </div>
+                          <button class="details-button">查看文献 <i class="fas fa-arrow-right"></i></button>
+                     </div>
+                 </article>
+                <!-- 更多卡片... -->
+            </div>
+             <!-- 可以添加分页控件 -->
+            <div class="pagination">
+                <button><i class="fas fa-chevron-left"></i></button>
+                <span>1</span>
+                <button>2</button>
+                <button>3</button>
+                <span>...</span>
+                <button>10</button>
+                <button><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+# .dockerignore
+
+# Git 文件
+.git
+.gitignore
+
+# Node.js 依赖 (将在 Dockerfile 中安装)
+node_modules
+
+# Next.js 构建输出 (将在 Dockerfile 中生成)
+.next
+
+# pnpm 调试日志
+pnpm-debug.log*
+
+# 本地环境变量文件 (非常重要，不要将敏感信息打包进镜像!)
+
+# IDE 和操作系统文件
+.idea
+.vscode
+*.iml
+*.DS_Store
+
+# 测试和文档 (根据需要)
+coverage/
+docs/
+test/
+*.test.ts
+*.spec.ts
+
+# 构建产物 (如果本地有其他构建输出)
+dist/
+build/
+
+# Docker 文件本身
+Dockerfile
+.dockerignore

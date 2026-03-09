@@ -1,0 +1,230 @@
+/* src/app/search/detail/[speciesId]/page.module.css */
+
+.pageContainer {
+    padding: 1rem 2rem 2rem 2rem; /* 上下左右内边距 */
+    background-color: var(--background-color); /* 页面背景色 */
+  }
+  
+  .pageActions {
+      margin-bottom: 1.5rem; /* 按钮和主体内容的间距 */
+  }
+  
+  /* 返回链接样式 */
+  .backLink {
+      color: var(--primary-blue, #4a90e2);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s ease;
+      padding: 0.4rem 0.8rem; /* 增加点击区域 */
+      border-radius: var(--border-radius-sm);
+      background-color: rgba(74, 144, 226, 0.05); /* 非常淡的背景 */
+      border: 1px solid rgba(74, 144, 226, 0.1);
+  }
+  .backLink svg { /* Target FontAwesomeIcon */
+      margin-right: 0.5rem;
+  }
+  .backLink:hover {
+      color: #3a7ac2;
+      background-color: rgba(74, 144, 226, 0.1);
+      text-decoration: none; /* 去除悬停下划线 */
+  }
+  
+  
+  /* 主内容网格布局 (从 detail-style-db.css 迁移) */
+  .detailContentGrid {
+    display: grid;
+    /* 尝试更灵活的列宽，给主列更多空间 */
+    grid-template-columns: minmax(0, 3fr) minmax(300px, 1.5fr); /* 右侧边栏最小宽度300px */
+    gap: 2rem; /* 调整列间距 */
+    align-items: start; /* 顶部对齐 */
+  }
+  
+  /* 主信息列和侧边栏 */
+  .mainInfoColumn {
+    /* 不需要特定样式，由内部 InfoSection 决定 */
+  }
+  
+  .sideInfoColumn {
+    position: relative; /* 为了粘性定位的父级 */
+  }
+  
+  /* 粘性侧边栏卡片 */
+  .stickyCard {
+    position: sticky;
+     /* 顶部距离 = Header 高度 + 页面内边距 */
+    top: calc(var(--header-height, 60px) + 1.5rem);
+    z-index: 1;
+  }
+  
+  /* --- 迁移 detail-style-db.css 中的列表、链接等特定样式 --- */
+  /* 这些样式更具体，放在页面级 CSS 中 */
+  
+  /* 快速概览列表 */
+  .quickFactsList {
+      margin: 0;
+      padding: 0;
+  }
+  .quickFactsList > div { /* 包裹 dt 和 dd 的容器 */
+      margin-bottom: 1rem;
+  }
+  .quickFactsList dt {
+      font-weight: 600;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+  }
+  .quickFactsList dt svg { /* Target FontAwesomeIcon */
+      margin-right: 0.8rem;
+      width: 1.3em; /* 稍微增大图标区域 */
+      text-align: center;
+      color: var(--primary-blue, #4a90e2); /* 使用全局变量 */
+      font-size: 1.1em;
+      flex-shrink: 0; /* 防止图标压缩 */
+  }
+  .quickFactsList dd {
+      /* 调整缩进以对齐 dt 下方的文本 */
+      padding-left: calc(1.3em + 0.8rem); /* dt 图标宽度 + 间距 */
+      margin-left: 0;
+      color: var(--text-secondary, #7f8c9a);
+      font-size: 0.95rem;
+      line-height: 1.6;
+  }
+  .quickFactsList dd:last-child { margin-bottom: 0; }
+  /* 状态文本颜色 (需要匹配 DetailHeader 中的定义) */
+  .quickFactsList .statusText { font-weight: 500; }
+  .quickFactsList .statusConfirmed { color: #3a8e7b; }
+  .quickFactsList .statusPending { color: #a16c0a; }
+  .quickFactsList .statusUnknown { color: var(--text-secondary); }
+  
+  /* 分类地位列表 */
+  .taxonomyList li::before {
+      content: "\f0da"; /* 实心右箭头 Unicode */
+      /*
+       * !!! 解决方案: 补充缺失的 font-family 和 font-weight !!!
+       * 必须指定使用 Font Awesome 字体和对应的权重 (Solid 图标通常是 900)
+       * 这样浏览器才能正确渲染 content 中的 Unicode 字符为图标。
+      */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: var(--primary-blue, #4a90e2); /* 使用全局变量 */
+      /* 继承或覆盖 .compactList li::before 的其他样式 */
+      position: absolute; /* 确保继承了 */
+      left: 0;          /* 确保继承了 */
+      top: 4px;           /* 调整垂直位置 */
+      font-size: 0.9em;   /* 确保继承或设置 */
+  }
+  .taxonomyList .currentTaxon {
+      color: var(--primary-blue, #4a90e2); /* 当前层级高亮 */
+      font-weight: 700;
+  }
+  .taxonomyList .currentTaxon i { /* 学名部分 */
+      color: var(--primary-blue); /* 确保斜体部分也高亮 */
+  }
+  .taxonomyList strong { /* 遗留的 strong (可能不需要了) */
+      color: var(--primary-blue);
+      font-weight: 700;
+  }
+  .taxonomyList i { /* 学名斜体 */
+       font-style: italic;
+       color: var(--text-secondary); /* 默认斜体颜色 */
+  }
+  
+  
+  /* 文献列表 */
+  .referenceList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
+  .referenceList li {
+      margin-bottom: 1.5rem; /* 增大文献条目间距 */
+      padding-bottom: 1.5rem;
+      border-bottom: 1px dashed var(--border-color-light, #eee);
+  }
+  .referenceList li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+  }
+  .referenceList p {
+      margin: 0 0 0.6rem 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-color);
+  }
+  .referenceList p strong { font-weight: 600; }
+  .referenceList p i { /* 期刊/来源斜体 */
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-left: 0.3rem;
+  }
+  .referenceList .tagContainer { /* 标签容器 */
+      margin-bottom: 0.8rem; /* 标签和链接/DOI的间距 */
+      margin-top: 0.5rem;
+  }
+  .doiInfo { /* DOI 信息 */
+      display: block; /* 让 DOI 单独一行 */
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 0.6rem;
+  }
+  .refLink, .refFileLink { /* 查看链接/文件链接 */
+      display: inline-flex; /* 让图标和文字对齐 */
+      align-items: center;
+      font-size: 0.9rem; /* 稍大一点 */
+      margin-top: 0.6rem;
+      margin-right: 1.5rem; /* 链接间距 */
+      color: var(--primary-blue, #4a90e2);
+      text-decoration: none;
+      font-weight: 500;
+  }
+  .refLink svg, .refFileLink svg { /* Target FontAwesomeIcon */
+      margin-right: 0.4rem;
+      font-size: 0.9em;
+  }
+  .refLink:hover, .refFileLink:hover {
+      text-decoration: underline;
+      color: #3a7ac2;
+  }
+  
+  
+  /* 分布区域细节 */
+  .distributionDetails { margin-top: 0.5rem; }
+  .distributionDetails h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.8rem; color: var(--text-color); }
+  .distributionRegion { margin-bottom: 1rem; }
+  .distributionRegion strong { display: block; margin-bottom: 0.4rem; }
+  .distributionRegion ul { list-style: disc; padding-left: 1.5rem; margin: 0; }
+  .distributionRegion li { font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .distributionDetails p { font-size: 0.9rem; margin-top: 1rem; color: var(--text-secondary)}
+  
+  
+  /* --- 响应式调整 --- */
+  @media (max-width: 992px) {
+    .detailContentGrid {
+      grid-template-columns: 1fr; /* 单列布局 */
+      gap: 1.8rem; /* 行间距 */
+    }
+    .sideInfoColumn {
+      margin-top: 0; /* 移除单列时的顶部边距 */
+    }
+    .stickyCard {
+      position: static; /* 取消粘性定位 */
+    }
+  }
+  
+  @media (max-width: 768px) {
+      .pageContainer { padding: 1rem; }
+      .pageActions { margin-bottom: 1rem; }
+      .backLink { font-size: 0.9rem; padding: 0.3rem 0.6rem;}
+  }
+  
+  @media (max-width: 480px) {
+      .pageContainer { padding: 0.8rem; }
+      .detailContentGrid { gap: 1.5rem; }
+      /* 可以在这里进一步缩小字体、间距等 */
+  }

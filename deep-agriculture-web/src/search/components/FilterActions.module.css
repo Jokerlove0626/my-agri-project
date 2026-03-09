@@ -1,0 +1,36 @@
+/* src/search/components/FilterActions.module.css */
+.filterActions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .filterActions button {
+    padding: 0.6rem 1.2rem; /* 调整按钮内边距 */
+    border: none;
+    border-radius: var(--border-radius-sm, 8px);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .resetButton {
+    background-color: #f1f3f5; /* 浅灰色 */
+    color: var(--text-secondary, #6c757d);
+    border: 1px solid var(--border-color-light, #dee2e6);
+  }
+  .resetButton:hover {
+    background-color: #e9ecef;
+  }
+  
+  .applyButton {
+    background: var(--primary-green, #50e3c2); /* 使用全局变量，更鲜艳 */
+    color: #fff; /* 白色文字 */
+    /* background: var(--accent-color); 原来的绿色 */
+    /* color: white; */
+  }
+  .applyButton:hover {
+     background: #40c9a9; /* 悬停时深一点的绿色 */
+     box-shadow: var(--shadow-soft);
+  }
