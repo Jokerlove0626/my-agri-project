@@ -15,7 +15,7 @@ def crawl_agri_data():
     }
     
     results = []
-    MAX_PAGES = 3  # 这里可以改大，比如 5 或 10
+    MAX_PAGES = 20  # 这里可以改大，比如 5 或 10
     
     print(f"🚀 [DeepAgriculture Crawler] 启动！")
     print(f"📂 目标存储路径: {os.path.abspath(OUTPUT_PATH)}")

@@ -2,7 +2,7 @@
 import axios, { type AxiosInstance, type InternalAxiosRequestConfig, type AxiosError, type AxiosResponse } from 'axios';
 
 // 1. 读取环境变量，并提供一个适合生产环境（Nginx 代理）的默认值
-const rawApiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '/api';
+const rawApiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api';
 
 // 2. 规范化 baseURL，确保它不以 '/' 结尾
 const API_BASE_URL = rawApiBaseUrl.endsWith('/')

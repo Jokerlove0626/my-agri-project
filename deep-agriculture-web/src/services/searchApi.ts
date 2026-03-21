@@ -26,6 +26,7 @@ export interface SearchParams {
  * @param params 搜索参数
  * @returns Promise<PageVO<SearchResultItemVO>>
  */
+
 export const fetchSearchResults = async (params: SearchParams): Promise<PageVO<SearchResultItemVO>> => {
     try {
         console.log('发起搜索请求, Params:', params);
@@ -36,13 +37,15 @@ export const fetchSearchResults = async (params: SearchParams): Promise<PageVO<S
             }
         });
 
-        // ** 2. 使用共享实例，传递相对路径和参数 **
-        // 基础 URL 是 /api, 这里路径是 /search
-        const responseData = await axiosInstance.get<PageVO<SearchResultItemVO>>('/search', { params: searchParams });
-        console.log(`搜索成功: 共 ${responseData.data.total} 条结果, 当前页 ${responseData.data.page}/${responseData.data.totalPages}`);
-        return responseData.data;
+        // 💡 关键改动：使用 as any 或者 as unknown as ... 告诉 TS 拦截器已经处理过了
+        const response = await axiosInstance.get<any>('/search', { params: searchParams });
+        const data = response as unknown as PageVO<SearchResultItemVO>;
+        
+        // 现在 TS 就不会报错了，因为它知道 data 里确实有 total
+        console.log(`搜索成功: 共 ${data.total} 条结果`);
+        
+        return data;
     } catch (error: any) {
-        // ** 3. 错误处理 **
         console.error('搜索请求失败:', error);
         throw new Error(`搜索失败: ${error.message || '未知错误'}`);
     }
@@ -53,22 +56,24 @@ export const fetchSearchResults = async (params: SearchParams): Promise<PageVO<S
  * @param speciesId 物种 ID
  * @returns Promise<SpeciesDetailData>
  */
-export const fetchSpeciesDetail = async (speciesId: string): Promise<SpeciesDetailData> => {
-    if (!speciesId) { throw new Error("物种 ID 不能为空"); }
-    try {
-        console.log(`请求物种详情, ID: ${speciesId}`);
-        // ** 2. 使用共享实例，传递相对路径 **
-        // 基础 URL 是 /api, 这里路径是 /search/species/{id}
-        const detailData = await axiosInstance.get<SpeciesDetailData>(`/search/species/${speciesId}`);
-        console.log(`成功获取物种 ${speciesId} 的详情`);
-        return detailData.data;
-    } catch (error: any) {
-        // ** 3. 错误处理 (拦截器会处理大部分，这里捕获最终的) **
-        console.error(`获取物种详情 ${speciesId} 失败:`, error);
-        // 重新抛出更具体的错误信息
-        if (error.message?.includes("未找到")) { // 检查拦截器或 Axios 返回的 404 信息
-            throw new Error(`未找到指定ID的物种信息 (ID: ${speciesId})`);
-        }
-        throw new Error(`获取物种详情失败: ${error.message || '未知错误'}`);
-    }
+// src/services/searchApi.ts
+
+export const fetchSpeciesDetail = async (id: string) => {
+  // 必须使用绝对路径，指向你的 Python 后端
+  const BACKEND_URL = "http://localhost:8000"; 
+  
+  // 注意：确保这里的路径与后端 main.py 中的 @app.get 路径一致
+  // 如果后端是 @app.get("/api/species/{id}")，那就不要加中间的 /search
+  const url = `${BACKEND_URL}/api/search/species/${id}`;
+  
+  console.log("🚀 正在请求后端详情接口:", url);
+
+  const response = await fetch(url, {
+    cache: 'no-store' // 保证实时性
+  });
+
+  if (!response.ok) {
+    throw new Error(`后端返回错误: ${response.status}`);
+  }
+  return response.json();
 };

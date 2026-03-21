@@ -1,0 +1,34 @@
+/* QuickFacts.module.css */
+.quickFactsContainer {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.taxonomyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.taxonomyItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+.taxonomyItem:last-child {
+  border-bottom: none;
+}
+
+.rankLabel {
+  color: #666;
+  font-weight: 500;
+}
+
+.nameValue {
+  color: var(--primary-blue, #1890ff);
+  font-weight: bold;
+}

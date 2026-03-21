@@ -1,7 +1,7 @@
 // src/entry/components/HostSection.tsx
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkedAlt, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTree, faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // 图标换成代表植物的 faTree
 import AccordionItem from './AccordionItem';
 import HostItem from './HostItem';
 import styles from '../styles/EntryForm.module.css';
@@ -16,7 +16,7 @@ interface HostSectionProps {
 
 const HostSection: React.FC<HostSectionProps> = ({ items, onAdd, onRemove, onChange }) => {
   return (
-    <AccordionItem title="寄主数据" icon={faMapMarkedAlt}>
+    <AccordionItem title="受害农作物 (寄主) 数据" icon={faTree}>
       <div className={styles.dynamicEntrySection}>
         <div id="HostEntries">
           {items.map((item) => (
@@ -29,7 +29,7 @@ const HostSection: React.FC<HostSectionProps> = ({ items, onAdd, onRemove, onCha
           ))}
         </div>
         <button type="button" className={styles.addButton} onClick={onAdd}>
-          <FontAwesomeIcon icon={faPlusCircle} /> 添加分布记录
+          <FontAwesomeIcon icon={faPlusCircle} /> 添加农作物记录
         </button>
       </div>
     </AccordionItem>

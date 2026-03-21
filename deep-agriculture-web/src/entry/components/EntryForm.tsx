@@ -30,59 +30,58 @@ import {
 } from '../types';
 
 // 默认/初始状态
+// 默认/初始状态 (农业版)
 const initialCoreData: SpeciesCoreData = {
-    chineseName: "松材线虫",
-    scientificName: "Bursaphelenchus xylophilus",
-    scientificNameWithAuthors: "Bursaphelenchus xylophilus (Steiner & Buhrer) Nickle",
-    authorship: "(Steiner & Buhrer) Nickle, 1970",
-    englishName: "Pine Wood Nematode",
-    abbreviation: "PWN",
-    classification: "线虫动物门",
-    parentGenus: "Bursaphelenchus",
+    chineseName: "草地贪夜蛾",
+    scientificName: "Spodoptera frugiperda",
+    scientificNameWithAuthors: "Spodoptera frugiperda (J.E. Smith)",
+    authorship: "J.E. Smith, 1797",
+    englishName: "Fall Armyworm",
+    abbreviation: "FAW",
+    classification: "鳞翅目",
+    parentGenus: "夜蛾属",
     taxonomicLevel: "种",
     confirmationStatus: "已确认",
-    sources: "EPPO Global Database; CABI Compendium; 中国林业科学研究院",
-    originalRiskCode: "HighRisk-001",
+    sources: "农业农村部; 联合国粮农组织 (FAO)",
+    originalRiskCode: "HighRisk-Agri-01",
     isSpecies: "TRUE",
 };
 
 const initialBasicInfo: SpeciesBasicInfoData = {
-    biologicalProperties: "典型的雌雄异体，卵生。生活史复杂，包含多个幼虫期和成虫期。存在特殊的扩散龄期（dauerlarva）适应环境并利于传播。繁殖速度受温度影响大。",
-    morphologicalCharacteristics: "虫体微小，线形。口针发达，基部具球结。雌雄形态有差异，如尾部形状、交合刺等。",
-    detectionMethod: "主要通过症状诊断、贝尔曼漏斗法分离、显微镜形态鉴定和PCR分子检测等方法。",
-    distributionDescription: "起源于北美，现已传入亚洲和欧洲多国。主要分布在松树种植区域。",
-    remark: "",
+    biologicalProperties: "典型的鳞翅目害虫，具有极强的迁飞性、繁殖力和暴食性。适宜在温暖湿润的气候下繁衍，没有滞育现象。",
+    morphologicalCharacteristics: "幼虫头部有倒“Y”型斑纹，腹部末节有呈正方形排列的4个黑斑。",
+    detectionMethod: "田间踏查结合性诱剂诱捕、高空测报灯监测。",
+    distributionDescription: "原产于美洲热带和亚热带地区，现已入侵亚洲、非洲广泛农业区。",
+    remark: "重大农业入侵害虫",
 };
 
 const initialDistributions: DistributionEntryData[] = [
-  { id: 'dist1', continentName: "亚洲", countryName: "中国", provinceName: "江苏省", description: "存在 (Present), 广泛分布" },
-  { id: 'dist2', continentName: "欧洲", countryName: "葡萄牙", provinceName: "", description: "存在 (Present)" },
+  { id: 'dist1', continentName: "亚洲", countryName: "中国", provinceName: "云南省", description: "存在 (周年繁殖区)" }
 ];
 
 const initialHosts: HostEntryData[] = [
-    { id: 'host1', hostName: "Pinus densiflora", hostNameCn: "赤松", hostTypes: "自然寄主,主要寄主", interactionType: "primary", plantParts: "木质部,枝条", infectionIntensity: "high" }
+    { id: 'host1', hostName: "Zea mays", hostNameCn: "玉米", hostTypes: "主要农作物", interactionType: "primary", plantParts: "心叶,穗部", infectionIntensity: "high" }
 ];
 
 const initialOtherNames: OtherNameEntryData[] = [
-    { id: 'on1', nameType: "异名 (Synonym)", otherName: "Aphelenchoides xylophilus", namedYear: "1934"}
+    { id: 'on1', nameType: "俗称", otherName: "秋粘虫", namedYear: ""}
 ];
 
 const initialImages: ImageEntryData[] = [
-    { id: 'img1', title: "松材线虫显微照片", type: "显微图", path: "/images/pwn_microscope_01.jpg", contentDescription: "高倍镜下显示的松材线虫成虫形态", copyrightDescription: "CC BY-SA 4.0 - Forest Pest Lab", orderBy: 1, isHomeShow: "1"}
+    { id: 'img1', title: "幼虫头部Y型斑", type: "特征图", path: "/images/faw_head.jpg", contentDescription: "草地贪夜蛾幼虫头部特征放大图", copyrightDescription: "农业农村部", orderBy: 1, isHomeShow: "1"}
 ];
 
 const initialReferences: ReferenceEntryData[] = [
-    { id: 'ref1', icode: 1001, title: "松材线虫病研究进展", authorDisplay: "叶建仁, 孙江华 (2010)", referenceType: "biology", url: "" }
+    { id: 'ref1', icode: 1001, title: "草地贪夜蛾防控技术指导意见", authorDisplay: "全国农技中心 (2020)", referenceType: "management", url: "" }
 ];
 
  const initialAssociations: SpeciesAssociationData = {
-    hostRange: "主要寄主为松属植物，尤其是二针和五针松类。对不同松种的易感性有差异。",
-    potentialEcoDesc: "导致松林生态系统崩溃，生物多样性降低，影响水源涵养。",
-    description: "主要通过松墨天牛等媒介昆虫传播，也可随带疫木材远距离扩散。",
-    managementInfo: "综合运用检疫、疫木清理、媒介防治、树干注药、抗性品种等措施。",
+    hostRange: "寄主极广，嗜好禾本科植物，最易受害的是玉米、水稻、高粱、甘蔗等主粮和经济作物。",
+    potentialEcoDesc: "群体爆发时可将农作物叶片吃光，导致玉米等作物绝收，严重威胁国家粮食安全。",
+    description: "成虫随季风远距离迁飞入侵农田，幼虫隐蔽在玉米心叶内暴食。",
+    managementInfo: "推行“防线前移、阻击群落”策略。采用理化诱控（杀虫灯、性诱剂），结合应急化学防治（如甲维盐、氯虫苯甲酰胺）和生物防治（如夜蛾黑卵蜂）。",
     remark: "",
 };
-
 // 简化版，实际可能更复杂或独立管理
 const initialRefMeta: ReferenceMetaData = {
      icode: '', title: '', authors: '', sourceTitle: '', publishTime: '', abstract: '', keywords: '', doi: ''
@@ -189,7 +188,7 @@ const EntryForm: React.FC = () => {
 
     // 2. 将复杂结构压缩为 RAG 检索需要的精简格式 (降维处理)
     const title = coreData.chineseName || coreData.scientificName || "未知物种";
-    const category = coreData.classification || "林业病虫害";
+    const category = coreData.classification || "农业病虫害";
     
     // 智能拼接所有的关键特征，喂给大模型做知识检索
     const contentText = `
@@ -202,17 +201,19 @@ const EntryForm: React.FC = () => {
     `.trim();
 
     // 3. 发送网络请求给 Python 后端
+ // 3. 发送网络请求给 Python 后端
     try {
       const response = await fetch('/api/knowledge', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        // 发送给后端的结构：{ title, content, category }
+        // 🚨 核心修改：把 hosts 原封不动地带上！
         body: JSON.stringify({
           title: title,
           category: category,
-          content: contentText
+          content: contentText,
+          hosts: hosts // <-- 新增这一行！
         }),
       });
 
@@ -386,10 +387,10 @@ const EntryForm: React.FC = () => {
           {/* 生态关系与管理 */}
           <AccordionItem title="生态关系与管理 (可选项)" icon={faUsersCog}>
             <div className={styles.formGrid}>
-                <FormGroup label="寄主范围详细描述" icon={faListAlt} htmlFor="hostRangeDesc" fullWidth>
+                <FormGroup label="受害农作物及品种" icon={faListAlt} htmlFor="hostRangeDesc" fullWidth>
                     <textarea id="hostRangeDesc" name="assoc_host_range" rows={3} value={associations.hostRange} onChange={handleInputChange(setAssociations, 'hostRange')}></textarea>
                 </FormGroup>
-                <FormGroup label="潜在生态影响分析" icon={faLeaf} htmlFor="potentialEcoDesc" fullWidth>
+                <FormGroup label="对农产品产量/质量的危害分析" icon={faLeaf} htmlFor="potentialEcoDesc" fullWidth>
                     <textarea id="potentialEcoDesc" name="assoc_potential_eco_desc" rows={3} value={associations.potentialEcoDesc} onChange={handleInputChange(setAssociations, 'potentialEcoDesc')}></textarea>
                 </FormGroup>
                 <FormGroup label="关联关系核心描述" icon={faLink} htmlFor="associationDesc" fullWidth>

@@ -6,24 +6,24 @@ import styles from './DetailHeader.module.css';
 import { SpeciesDetailData } from '../types'; // 引入类型
 
 interface DetailHeaderProps {
-  chineseName: string;
-  scientificName: string;
-  authorship: string;
-  status: SpeciesDetailData['status']; // 使用导入的类型
-  statusText: string;
-  icon?: IconDefinition; // 允许传入自定义图标
+  title: string;          // 必须有标题
+  scientificName?: string; // 💡 加个问号，变成可选
+  authorship?: string;    // 💡 加个问号
+  status?: SpeciesDetailData['status']; // 💡 加个问号
+  statusText?: string;    // 💡 加个问号
+  category?: string;      // 已经是可选了
+  icon?: IconDefinition; 
 }
-
 /**
  * 物种详情页的头部组件
  */
 const DetailHeader: React.FC<DetailHeaderProps> = ({
-  chineseName,
-  scientificName,
-  authorship,
-  status,
-  statusText,
-  icon = faMicroscope // 默认图标
+  title,
+  scientificName = "N/A",  // 💡 给个默认值
+  authorship = "",         // 💡 给个空字符串
+  status = 'unknown',      // 💡 默认未知
+  statusText = "待核实",    // 💡 默认文字
+  icon = faMicroscope
 }) => {
 
   // 根据状态选择状态徽章的样式和图标
@@ -49,7 +49,7 @@ const DetailHeader: React.FC<DetailHeaderProps> = ({
       {/* 主要信息区域 */}
       <div className={styles.headerMainInfo}>
         <h1>
-          {chineseName}
+          {title}
           {/* 状态徽章 */}
           <span className={`${styles.statusBadge} ${statusInfo.className}`}>
             <FontAwesomeIcon icon={statusInfo.icon} /> {statusText}

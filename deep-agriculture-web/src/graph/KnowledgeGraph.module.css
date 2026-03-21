@@ -262,7 +262,8 @@
     font-size: 1.8em; font-weight: 700;
     background: var(--gradient-text-color);
     -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent; text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; 
+    
     display: block; /* Changed to block for better centering */
     margin-bottom: 3px;
 }
