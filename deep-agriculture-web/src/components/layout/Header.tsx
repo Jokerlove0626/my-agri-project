@@ -30,7 +30,6 @@ const { Header: AntHeader } = Layout;
 // 导航项定义 (保持不变)
 const mainNavItems = [
   { key: '/chat', icon: <RobotOutlined />, label: '智能问答', path: '/chat' },
-  { key: '/analysis', icon: <AreaChartOutlined />, label: '数据分析', path: '/analysis' },
   { key: '/graph', icon: <ApartmentOutlined />, label: '知识图谱', path: '/graph' },
   { key: '/search', icon: <SearchOutlined />, label: '知识检索', path: '/search' },
   { key: '/entry', icon: <FormOutlined />, label: '数据录入', path: '/entry' },
