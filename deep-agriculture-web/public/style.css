@@ -15,18 +15,14 @@
         /* 肥沃黑土色 */
         --leaf-vein: rgba(56, 142, 60, 0.1);
         /* 叶脉浅纹 */
-    
-        /* 背景：从纯白改为极浅的“米糠色”，增加自然感 */
-        --bg-light: #fdfbf7;
-        --bg-dark: #0a0f0d;
 
        /* 暗色模式色彩调整 */
        --primary-color-light: #81c784;
        --secondary-color-light: #a5d6a7;
        --accent-color-light: #fff176;
 
-       /* 页面背景：极淡的青草底色，更有呼吸感 */
-       --bg-light: #f9fbf9;
+        /* 页面背景：暖麦黄径向渐变，模拟阳光与大地 */
+        --bg-light: radial-gradient(circle at center, #fdf8e7 0%, #f5e2b8 100%);
        --bg-dark: #0d1310;
 
        /* 玻璃贴层颜色 */
@@ -98,8 +94,13 @@ html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark 
 html.dark .link { color: var(--text-link-dark); }
 
 /* 全局背景 (保持原有实现方式，确保 body class 是 global-gradient-bg) */
-.global-gradient-bg { background-color: var(--bg-light); } /* Apply base color */
-html.dark .global-gradient-bg { background-color: var(--bg-dark); }
+.global-gradient-bg {
+    background: var(--bg-light);
+}
+
+html.dark .global-gradient-bg {
+    background: var(--bg-dark);
+}
 /* Fixed background SVGs are placed in HTML */
 
 /* ==========================================================================
