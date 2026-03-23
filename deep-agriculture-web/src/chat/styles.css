@@ -3,7 +3,7 @@
 /* --- :root 变量定义 (保持不变) --- */
 :root {
     /* 主题颜色 */
-    --primary-color: #f5da18; /* Ant Design 蓝色 */
+    --primary-color: #f5da18;
     --primary-color-light: #e6f7ff; /* Ant Design 浅蓝 */
     --sidebar-bg: #f3f4f6; /* 侧边栏背景 - 浅灰色 */
     /* 背景色 */
