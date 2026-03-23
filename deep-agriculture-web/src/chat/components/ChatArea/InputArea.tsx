@@ -202,7 +202,7 @@ const InputArea: React.FC<InputAreaProps> = ({ onSendMessage, isSending }) => {
 
       {/* 页脚免责声明 */}
       <div className="footer-notice">
-        DeepForest 生成的内容由大型模型驱动，请谨慎甄别其准确性。
+        Deepagriculture 生成的内容由大型模型驱动，请谨慎甄别其准确性。
       </div>
     </footer>
   );

@@ -126,8 +126,8 @@ const Header: React.FC = () => {
            />
 
           <Link href="/" className={styles.logo}>
-            <Image src="/deepforest.jpg" alt="DeepForest Logo" width={128} height={128} className={styles.logoIcon} priority />
-            {/* <span className={`${styles.logoText} ${styles.hideOnMobile}`}>DeepForest</span> */}
+            <Image src="/deepagriculture.jpg" alt="DeepAgriculture Logo" width={128} height={128} className={styles.logoIcon} priority />
+            {/* <span className={`${styles.logoText} ${styles.hideOnMobile}`}>DeepAgriculture</span> */}
           </Link>
 
           {/* 顶部导航 Menu: 始终渲染，通过 CSS 在移动端隐藏 */}
@@ -164,8 +164,8 @@ const Header: React.FC = () => {
       <Drawer
         title={
             <Link href="/" onClick={closeDrawer} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration:'none' }}>
-               <Image src="/deepforest.jpg" alt="DeepForest Logo" width={96} height={24} />
-               {/* <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-color-primary)'}}>DeepForest</span> */}
+               <Image src="/deepagriculture.jpg" alt="DeepAgriculture Logo" width={96} height={24} />
+               {/* <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-color-primary)'}}>DeepAgriculture</span> */}
             </Link>
         }
         placement="left"

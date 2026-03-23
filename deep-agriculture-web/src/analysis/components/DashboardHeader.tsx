@@ -6,7 +6,7 @@ import Icon from './common/Icon'; // 引入自定义的 Icon 组件
 import { faTree, faUserCircle, faBell } from '@fortawesome/free-solid-svg-icons'; // 引入需要的图标
 
 /**
- * DeepForest 数据分析仪表盘的头部组件。
+ * Deepagriculture 数据分析仪表盘的头部组件。
  * 显示 Logo、标题、当前时间以及用户信息区域。
  */
 const DashboardHeader: React.FC = () => {
@@ -51,7 +51,7 @@ const DashboardHeader: React.FC = () => {
         {/* 使用 Icon 组件显示树图标 */}
         <Icon icon={faTree} className="icon" />
         {/* 显示仪表盘标题 */}
-        <h1>DeepForest 数据分析</h1>
+        <h1>Deepagriculture 数据分析</h1>
       </div>
 
       {/* 当前时间显示 */}

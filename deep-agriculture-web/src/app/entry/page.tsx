@@ -7,8 +7,8 @@ import styles from '@/entry/styles/EntryForm.module.css'; // 使用 @/ 别名
 
 // 定义页面元数据 (可选)
 export const metadata = {
-  title: 'DeepForest - 数据录入',
-  description: 'DeepForest 系统数据录入与管理页面',
+  title: 'Deepagriculture - 数据录入',
+  description: 'Deepagriculture 系统数据录入与管理页面',
 };
 
 const DataEntryPage: React.FC = () => {

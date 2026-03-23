@@ -45,7 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             aria-label="Close sidebar"
             type="text" // 使用文本按钮减少干扰
         />
-        {/* <div className="logo">DeepForest</div> */}
+        {/* <div className="logo">Deepagriculture</div> */}
         <button className="new-chat-btn" onClick={onNewChat}>
           <Icon name="Plus" size={16} className="feather" /> 新建对话
         </button>

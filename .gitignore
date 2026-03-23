@@ -18,3 +18,5 @@
 
 # --- Search Engine (If any local files) ---
 elasticsearch-*/
+
+**/requirements*.txt

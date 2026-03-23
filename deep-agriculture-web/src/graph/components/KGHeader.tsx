@@ -13,7 +13,7 @@ const KGHeader: React.FC = () => {
             {/* Logo 和标题 */}
             <div className={styles.logoContainer}>
                 <Icon icon={faProjectDiagram} className={styles.logoIcon} />
-                <h1 className={styles.headerTitle}>DeepForest 知识图谱</h1>
+                <h1 className={styles.headerTitle}>Deepagriculture 知识图谱</h1>
             </div>
 
             {/* 时间显示 */}

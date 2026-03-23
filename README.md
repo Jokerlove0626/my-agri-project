@@ -2,27 +2,28 @@
 
 本项目是一个集“数据爬取、知识存储、智能检索、问答输出”为一体的农业病虫害系统。
 
-
-
 ## 📂 项目模块说明
 
-| 文件夹 | 角色 | 技术栈 |
-| :--- | :--- | :--- |
-| **`agri-backend`** | 核心大脑 | FastAPI + ElasticSearch + RAG |
-| **`deep-agriculture-web`** | 用户界面 | Next.js + Tailwind CSS |
-| **`agri-crawler`** | 数据来源 | Python Spider |
+| 文件夹                     | 角色     | 技术栈                        |
+| :------------------------- | :------- | :---------------------------- |
+| **`agri-backend`**         | 核心大脑 | FastAPI + ElasticSearch + RAG |
+| **`deep-agriculture-web`** | 用户界面 | Next.js + Tailwind CSS        |
+| **`agri-crawler`**         | 数据来源 | Python Spider                 |
 
 ---
 
 ## 🛠️ 快速启动指南
 
 ### 1. 启动搜索引擎 (ElasticSearch)
+
 系统依赖 ElasticSearch 8.12.0。
+
 - 确保 ES 运行在 `http://localhost:9200`
 - 需关闭 SSL 验证（仅限开发环境）。
 
 ### 2. 后端部署 (agri-backend)
-```bash
+
+````bash
 cd agri-backend
 python3 -m venv .venv
 source .venv/bin/activate  # Windows 使用 .venv\Scripts\activate
@@ -58,3 +59,5 @@ cd agri-crawler
 ```bash
 cd ~/my-agri-project/agri-backend
 ./.venv/bin/pip freeze > requirements.txt
+# windows使用 python -m pip freeze > requirements.txt
+````
